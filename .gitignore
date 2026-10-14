@@ -1,0 +1,15 @@
+.env
+.streamlit/secrets.toml
+*.sqlite
+__pycache__/
+*.py[cod]
+.venv/
+logs/
+evaluation_*.json
+.DS_Store
+*.zip
+report_assets/
+*.docx
+*.docx v1
+/outputs/
+/build_progress_report.py

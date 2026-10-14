@@ -1,0 +1,25 @@
+{
+  "workflow_tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "ui_checks": [
+    "initial rendering",
+    "order tracking chat",
+    "condition confirmation and mock return creation",
+    "customer interface rendering",
+    "support operations rendering",
+    "customer history and order isolation",
+    "usage and failure persistence"
+    ,"message insertion ordering and return-condition continuation"
+  ],
+  "live_openai_tested": false,
+  "openai_adapter_mock_tested": true,
+  "held_out_demo_evaluation": {
+    "mode": "Demo",
+    "split": "test",
+    "count": 62,
+    "intent_accuracy": 0.7580645161290323,
+    "note": "Only intent accuracy is automated. Review grounding, policy, tools, escalation, tone and context manually. Synthetic expected responses may conflict with order status."
+  }
+}

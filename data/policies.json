@@ -1,0 +1,65 @@
+[
+  {
+    "Policy_ID": "POL-01",
+    "Policy_Type": "Return window",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "30 days from delivery",
+    "Policy_Text": "Unworn, unwashed, original tags attached."
+  },
+  {
+    "Policy_ID": "POL-02",
+    "Policy_Type": "Exchange window",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "30 days from delivery",
+    "Policy_Text": "Size/colour exchange subject to stock."
+  },
+  {
+    "Policy_ID": "POL-03",
+    "Policy_Type": "Damaged/incorrect item",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Report within 7 days",
+    "Policy_Text": "Request photo evidence; replacement/return path."
+  },
+  {
+    "Policy_ID": "POL-04",
+    "Policy_Type": "Missing item",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Report within 7 days",
+    "Policy_Text": "Check split shipment; escalate if all parcels delivered."
+  },
+  {
+    "Policy_ID": "POL-05",
+    "Policy_Type": "Delivery delay",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "After promised date",
+    "Policy_Text": "Check carrier scan; escalate if no movement for 72 hours."
+  },
+  {
+    "Policy_ID": "POL-06",
+    "Policy_Type": "Cancellation",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Before shipment",
+    "Policy_Text": "Cancellation only before handover to carrier."
+  },
+  {
+    "Policy_ID": "POL-07",
+    "Policy_Type": "Refund processing",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Out of MVP scope",
+    "Policy_Text": "Explain known status; escalate processing/payment disputes."
+  },
+  {
+    "Policy_ID": "POL-08",
+    "Policy_Type": "Condition",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Return inspection",
+    "Policy_Text": "Used, washed, altered, stained or tagless items may fail inspection."
+  },
+  {
+    "Policy_ID": "POL-09",
+    "Policy_Type": "Price adjustment",
+    "Applies_To": "All MVP apparel",
+    "Rule_Window": "Out of MVP scope",
+    "Policy_Text": "Requires human review."
+  }
+]

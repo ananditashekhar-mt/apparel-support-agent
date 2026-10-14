@@ -1,0 +1,30 @@
+THREADLY — SIMPLE START GUIDE
+=============================
+
+MAC
+1. Double-click "Start Threadly.command".
+2. If macOS blocks it, right-click the file, choose Open, then Open again.
+3. The first launch may take a few minutes while Threadly installs itself.
+4. Keep the Terminal window open while using Threadly.
+
+WINDOWS
+1. Double-click "Start Threadly.bat".
+2. The first launch may take a few minutes while Threadly installs itself.
+3. Keep the black Command Prompt window open while using Threadly.
+
+IF PYTHON IS MISSING
+The launcher will open the official Python download page. Install Python and
+then double-click the Threadly launcher again. Windows users should select
+"Add Python to PATH" during installation.
+
+AFTER THE FIRST SETUP
+Just double-click the same Start Threadly file whenever you want to use the app.
+
+STOPPING THREADLY
+Close the Terminal/Command Prompt window, or press Control+C inside it.
+
+DEMO MODE
+No OpenAI key is needed. Choose Customer, Support, or Admin in the sidebar.
+
+NEED HELP?
+Take a screenshot of the launcher window and send it to the project owner.

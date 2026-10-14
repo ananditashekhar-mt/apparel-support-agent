@@ -1,0 +1,98 @@
+[
+  {
+    "Intent": "order_tracking",
+    "Description": "Where is my order?",
+    "Default_Action": "Check order + carrier status",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "delivery_delay",
+    "Description": "Order is late",
+    "Default_Action": "Check promised date and carrier; escalate if no scan 72h",
+    "Escalation_Default": "Conditional"
+  },
+  {
+    "Intent": "delivered_not_received",
+    "Description": "Marked delivered but missing",
+    "Default_Action": "Verify delivery and escalate if unresolved",
+    "Escalation_Default": "Yes"
+  },
+  {
+    "Intent": "damaged_item",
+    "Description": "Item damaged",
+    "Default_Action": "Collect photo and arrange return/replacement",
+    "Escalation_Default": "Conditional"
+  },
+  {
+    "Intent": "wrong_item",
+    "Description": "Wrong item received",
+    "Default_Action": "Verify item/photo and arrange return/replacement",
+    "Escalation_Default": "Conditional"
+  },
+  {
+    "Intent": "missing_item",
+    "Description": "Partial order",
+    "Default_Action": "Check split shipment; escalate if needed",
+    "Escalation_Default": "Conditional"
+  },
+  {
+    "Intent": "return_request",
+    "Description": "Return item",
+    "Default_Action": "Check 30-day window + condition",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "exchange_size",
+    "Description": "Size exchange",
+    "Default_Action": "Check eligibility + inventory",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "exchange_color",
+    "Description": "Colour exchange",
+    "Default_Action": "Check eligibility + inventory",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "fit_issue",
+    "Description": "Fit problem",
+    "Default_Action": "Offer eligible exchange/return",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "quality_issue",
+    "Description": "Quality concern",
+    "Default_Action": "Distinguish defect vs preference",
+    "Escalation_Default": "Conditional"
+  },
+  {
+    "Intent": "cancel_order",
+    "Description": "Cancel order",
+    "Default_Action": "Cancel only before shipment",
+    "Escalation_Default": "No"
+  },
+  {
+    "Intent": "refund_status",
+    "Description": "Refund status",
+    "Default_Action": "Explain known status; human handoff",
+    "Escalation_Default": "Yes"
+  },
+  {
+    "Intent": "price_adjustment",
+    "Description": "Price dropped",
+    "Default_Action": "Human review",
+    "Escalation_Default": "Yes"
+  },
+  {
+    "Intent": "return_outside_window",
+    "Description": "Return after 30 days",
+    "Default_Action": "Explain policy; exception review",
+    "Escalation_Default": "Yes"
+  },
+  {
+    "Intent": "used_item_return",
+    "Description": "Used/washed/tagless return",
+    "Default_Action": "Explain condition; review exception",
+    "Escalation_Default": "Conditional"
+  }
+]
