@@ -83,7 +83,12 @@ Official references: [Ollama OpenAI compatibility](https://docs.ollama.com/api/o
 
 ## Share through GitHub and Streamlit
 
-GitHub provides a shareable code repository URL. To provide a shareable working app URL, connect the GitHub repository to Streamlit Community Cloud and deploy `app.py`. Keep the hosted default as `APP_MODE=Demo` so the public demonstration works without paid credentials or a local Ollama service. Add secrets only through the hosting platform's secret settings, never in the repository.
+The project is publicly available in two forms:
+
+* Source code and reproducibility materials: [GitHub repository](https://github.com/ananditashekhar-mt/apparel-support-agent)
+* Working demonstration in Demo mode: [Streamlit application](https://cfhkd7tvwubyfhxfrqnuvm.streamlit.app/)
+
+The hosted default remains `APP_MODE=Demo` so the demonstration works without paid credentials or a local Ollama service. Add secrets only through the hosting platform's secret settings, never in the repository. Changes pushed to the GitHub `main` branch are redeployed by Streamlit Community Cloud.
 
 Deployment reference: [Streamlit Community Cloud deployment](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy).
 
