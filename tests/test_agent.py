@@ -32,6 +32,22 @@ class AgentTests(unittest.TestCase):
         self.assertIsNone(self.ask(text)['pending'])
         r=self.ask(text,condition_ok=True,today=self.day+timedelta(days=30));self.assertEqual(r['pending']['kind'],'return')
         r=self.ask(text,condition_ok=True,today=self.day+timedelta(days=31));self.assertEqual(r['pending']['kind'],'escalation')
+    def test_expired_return_feedback_and_single_introduction(self):
+        first=self.ask('Return '+self.order['Order_ID'],today=self.day+timedelta(days=68))
+        self.assertTrue(first['feedback_required'])
+        self.assertTrue(first['response'].startswith('Hi,\nI’m Tia from Threadly support.\n\n'))
+        self.assertIn('68 days',first['response'])
+        self.assertIn('within 30 days of delivery',first['response'])
+        self.assertNotIn('—',first['response'])
+        self.assertNotIn('Please confirm',first['response'])
+        self.assertNotIn('unwashed',first['response'])
+        self.assertNotIn('human-review',first['response'])
+        follow=self.ask('Yes, condition confirmed',memory=first['memory'],condition_ok=True,
+            history=[{'role':'assistant','content':first['response']}],today=self.day+timedelta(days=68))
+        self.assertTrue(follow['feedback_required'])
+        self.assertNotIn('Hi, I’m Tia',follow['response'])
+        self.assertNotIn('condition rules',follow['response'])
+
     def test_non_delivered_block(self):
         r=self.ask('Return ORD-10003',condition_ok=True);self.assertEqual(r['status'],'blocked')
     def test_future_delivery(self):

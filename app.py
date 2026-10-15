@@ -2,6 +2,7 @@ import csv
 import hashlib
 import html
 import io
+import json
 import os
 import uuid
 from datetime import date
@@ -105,12 +106,34 @@ def reset_customer_state(cid,new=False):
         st.session_state.memory={};st.session_state.last=None;st.session_state.condition_ok=False
 
 
+def feedback_state():
+    # Persist the two-round limit across page reloads and reopening saved chats.
+    agent.db.execute('CREATE TABLE IF NOT EXISTS chat_feedback (conversation_id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
+    row=agent.db.execute('SELECT payload FROM chat_feedback WHERE conversation_id=?',(st.session_state.conversation_id,)).fetchone()
+    return json.loads(row[0]) if row else {'rounds':0,'phase':'open','support_result':None}
+
+
+def save_feedback(state):
+    agent.db.execute('INSERT OR REPLACE INTO chat_feedback VALUES(?,?)',
+        (st.session_state.conversation_id,json.dumps(state)));agent.db.commit()
+
+
 def submit_message(prompt,cid):
+    feedback=feedback_state()
+    if feedback['phase'] not in ['open','retry']:return
     try:
         with st.spinner('Checking your request…'):
             result=agent.chat(prompt,st.session_state.memory,st.session_state.history,demo_date,
                 st.session_state.condition_ok,st.session_state.conversation_id,cid,input_rate,output_rate,usd_inr,
-                [order['Order_ID'] for order in profiles[cid]['orders']])
+                [order['Order_ID'] for order in profiles[cid]['orders']],customer_name=profiles[cid]['name'])
+        if result.get('feedback_required') or feedback['phase']=='retry':
+            if result.get('pending',{} ) and result['pending']['kind']=='escalation':
+                feedback['support_result']=result
+            feedback['phase']='rating'
+            save_feedback(feedback)
+            agent.log_message(st.session_state.conversation_id,cid,'assistant',
+                'Please let us know if there is anything else we can help you with.')
+            agent.db.commit()
         st.session_state.memory=result['memory'];st.session_state.last=result
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
     except Exception:
@@ -177,24 +200,53 @@ def customer_view():
         render_message(message)
 
     last=st.session_state.last
-    needs_condition=last and last.get('intent') in ['return_request','exchange_size','exchange_color','fit_issue'] and not last.get('condition_ok')
+    needs_condition=feedback_state()['phase'] in ['open','retry'] and last and last.get('status')=='needs_information' and last.get('intent') in ['return_request','exchange_size','exchange_color','fit_issue'] and not last.get('condition_ok')
     if needs_condition:
         st.session_state.condition_ok=st.checkbox('The item is unworn, unwashed, unaltered, unstained, and has its original tags.',value=st.session_state.condition_ok)
         if st.session_state.condition_ok and st.button('Continue eligibility check',type='primary'):
             submit_message('Yes, condition confirmed',cid)
-    if last and last.get('pending') and last['as_of']==demo_date.isoformat():
-        label={'return':'Initiate return','exchange':'Initiate exchange','cancellation':'Cancel order','escalation':'Create support case'}[last['pending']['kind']]
+    feedback=feedback_state()
+    if feedback['phase']=='rating':
+        st.caption('Chat closed · Was this helpful?')
+        rating=st.feedback('stars',key='rating_'+st.session_state.conversation_id+'_'+str(feedback['rounds']))
+        if rating is not None:
+            stars=rating+1
+            feedback['rounds']+=1
+            agent.log_message(st.session_state.conversation_id,cid,'user',f'Feedback: {stars}/5 stars')
+            if stars>=4:
+                feedback['phase']='closed'
+                text='Thank you for your feedback.'
+            elif feedback['rounds']<2:
+                feedback['phase']='retry'
+                text='I’m sorry we haven’t resolved this. How can we help you further?'
+            else:
+                feedback['phase']='handoff'
+                text='I’m sorry we haven’t resolved this. Would you like to talk to a support engineer? This prototype can save a simulated support request, but no one will be contacted.'
+            agent.log_message(st.session_state.conversation_id,cid,'assistant',text)
+            save_feedback(feedback)
+            st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
+    elif feedback['phase']=='closed':
+        st.caption('Chat closed. Thank you for your feedback.')
+    elif feedback['phase']=='handoff':
+        st.caption('Chat closed. You can request support below or start a new chat for a different issue.')
+    if feedback['phase']=='handoff' and feedback.get('support_result'):
+        last=feedback['support_result']
+    show_action=feedback['phase']=='open' or feedback['phase']=='handoff'
+    if last and last.get('pending') and show_action and last['as_of']==demo_date.isoformat():
+        label={'return':'Initiate return','exchange':'Initiate exchange','cancellation':'Cancel order','escalation':'Request support engineer'}[last['pending']['kind']]
         c1,c2=st.columns([1,4])
         if c1.button(label,type='primary',width='stretch'):
             try:
                 request=agent.confirm(last,st.session_state.conversation_id)
-                message=f'Request {request} created. Status: awaiting human review.' if last['pending']['kind']=='escalation' else f'Request {request} created. Fulfilment remains simulated.'
+                message=f'Simulated support request {request} saved. No support engineer has been contacted.' if last['pending']['kind']=='escalation' else f'Request {request} created. Fulfilment remains simulated.'
                 agent.log_message(st.session_state.conversation_id,cid,'assistant',message);agent.db.commit()
                 st.session_state.history.append({'role':'assistant','content':message})
+                if feedback['phase']=='handoff':
+                    feedback['phase']='closed';save_feedback(feedback)
                 st.session_state.last=None;st.rerun()
             except ValueError as error:st.error(str(error))
         c2.caption('Nothing is sent to a carrier, warehouse, payment provider, or support team.')
-    prompt=st.chat_input('Type a message about your order…')
+    prompt=st.chat_input('Type a message about your order…',disabled=feedback['phase'] not in ['open','retry'])
     if prompt:submit_message(prompt,cid)
 
 

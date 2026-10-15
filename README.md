@@ -164,3 +164,11 @@ The support dashboard totals API requests, input tokens, output tokens, estimate
 * `tests/test_agent.py`: workflow verification.
 
 The dependencies are pinned to the versions used to verify this package. Network access is needed to install them and for OpenAI mode. Ollama mode requires a running local or remote Ollama endpoint.
+
+### Local conversational-flow update
+
+Tia greets the selected synthetic customer by name, introduces herself on the next line, then separates the explanation with a blank line. Customer replies do not use em dashes. Expired return/exchange requests check the delivery date before requesting condition confirmation and explain only the 30-day window. This explanation is rendered from the code decision rather than the model rewrite.
+
+For this outcome, a separate closing message is followed by a 1–5 star rating with chat input closed. A rating of 4 or 5 ends the flow. The first rating below 4 reopens the chat for one further response and rating. A second rating below 4 offers a support engineer and cannot restart the automated loop. The round count and closure state persist in SQLite per conversation, including when a saved chat is reopened. Support requests remain local simulations and contact nobody. Starting a new chat creates a separate conversation.
+
+The 26 automated tests include isolated UI-flow tests for the star-rating threshold, two-round cap, persisted closure, greeting layout and mock support request. No fresh live-model quality score is claimed for this revision. Earlier accuracy figures do not measure the updated prompts and workflow.
