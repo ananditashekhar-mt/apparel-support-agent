@@ -5,6 +5,8 @@ import io
 import json
 import os
 import uuid
+import traceback
+from pathlib import Path
 from datetime import date
 
 import streamlit as st
@@ -136,7 +138,9 @@ def submit_message(prompt,cid):
             agent.db.commit()
         st.session_state.memory=result['memory'];st.session_state.last=result
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
-    except Exception:
+    except Exception as error:
+        frames='; '.join(f'{Path(frame.filename).name}:{frame.lineno} in {frame.name}' for frame in traceback.extract_tb(error.__traceback__))
+        agent.log_error(st.session_state.conversation_id,cid,RuntimeError(f'UI request failed: {type(error).__name__}; {frames}'))
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
         st.error('We could not complete that request. It has been logged for support review; no action was created.')
 
