@@ -1,0 +1,51 @@
+[
+  {
+    "Dimension": "Intent recognition",
+    "What_Good_Looks_Like": "Correctly identifies the main post-purchase need.",
+    "Score_0": "Wrong",
+    "Score_1": "Partial",
+    "Score_2": "Correct"
+  },
+  {
+    "Dimension": "Grounding",
+    "What_Good_Looks_Like": "Uses only order, carrier, inventory and policy facts available.",
+    "Score_0": "Invents facts",
+    "Score_1": "Minor issue",
+    "Score_2": "Fully grounded"
+  },
+  {
+    "Dimension": "Policy compliance",
+    "What_Good_Looks_Like": "Applies return/exchange/damage/cancellation rules correctly.",
+    "Score_0": "Violation",
+    "Score_1": "Minor omission",
+    "Score_2": "Correct"
+  },
+  {
+    "Dimension": "Tool selection",
+    "What_Good_Looks_Like": "Chooses the minimum correct API/tool(s).",
+    "Score_0": "Wrong",
+    "Score_1": "Incomplete/extra",
+    "Score_2": "Correct"
+  },
+  {
+    "Dimension": "Escalation",
+    "What_Good_Looks_Like": "Hands off financial, exception and unresolved delivery cases appropriately.",
+    "Score_0": "Wrong",
+    "Score_1": "Unclear",
+    "Score_2": "Correct"
+  },
+  {
+    "Dimension": "Conversation quality",
+    "What_Good_Looks_Like": "Clear, empathetic, concise, with next step.",
+    "Score_0": "Poor",
+    "Score_1": "Acceptable",
+    "Score_2": "Strong"
+  },
+  {
+    "Dimension": "Context retention",
+    "What_Good_Looks_Like": "Retains order/item/variant/prior actions across turns.",
+    "Score_0": "Forgets",
+    "Score_1": "Partial",
+    "Score_2": "Retains"
+  }
+]

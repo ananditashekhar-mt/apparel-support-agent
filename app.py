@@ -90,7 +90,7 @@ if interface=='Customer':
 else:
     demo_date=date(2026,9,17)
 
-agent_key=(mode,model)
+agent_key=(mode,model,'feedback-v2')
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)

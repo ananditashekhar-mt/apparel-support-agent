@@ -5,7 +5,7 @@ __pycache__/
 *.py[cod]
 .venv/
 logs/
-evaluation_*.json
+/evaluation_*.json
 .DS_Store
 *.zip
 report_assets/
