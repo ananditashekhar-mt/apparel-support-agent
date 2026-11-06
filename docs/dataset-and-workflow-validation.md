@@ -83,3 +83,18 @@ reopening or new chats. Responses are stored in SQLite and shown in the Support
 transcript. A reopened conversation gets a new survey cycle when it ends again;
 reruns do not create duplicate responses. Existing low-score retry/handoff logic
 uses the same form, so comments can also be captured on those feedback rounds.
+
+
+## Back navigation and recent orders
+
+Back controls return from chat to topics, from topics to order selection, from
+issue descriptions to topics, and from reopening to the saved conversation. Past
+chats remembers the current conversation so Back restores its context rather
+than starting a new session. Navigation does not undo or delete saved requests.
+
+The order picker initially shows the customer's three newest orders by purchase
+date, with View all orders for older purchases. When a UI question is missing an
+order (or references an unavailable order), the agent asks the customer to choose
+from these cards rather than type an ID. Selection resumes the original question
+and retains extracted intent/variant details. Only this profile's orders are shown.
+CLI/reference evaluation keeps the existing text-only order-ID prompt.

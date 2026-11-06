@@ -19,6 +19,13 @@ class CustomerJourneyTests(unittest.TestCase):
     def tearDown(self):
         self.app.session_state['agent'].db.close();self.factory.stop();self.temp.cleanup()
     def click(self,label):
+        # AppTest can retain removed form controls for one extra rerun.
+        for widget in self.app.radio:
+            try:widget.value
+            except KeyError:widget.set_value(None)
+        for field in self.app.text_area:
+            try:field.value
+            except KeyError:field.set_value('')
         # AppTest may retain the form widget for one rerun after navigation.
         for field in self.app.text_area:
             if field.label=='Describe your issue' and self.app.session_state['chat_stage']=='chat':field.set_value('')
@@ -125,3 +132,56 @@ class CustomerJourneyTests(unittest.TestCase):
         self.click('Submit feedback')
         responses=self.app.session_state['agent'].csat_responses(self.app.session_state['conversation_id'])
         self.assertEqual([(r['rating'],r['comment']) for r in responses],[(3,'')])
+
+    def test_direct_delivery_question_shows_orders_and_resumes_without_typing_id(self):
+        self.click('Other');self.click('Delivery status')
+        self.assertEqual(self.app.session_state['chat_stage'],'pick_order')
+        self.assertNotIn('Please share your order ID',self.app.session_state['history'][-1]['content'])
+        self.assertEqual(self.app.session_state['agent'].actions(self.app.session_state['conversation_id']),[])
+        self.click('Get help with this order')
+        self.assertEqual(self.app.session_state['chat_stage'],'chat')
+        self.assertEqual(self.app.session_state['last']['intent'],'order_tracking')
+        self.assertIn(self.app.session_state['selected_order'],self.app.session_state['history'][-1]['content'])
+
+    def test_recent_orders_are_latest_three_and_view_all_is_available(self):
+        from collections import Counter
+        orders=list(self.app.session_state['agent'].orders.values())
+        cid=Counter(o['Customer_ID'] for o in orders).most_common(1)[0][0]
+        order=next(o for o in orders if o['Customer_ID']==cid)
+        label=f"{order['Customer_Name_Synthetic']} · {order['City']} · Customer {cid[-4:]}"
+        next(s for s in self.app.selectbox if s.label=='Preview customer').set_value(label).run()
+        expected=sorted([o for o in orders if o['Customer_ID']==cid],key=lambda o:(o['Order_Date'],o['Order_ID']),reverse=True)
+        visible=[b.key for b in self.app.button if b.key and b.key.startswith('choose_')]
+        self.assertEqual(visible,['choose_'+o['Order_ID'] for o in expected[:3]])
+        self.click('View all '+str(len(expected))+' orders')
+        self.assertEqual(len([b for b in self.app.button if b.key and b.key.startswith('choose_')]),len(expected))
+
+    def test_back_through_topics_description_chat_and_history_preserves_conversation(self):
+        self.click('Get help with this order');self.click('My issue is not listed here');self.click('Back')
+        self.assertEqual(self.app.session_state['chat_stage'],'issue')
+        self.click('Delivery status');session=self.app.session_state['conversation_id']
+        messages=list(self.app.session_state['history'])
+        self.click('Past chats');self.app.button(key='recent_'+session).click().run()
+        self.click('Back');self.assertEqual(self.app.session_state['chat_stage'],'recent')
+        self.click('Back');self.assertEqual(self.app.session_state['chat_stage'],'chat')
+        self.assertEqual(self.app.session_state['conversation_id'],session)
+        self.assertEqual(self.app.session_state['history'],messages)
+        self.click('Back');self.assertEqual(self.app.session_state['chat_stage'],'issue')
+        self.click('Back');self.assertEqual(self.app.session_state['chat_stage'],'order')
+
+    def test_order_picker_back_and_reopen_back(self):
+        self.click('Other');self.click('Delivery status');self.click('Back')
+        self.assertEqual(self.app.session_state['chat_stage'],'issue')
+        self.click('Delivery status');self.click('Get help with this order');self.click('Finish chat')
+        self.click('Reopen chat');self.click('Back')
+        self.assertEqual(self.app.session_state['chat_stage'],'review')
+
+    def test_unavailable_typed_order_is_replaced_by_selected_customer_order(self):
+        self.click('Other');self.click('My issue is not listed here')
+        self.app.text_area[0].set_value('Where is ORD-99999?')
+        self.click('Let Tia take a look')
+        self.assertEqual(self.app.session_state['chat_stage'],'pick_order')
+        self.click('Get help with this order')
+        self.assertEqual(self.app.session_state['chat_stage'],'chat')
+        self.assertEqual(self.app.session_state['last']['order_id'],self.app.session_state['selected_order'])
+        self.assertNotIn('99999',self.app.session_state['history'][-1]['content'])

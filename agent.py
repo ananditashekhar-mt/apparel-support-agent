@@ -229,8 +229,15 @@ class Agent:
         if intent=='unknown':return done('I can help with order tracking, a delivery problem, or a return/exchange. What happened?')
         if intent in ['refund_status','price_adjustment']:
             return escalation('I know payment concerns can be worrying. Refunds, payment disputes and price adjustments need a Support Expert, as I can’t safely check or change payments here.')
-        if not p.get('order_id'):return done('Please share your order ID, for example ORD-10003.')
+        if not p.get('order_id'):
+            if self.offer_order_picker:
+                out['needs_order_selection']=True
+                return done('Which order is this about? Choose from your recent purchases below. You don’t need to look up an order number.')
+            return done('Please share your order ID, for example ORD-10003.')
         if not o or (self.allowed_order_ids is not None and o['Order_ID'] not in self.allowed_order_ids):
+            if self.offer_order_picker:
+                out['needs_order_selection']=True
+                return done('I couldn’t match that to one of your orders. Please choose one of your recent purchases below.')
             return done('I could not find that order in this customer profile. Please check the order ID.')
         requests=self.order_requests(o['Order_ID'], self.current_customer, self.current_session)
         cancellation=next((r for r in requests if r['kind']=='cancellation' and r['status']=='completed'),None)
@@ -314,7 +321,8 @@ class Agent:
         self.db.execute('INSERT INTO api_usage VALUES(?,?,?,?,?,?,?,?,?,?,?)',
             (str(uuid.uuid4()),conversation_id,customer_id,request_id,self.model.model,inputs,outputs,requests,usd,usd*usd_inr,self.now()))
     def chat(self,message,memory=None,history=None,today=None,condition_ok=False,session='demo',
-             customer_id='anonymous',input_rate=0,output_rate=0,usd_inr=0,allowed_order_ids=None, customer_name=None, review_unlisted=False):
+             customer_id='anonymous',input_rate=0,output_rate=0,usd_inr=0,allowed_order_ids=None, customer_name=None, review_unlisted=False, offer_order_picker=False):
+        self.offer_order_picker=offer_order_picker
         self.review_unlisted=review_unlisted
         self.current_session=session;self.current_customer=customer_id
         self.customer_name=customer_name

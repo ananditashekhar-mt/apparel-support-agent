@@ -1,4 +1,5 @@
 import csv
+import copy
 import hashlib
 import html
 import io
@@ -128,6 +129,9 @@ def reset_customer_state(cid,new=False):
         st.session_state.customer_key=key;st.session_state.conversation_id=str(uuid.uuid4())
         st.session_state.chat_stage='order';st.session_state.selected_order=None
         st.session_state.unlisted_issue=False
+        st.session_state.pending_order_request=None
+        st.session_state.recent_origin=None
+        st.session_state.show_all_orders=False
         st.session_state.pop('issue_description',None)
         st.session_state.history=[]
         st.session_state.memory={};st.session_state.last=None;st.session_state.condition_ok=False
@@ -153,8 +157,8 @@ def submit_message(prompt,cid):
             result=agent.chat(prompt,st.session_state.memory,st.session_state.history,demo_date,
                 st.session_state.condition_ok,st.session_state.conversation_id,cid,input_rate,output_rate,usd_inr,
                 [order['Order_ID'] for order in profiles[cid]['orders']],customer_name=profiles[cid]['name'],
-                review_unlisted=st.session_state.get('unlisted_issue',False))
-        if result.get('feedback_required') or feedback['phase']=='retry':
+                review_unlisted=st.session_state.get('unlisted_issue',False),offer_order_picker=True)
+        if not result.get('needs_order_selection') and (result.get('feedback_required') or feedback['phase']=='retry'):
             if result.get('pending',{} ) and result['pending']['kind']=='escalation':
                 feedback['support_result']=result
             feedback.update(phase='rating',csat_submitted=False,csat_skipped=False,csat_id=None)
@@ -162,8 +166,9 @@ def submit_message(prompt,cid):
             agent.log_message(st.session_state.conversation_id,cid,'assistant',
                 'Please let us know if there is anything else we can help you with.')
             agent.db.commit()
+        st.session_state.pending_order_request=prompt if result.get('needs_order_selection') else None
         st.session_state.unlisted_issue=False
-        st.session_state.chat_stage='chat'
+        st.session_state.chat_stage='pick_order' if result.get('needs_order_selection') else 'chat'
         st.session_state.memory=result['memory'];st.session_state.last=result
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
     except Exception as error:
@@ -173,8 +178,58 @@ def submit_message(prompt,cid):
         st.error('I’m sorry, I couldn’t check that just now. Please try again in a moment. Your order hasn’t been changed.')
 
 
+def open_recent_chats():
+    keys=['conversation_id','chat_stage','selected_order','memory','history','last','condition_ok','unlisted_issue','pending_order_request']
+    st.session_state.recent_origin={key:copy.deepcopy(st.session_state.get(key)) for key in keys}
+    st.session_state.chat_stage='recent'
+
+
+def back_in_journey(stage):
+    if stage=='recent':
+        origin=st.session_state.get('recent_origin')
+        if origin:
+            for key,value in origin.items():st.session_state[key]=value
+        else:st.session_state.chat_stage='order'
+    elif stage=='review':st.session_state.chat_stage='recent'
+    elif stage=='reopen':st.session_state.chat_stage='review'
+    elif stage=='describe':
+        st.session_state.chat_stage='issue';st.session_state.unlisted_issue=False
+    elif stage=='issue':
+        st.session_state.chat_stage='order';st.session_state.memory={};st.session_state.selected_order=None
+        st.session_state.condition_ok=False;st.session_state.last=None
+    elif stage=='pick_order':
+        st.session_state.chat_stage='issue';st.session_state.pending_order_request=None;st.session_state.last=None
+    elif stage=='chat':
+        st.session_state.chat_stage='review' if feedback_state()['phase'] not in ('open','retry') else 'issue'
+        st.session_state.condition_ok=False
+    elif stage=='order':st.session_state.chat_stage='chat'
+
+
+def render_order_choices(cid,profile,resume=False):
+    orders=sorted(profile['orders'],key=lambda o:(o['Order_Date'],o['Order_ID']),reverse=True)
+    show_all=st.session_state.get('show_all_orders',False)
+    st.caption('Your recent purchases' if not show_all else 'All your orders')
+    for order in (orders if show_all else orders[:3]):
+        with st.container(border=True):
+            st.caption(order['Order_ID']+' · '+order['Order_Status']+' · '+str(order['Order_Date'])[:10])
+            st.markdown('**'+order['Product_Name']+'**')
+            st.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']}")
+            if st.button('Get help with this order',icon=':material/arrow_forward:',key='choose_'+order['Order_ID'],width='stretch'):
+                st.session_state.selected_order=order['Order_ID']
+                if resume:
+                    st.session_state.memory=dict(st.session_state.memory,order_id=order['Order_ID'])
+                    # The original question and extracted details remain in history/memory.
+                    submit_message('Please use '+order['Order_ID']+' for my question.',cid)
+                else:
+                    st.session_state.memory={'order_id':order['Order_ID']};st.session_state.last=None
+                    st.session_state.condition_ok=False;st.session_state.chat_stage='issue';st.rerun()
+    if len(orders)>3:
+        if st.button('Show recent orders' if show_all else f'View all {len(orders)} orders',key='toggle_order_list'):
+            st.session_state.show_all_orders=not show_all;st.rerun()
+
 def open_saved_conversation(cid,conversation_id):
     agent.require_conversation_owner(conversation_id,cid)
+    if st.session_state.chat_stage!='recent':open_recent_chats()
     st.session_state.conversation_id=conversation_id
     st.session_state.history=agent.messages(conversation_id,cid)
     saved=agent.db.execute('SELECT payload FROM events WHERE session=? ORDER BY rowid DESC LIMIT 1',(conversation_id,)).fetchone()
@@ -210,7 +265,7 @@ def customer_view():
     with st.container(key='mobile_new_chat'):
         mobile_new,mobile_history=st.columns([2,1])
         if mobile_history.button('Past chats',key='mobile_history',width='stretch'):
-            st.session_state.chat_stage='recent';st.rerun()
+            open_recent_chats();st.rerun()
         if mobile_new.button('＋ New chat',key='new_chat_mobile',type='primary',width='stretch'):
             reset_customer_state(cid,True);st.rerun()
     rail,workspace=st.columns([1,2.8],gap='large')
@@ -219,7 +274,7 @@ def customer_view():
             if st.button('＋ New chat',key='new_chat_rail',type='primary',width='stretch'):
                 reset_customer_state(cid,True);st.rerun()
             if st.button('Past chats',key='rail_history',width='stretch',icon=':material/history:'):
-                st.session_state.chat_stage='recent';st.rerun()
+                open_recent_chats();st.rerun()
             with st.container(key='care_context'):
                 st.markdown('<div class="context-label">Your order</div>',unsafe_allow_html=True)
                 selected=st.session_state.selected_order
@@ -229,7 +284,9 @@ def customer_view():
                     if any(r['kind']=='cancellation' and r['status']=='completed' for r in agent.order_requests(selected,cid,st.session_state.conversation_id)):status='Cancelled'
                     st.markdown(f'''<div class="context-card"><span class="context-pill">{html.escape(status)}</span><strong>{html.escape(order['Product_Name'])}</strong><p>{html.escape(selected)}</p><p>{html.escape(order['Colour'])} · Size {html.escape(order['Size'])} · Qty {order['Qty']}</p></div>''',unsafe_allow_html=True)
                     if st.button('Change order',width='stretch'):
-                        reset_customer_state(cid,True);st.rerun()
+                        st.session_state.chat_stage='order';st.session_state.memory={}
+                        st.session_state.selected_order=None;st.session_state.last=None
+                        st.session_state.condition_ok=False;st.rerun()
                     with st.expander('Order updates'):
                         for event in order.get('Shipment_Events',[]):st.caption(f"{event['Status']} · {str(event['Date'])[:10]}")
                         for request in agent.order_requests(selected,cid,st.session_state.conversation_id):st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
@@ -315,6 +372,13 @@ def render_evidence(cid,last):
 
 def render_customer_journey(cid,profile):
     stage=st.session_state.chat_stage
+    if stage!='order' or st.session_state.history:
+        if st.button('Back',key='journey_back',icon=':material/arrow_back:'):
+            back_in_journey(stage);st.rerun()
+    if stage=='pick_order':
+        st.markdown('<div class="intro">Choose the order you’d like me to check. I’ll continue with your question.</div>',unsafe_allow_html=True)
+        render_order_choices(cid,profile,resume=True)
+        return
     if stage=='recent':
         st.subheader('Your previous chats')
         st.caption('Pick a conversation to read it or reopen it.')
@@ -350,15 +414,7 @@ def render_customer_journey(cid,profile):
         return
     if stage=='order':
         st.markdown(f'<div class="intro">Hi {html.escape(profile["name"])}, I’m Tia. I can help with your delivery, a return, an exchange, or something else.<br>Which order is this about?</div>',unsafe_allow_html=True)
-        for index,order in enumerate(sorted(profile['orders'],key=lambda o:o['Order_Date'],reverse=True)):
-            with st.container(border=True):
-                st.caption(order['Order_ID']+' · '+order['Order_Status'])
-                st.markdown('**'+order['Product_Name']+'**')
-                st.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']}")
-                if st.button('Get help with this order',icon=':material/arrow_forward:',key='choose_'+order['Order_ID'],width='stretch'):
-                    st.session_state.selected_order=order['Order_ID']
-                    st.session_state.memory={'order_id':order['Order_ID']}
-                    st.session_state.chat_stage='issue';st.rerun()
+        render_order_choices(cid,profile)
         if st.button('Other',icon=':material/chat_bubble_outline:',width='stretch'):
             st.session_state.selected_order=None;st.session_state.memory={}
             st.session_state.chat_stage='issue';st.rerun()
