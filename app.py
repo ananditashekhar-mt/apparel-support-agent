@@ -17,37 +17,53 @@ from agent import Agent, load
 load_dotenv()
 BRAND_NAME=os.getenv('BRAND_NAME','Threadly')
 AGENT_NAME=os.getenv('AGENT_NAME','Tia')
-st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide')
+st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide', initial_sidebar_state='collapsed')
 st.markdown('''<style>
-.stApp {background:#faf9f6;color:#253b35}
-.block-container {max-width:1040px;padding:4.5rem 2rem 5rem}
-[data-testid="stSidebar"] {background:#f0f2ed;border-right:1px solid #e0e5dd}
-h1,h2,h3 {color:#233d34;letter-spacing:-.035em}
-h1 {font-size:2.65rem!important;font-weight:600!important}
-.brand-lockup {display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.brand-mark {width:34px;height:34px;border-radius:50%;background:#244c3f;color:#fff;display:grid;place-items:center;font:italic 25px Georgia,serif}
-.brand-word {font:600 24px Georgia,serif;color:#244c3f}
-.welcome {padding:30px 0 22px;max-width:680px}
-.welcome .eyebrow,.eyebrow {font-size:.75rem;text-transform:uppercase;letter-spacing:.13em;color:#687e70;margin-bottom:10px}
-.welcome h1 {margin:0 0 12px;line-height:1.15}
-.welcome p {font-size:1.08rem;line-height:1.7;color:#627066;margin:0}
-.welcome.compact {padding:12px 0 18px}.welcome.compact h1 {font-size:1.7rem!important}.welcome.compact p {font-size:.95rem}
-.step-label {font-size:.78rem;letter-spacing:.06em;color:#728176;margin:15px 0}
-.order-card {background:#fff;border:1px solid #e1e6dd;border-radius:16px;padding:20px 24px;margin:12px 0}
-.order-card h3 {margin:6px 0;font-size:1.3rem}
-.status-pill {background:#eaf1e9;color:#365a42;border-radius:8px;padding:4px 10px;font-size:.8rem}
-.stButton>button {border-radius:12px;border:1px solid #d9e0d4;min-height:48px;text-align:left;color:#294638;background:#fff}
-.stButton>button:hover {border-color:#426a51;background:#f0f5ec;color:#244c3f}
-.stButton>button[kind="primary"] {background:#244c3f;border-color:#244c3f;color:#fff}
-.chat-row {display:flex;gap:12px;align-items:flex-start;margin:20px 0}
-.chat-avatar {width:34px;height:34px;min-width:34px;border-radius:50%;display:grid;place-items:center;font-size:12px}
-.chat-avatar.tia {background:#244c3f;color:white}
-.chat-avatar.you {background:#e9e3d8;color:#635744}
-.chat-bubble {max-width:86%;padding:16px 20px;border-radius:0 16px 16px;background:white;border:1px solid #e4e7df;line-height:1.7}
+.stApp {background:#f3f4f8;color:#292c38}
+.block-container {max-width:1180px;padding:3.7rem 1.5rem 3rem}
+[data-testid="stHeader"] {background:#f3f4f8}
+[data-testid="stSidebar"] {background:#fff;border-right:1px solid #e7e8ef}
+[data-testid="stVerticalBlock"] {gap:.75rem}
+h1,h2,h3 {color:#282636;letter-spacing:-.025em}
+h3 {font-size:1.25rem!important;padding:0!important;margin:0!important}
+p {font-size:.94rem;line-height:1.55}
+.brand-lockup {display:flex;align-items:center;gap:9px}
+.brand-mark {width:32px;height:32px;border-radius:10px;background:#40365c;color:#fff;display:grid;place-items:center;font:italic 23px Georgia,serif}
+.brand-word {font:600 24px Georgia,serif;color:#302a42}
+.brand-sub {font:400 13px sans-serif;color:#777885;margin-left:10px;border-left:1px solid #d9dae4;padding-left:16px}
+.account {text-align:right;font-size:13px;color:#737582;padding-top:8px}
+.account b {color:#383344;font-weight:600}
+.st-key-care_workspace {background:#fff;border:1px solid #e4e4ed;border-radius:20px;padding:24px;box-shadow:0 8px 32px #28233d07;min-height:530px}
+.st-key-care_rail {padding:8px 16px 0 0}
+.st-key-care_rail [data-testid="stCaptionContainer"] p {font-size:12px}
+.assistant-header {display:flex;align-items:center;gap:11px;border-bottom:1px solid #eeeef4;padding-bottom:17px;margin-bottom:3px}
+.tia-avatar {width:42px;height:42px;border-radius:50%;background:#ede9f6;color:#685491;display:grid;place-items:center;font-size:19px;font-weight:600}
+.assistant-header strong {display:block;font-size:15px;font-weight:600;color:#2e293e}
+.assistant-header span {font-size:12px;color:#85818f}
+.intro {background:#f6f5fa;border-radius:3px 14px 14px;padding:14px 17px;color:#504a60;font-size:14px;line-height:1.6;margin:3px 0 10px;max-width:580px}
+.context-label {font-size:11px;letter-spacing:.07em;color:#888492;text-transform:uppercase;margin:20px 0 10px}
+.context-card {background:#ebeaf2;border-radius:14px;padding:16px;margin:4px 0 8px}
+.context-card strong {display:block;font-size:15px;color:#393246;margin:9px 0 5px}
+.context-card p {font-size:12px;color:#757080;margin:5px 0}
+.context-pill {display:inline-block;font-size:11px;background:#fff;color:#596a60;padding:3px 8px;border-radius:6px}
+.rail-note {font-size:12px;color:#85818e;line-height:1.6;margin-top:22px}
+.stButton>button {border:1px solid #e4e2ed;border-radius:10px;min-height:43px;color:#4b435b;background:white;font-size:14px;justify-content:flex-start;padding:9px 13px;box-shadow:none}
+.stButton>button p {font-size:14px;line-height:1.3}
+.stButton>button:hover {background:#f5f2fa;border-color:#b8a8d0;color:#4d3a6d}
+.stButton>button[kind="primary"] {background:#51416d;border-color:#51416d;color:#fff;justify-content:center}
+.stButton>button[kind="primary"]:hover {background:#403156;color:white}
+.st-key-care_workspace [data-testid="stExpander"] {border:1px solid #e8e6ef;border-radius:10px;background:#fbfaff}
+.st-key-care_workspace [data-testid="stVerticalBlockBorderWrapper"] {border-radius:12px}
+.chat-row {display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.chat-avatar {width:28px;height:28px;min-width:28px;border-radius:50%;display:grid;place-items:center;font-size:10px;background:#eee9f6;color:#675182}
+.chat-avatar.you {background:#e6edf2;color:#5e7182}
+.chat-bubble {max-width:88%;padding:12px 15px;border-radius:3px 13px 13px;background:#f6f5fa;color:#4d465b;line-height:1.6;font-size:14px}
 .chat-row.user {flex-direction:row-reverse}
-.chat-row.user .chat-bubble {background:#edf2e8;border-color:#e0e7d9;border-radius:16px 0 16px 16px}
-[data-testid="stChatInput"] {border-radius:14px}
-@media(max-width:640px) {.block-container {padding:4rem 1rem 4rem} h1 {font-size:2rem!important}.chat-bubble {max-width:88%;padding:12px}}
+.chat-row.user .chat-bubble {background:#eee9f7;border-radius:13px 3px 13px 13px}
+[data-testid="stChatInput"] {border-radius:12px}
+[data-testid="stBottom"] {background:transparent}
+.mobile-order,.st-key-mobile_new_chat {display:none}
+@media(max-width:640px) {.block-container {padding:3.7rem .8rem 2rem}.st-key-care_workspace {padding:18px;min-height:0}.st-key-care_rail {padding:0}.st-key-care_context {display:none}.st-key-mobile_new_chat {display:block}[data-testid="stColumn"]:has(.st-key-care_rail) {display:none}.st-key-care_rail {margin-bottom:0}.mobile-order {display:block;font-size:12px;color:#81798c}.st-key-topic_primary [data-testid="stHorizontalBlock"],.st-key-topic_secondary [data-testid="stHorizontalBlock"] {flex-wrap:nowrap!important;gap:8px}.st-key-topic_primary [data-testid="stColumn"],.st-key-topic_secondary [data-testid="stColumn"] {min-width:0!important;flex:1!important}.st-key-topic_primary button {padding:9px 8px}.st-key-topic_primary button p {font-size:12px}.brand-sub {display:none}.account {font-size:12px}.intro {font-size:14px}}
 </style>''',unsafe_allow_html=True)
 
 
@@ -160,24 +176,16 @@ def submit_message(prompt,cid):
 def customer_view():
     profile_options=sorted(profiles,key=lambda c:(profiles[c]['name'],profiles[c]['city']))
     profile_labels={f"{profiles[c]['name']} · {profiles[c]['city']} · Customer {c[-4:]}":c for c in profile_options}
-    header_left,header_right=st.columns([3,2],vertical_alignment='center')
-    with header_left:
-        st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div></div>',unsafe_allow_html=True)
-        st.caption('Everyday style, thoughtfully supported.')
-    with header_right:
-        selected_profile=st.selectbox('Shopping as',list(profile_labels),key='customer_profile_picker',
-            help='Choose a sample customer to explore their orders.')
-        cid=profile_labels[selected_profile]
+    with st.sidebar:
+        selected_profile=st.selectbox('Preview customer',list(profile_labels),key='customer_profile_picker',help='Choose a sample customer to preview their support experience.')
+    cid=profile_labels[selected_profile]
     reset_customer_state(cid);profile=profiles[cid]
-    top,new=st.columns([3,1],vertical_alignment='center')
-    with top:st.caption('THREADLY CARE / YOUR SUPPORT SPACE')
-    with new:
-        if st.button('＋ New chat',type='primary',width='stretch'):
-            reset_customer_state(cid,True);st.rerun()
-    compact=st.session_state.chat_stage!='order'
-    st.markdown(f'''<div class="welcome {'compact' if compact else ''}"><div class="eyebrow">A little help, whenever you need it</div>
-        <h1>{'Let’s take care of this.' if compact else 'Hi '+html.escape(profile['name'])+',<br>let’s make things right.'}</h1>
-        <p>{'You’re chatting with '+html.escape(AGENT_NAME)+', your '+html.escape(BRAND_NAME)+' care assistant.' if compact else 'I’m '+html.escape(AGENT_NAME)+', your '+html.escape(BRAND_NAME)+' care assistant. From finding your delivery to finding a better fit, I’m here to help.'}</p></div>''',unsafe_allow_html=True)
+    brand,account=st.columns([2,1])
+    with brand:
+        st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div><div class="brand-sub">Customer care</div></div>',unsafe_allow_html=True)
+    with account:
+        st.markdown(f'<div class="account"><b>{html.escape(profile["name"])}</b> · {html.escape(profile["city"])}</div>',unsafe_allow_html=True)
+    st.write('')
     with st.sidebar:
         st.divider()
         st.caption('YOUR CONVERSATIONS')
@@ -194,57 +202,80 @@ def customer_view():
                 st.session_state.unlisted_issue=False;st.rerun()
         st.divider()
         st.caption('Demo experience · Orders and requests are examples. No live fulfilment or external support connection.')
+    with st.container(key='mobile_new_chat'):
+        if st.button('＋ New chat',key='new_chat_mobile',type='primary',width='stretch'):
+            reset_customer_state(cid,True);st.rerun()
+    rail,workspace=st.columns([1,2.8],gap='large')
+    with rail:
+        with st.container(key='care_rail'):
+            if st.button('＋ New chat',key='new_chat_rail',type='primary',width='stretch'):
+                reset_customer_state(cid,True);st.rerun()
+            with st.container(key='care_context'):
+                st.markdown('<div class="context-label">Your order</div>',unsafe_allow_html=True)
+                selected=st.session_state.selected_order
+                order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
+                if order:
+                    status=order['Order_Status']
+                    if any(r['kind']=='cancellation' and r['status']=='completed' for r in agent.order_requests(selected,cid,st.session_state.conversation_id)):status='Cancelled'
+                    st.markdown(f'''<div class="context-card"><span class="context-pill">{html.escape(status)}</span><strong>{html.escape(order['Product_Name'])}</strong><p>{html.escape(selected)}</p><p>{html.escape(order['Colour'])} · Size {html.escape(order['Size'])} · Qty {order['Qty']}</p></div>''',unsafe_allow_html=True)
+                    if st.button('Change order',width='stretch'):
+                        reset_customer_state(cid,True);st.rerun()
+                    with st.expander('Order updates'):
+                        for event in order.get('Shipment_Events',[]):st.caption(f"{event['Status']} · {str(event['Date'])[:10]}")
+                        for request in agent.order_requests(selected,cid,st.session_state.conversation_id):st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
+                else:
+                    st.caption('Select an order in the chat to get started.' if st.session_state.chat_stage=='order' else 'General question · No order selected')
+                st.markdown('<div class="context-label">Need a closer look?</div><div class="rail-note">If I can’t resolve your concern, I’ll help you request a review from a Support Expert.</div>',unsafe_allow_html=True)
+    with workspace:
+        with st.container(key='care_workspace'):
+            st.markdown('<div class="assistant-header"><div class="tia-avatar">T</div><div><strong>Tia</strong><span>Your Threadly care assistant</span></div></div>',unsafe_allow_html=True)
+            selected=st.session_state.selected_order
+            order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
+            if order:st.markdown(f'<div class="mobile-order">{html.escape(order["Product_Name"])} · {html.escape(selected)}</div>',unsafe_allow_html=True)
+            render_customer_journey(cid,profile)
+
+
+def render_customer_journey(cid,profile):
     stage=st.session_state.chat_stage
     if stage=='order':
-        st.markdown('<div class="step-label">01 / CHOOSE AN ORDER</div>',unsafe_allow_html=True)
-        st.subheader('Which order can I help with?')
-        st.caption('Choose an order below, or select Other for a different question.')
+        st.markdown(f'<div class="intro">Hi {html.escape(profile["name"])}, I’m Tia. I can help with your delivery, a return, an exchange, or something else.<br>Which order is this about?</div>',unsafe_allow_html=True)
         for index,order in enumerate(sorted(profile['orders'],key=lambda o:o['Order_Date'],reverse=True)):
-            if index%2==0:columns=st.columns(2)
-            with columns[index%2]:
-                with st.container(border=True):
-                    st.caption(order['Order_ID']+' · '+order['Order_Status'])
-                    st.markdown('**'+order['Product_Name']+'**')
-                    st.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']}")
-                    if st.button('Get help with this order',key='choose_'+order['Order_ID'],width='stretch'):
-                        st.session_state.selected_order=order['Order_ID']
-                        st.session_state.memory={'order_id':order['Order_ID']}
-                        st.session_state.chat_stage='issue';st.rerun()
-        if st.button('Other',width='stretch'):
+            with st.container(border=True):
+                st.caption(order['Order_ID']+' · '+order['Order_Status'])
+                st.markdown('**'+order['Product_Name']+'**')
+                st.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']}")
+                if st.button('Get help with this order',icon=':material/arrow_forward:',key='choose_'+order['Order_ID'],width='stretch'):
+                    st.session_state.selected_order=order['Order_ID']
+                    st.session_state.memory={'order_id':order['Order_ID']}
+                    st.session_state.chat_stage='issue';st.rerun()
+        if st.button('Other',icon=':material/chat_bubble_outline:',width='stretch'):
             st.session_state.selected_order=None;st.session_state.memory={}
             st.session_state.chat_stage='issue';st.rerun()
         return
-    active_order=st.session_state.selected_order
-    if active_order:
-        selected_order=next(o for o in profile['orders'] if o['Order_ID']==active_order)
-        with st.expander(selected_order['Product_Name']+' · '+active_order,expanded=False):
-            st.write(f"{selected_order['Colour']} · Size {selected_order['Size']} · Qty {selected_order['Qty']}")
-            for request in agent.order_requests(active_order,cid,st.session_state.conversation_id):
-                st.info(f"{request['kind'].title()} request: {request['status'].replace('_',' ')}. {request['note']}")
-            for event in selected_order.get('Shipment_Events',[]):
-                st.caption(f"{event['Status']} · {str(event['Date'])[:10]} · {event.get('Location','')}")
     if stage=='issue':
-        st.markdown('<div class="step-label">02 / TELL US WHAT YOU NEED</div>',unsafe_allow_html=True)
-        st.subheader('How can I help?')
-        st.caption('Pick what feels closest. We’ll take it from there.')
+        st.markdown('<div class="intro">Thanks. What would you like help with? Choose a topic below, or tell me what happened in your own words.</div>',unsafe_allow_html=True)
         topics=[('Delivery status','Where is my order?'),('Return an item','I would like to return my item.'),
                 ('Exchange an item','I would like to exchange my item.'),('Delivery is late','My delivery is late.'),
                 ('Damaged or faulty item','My item arrived damaged.'),('Wrong item received','I received the wrong item.'),
                 ('An item is missing','An item is missing from my order.'),('Delivered, but not received','My order is marked delivered but I have not received it.'),
                 ('Cancel an order','I would like to cancel my order.'),('Refund or payment help','I need help with my refund.')]
-        for index,(label,prompt) in enumerate(topics):
-            if index%2==0:columns=st.columns(2)
-            if columns[index%2].button(label,key='topic_'+str(index),width='stretch'):
-                submit_message(prompt,cid)
+        icons=['local_shipping','keyboard_return','swap_horiz','schedule','broken_image','inventory_2','package_2','location_off','cancel','payments']
+        with st.container(key='topic_primary'):
+            columns=st.columns(3)
+            for index,(label,prompt) in enumerate(topics[:3]):
+                if columns[index].button(label,key='topic_'+str(index),icon=':material/'+icons[index]+':',width='stretch'):submit_message(prompt,cid)
+        st.caption('More help with your order')
+        with st.container(key='topic_secondary'):
+            for index,(label,prompt) in enumerate(topics[3:],start=3):
+                if (index-3)%2==0:columns=st.columns(2)
+                if columns[(index-3)%2].button(label,key='topic_'+str(index),icon=':material/'+icons[index]+':',width='stretch'):submit_message(prompt,cid)
         if st.button('My issue is not listed here',width='stretch'):
             st.session_state.chat_stage='describe';st.session_state.unlisted_issue=True;st.rerun()
         if st.button('← Choose a different order'):
             st.session_state.chat_stage='order';st.session_state.memory={};st.rerun()
         return
     if stage=='describe':
-        st.markdown('<div class="step-label">03 / IN YOUR OWN WORDS</div>',unsafe_allow_html=True)
-        st.subheader('Tell me what’s happened')
-        st.write('I’ll check how I can help. If your concern needs a closer look, I’ll help you request a Support Expert.')
+        st.markdown('<div class="intro">Of course. Tell me what happened and how you’d like us to help. I’ll check the options for you. If this needs a Support Expert, I’ll help you with the next step.</div>',unsafe_allow_html=True)
         with st.form('describe_issue'):
             description=st.text_area('Describe your issue',key='issue_description',placeholder='What happened, and what would you like help with?',height=140,max_chars=4000)
             if st.form_submit_button('Let Tia take a look',type='primary'):
@@ -291,7 +322,7 @@ def customer_view():
     show_action=feedback['phase']!='closed'
     if last and last.get('pending') and show_action and last['as_of']==demo_date.isoformat():
         label={'return':'Request a return','exchange':'Request an exchange','cancellation':'Cancel order','escalation':'Request a Support Expert'}[last['pending']['kind']]
-        c1,c2=st.columns([1,4])
+        c1,c2=st.columns([2,3])
         if c1.button(label,type='primary',width='stretch'):
             try:
                 request=agent.confirm(last,st.session_state.conversation_id)
