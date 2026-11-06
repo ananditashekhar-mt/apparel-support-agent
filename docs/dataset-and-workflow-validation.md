@@ -50,3 +50,25 @@ original split is retained for comparability. A separately curated holdout and
 reviewed policy/tool labels are still needed for stronger quality claims.
 Grounding, tone and open-ended conversation quality are not automatically graded.
 No live OpenAI/Ollama run or Jev integration was performed in this change.
+
+
+## Photo evidence and reopened conversations
+
+Damaged, wrong-item and quality concerns offer a photo uploader in chat. Customers
+can attach up to three JPG, PNG or WebP images (5 MB each, up to 20 megapixels).
+Actual image contents are validated, and duplicates are not saved twice for the
+same order/chat. Photos are stored as SQLite BLOBs with the conversation and order,
+shown in the customer chat and Support transcript, and never treated as automated
+proof of damage. A customer can request help without uploading a photo.
+
+Past chats opens a read-only transcript with Reopen chat and Start a new chat.
+Reopening requires either dissatisfaction with the earlier help or something
+still pending, plus a written description. The reason and description are saved
+in the same conversation; messages, attachments, proposals and requests remain.
+A reopen begins a fresh feedback cycle. Finish chat closes the current conversation;
+starting a new chat clears order and intent context without deleting prior history.
+
+Storage follows the existing SQLite deployment: photos and chat history survive
+reopening the database, but Streamlit hosting may reset local storage on restart
+or redeployment. Production retention needs persistent storage. There is no model
+vision assessment or automatic replacement approval in this implementation.

@@ -173,6 +173,18 @@ def submit_message(prompt,cid):
         st.error('I’m sorry, I couldn’t check that just now. Please try again in a moment. Your order hasn’t been changed.')
 
 
+def open_saved_conversation(cid,conversation_id):
+    agent.require_conversation_owner(conversation_id,cid)
+    st.session_state.conversation_id=conversation_id
+    st.session_state.history=agent.messages(conversation_id,cid)
+    saved=agent.db.execute('SELECT payload FROM events WHERE session=? ORDER BY rowid DESC LIMIT 1',(conversation_id,)).fetchone()
+    result=json.loads(saved[0]) if saved else {}
+    st.session_state.memory=result.get('memory',{});st.session_state.last=result or None
+    st.session_state.condition_ok=result.get('condition_ok',False)
+    st.session_state.selected_order=result.get('order_id');st.session_state.chat_stage='review'
+    st.session_state.unlisted_issue=False
+
+
 def customer_view():
     profile_options=sorted(profiles,key=lambda c:(profiles[c]['name'],profiles[c]['city']))
     profile_labels={f"{profiles[c]['name']} · {profiles[c]['city']} · Customer {c[-4:]}":c for c in profile_options}
@@ -190,26 +202,24 @@ def customer_view():
         st.divider()
         st.caption('YOUR CONVERSATIONS')
         for conversation in agent.customer_conversations(cid)[:12]:
-            label='Chat · '+conversation['updated_at'][:10]
+            label=agent.conversation_label(conversation['id'],cid)+' · '+conversation['updated_at'][:10]
             if st.button(label,key='history_'+conversation['id'],width='stretch'):
-                st.session_state.conversation_id=conversation['id']
-                st.session_state.history=agent.messages(conversation['id'],cid)
-                saved=agent.db.execute('SELECT payload FROM events WHERE session=? ORDER BY rowid DESC LIMIT 1',(conversation['id'],)).fetchone()
-                result=json.loads(saved[0]) if saved else {}
-                st.session_state.memory=result.get('memory',{});st.session_state.last=result or None
-                st.session_state.condition_ok=result.get('condition_ok',False)
-                st.session_state.selected_order=result.get('order_id');st.session_state.chat_stage='chat'
-                st.session_state.unlisted_issue=False;st.rerun()
+                open_saved_conversation(cid,conversation['id']);st.rerun()
         st.divider()
         st.caption('Demo experience · Orders and requests are examples. No live fulfilment or external support connection.')
     with st.container(key='mobile_new_chat'):
-        if st.button('＋ New chat',key='new_chat_mobile',type='primary',width='stretch'):
+        mobile_new,mobile_history=st.columns([2,1])
+        if mobile_history.button('Past chats',key='mobile_history',width='stretch'):
+            st.session_state.chat_stage='recent';st.rerun()
+        if mobile_new.button('＋ New chat',key='new_chat_mobile',type='primary',width='stretch'):
             reset_customer_state(cid,True);st.rerun()
     rail,workspace=st.columns([1,2.8],gap='large')
     with rail:
         with st.container(key='care_rail'):
             if st.button('＋ New chat',key='new_chat_rail',type='primary',width='stretch'):
                 reset_customer_state(cid,True);st.rerun()
+            if st.button('Past chats',key='rail_history',width='stretch',icon=':material/history:'):
+                st.session_state.chat_stage='recent';st.rerun()
             with st.container(key='care_context'):
                 st.markdown('<div class="context-label">Your order</div>',unsafe_allow_html=True)
                 selected=st.session_state.selected_order
@@ -235,8 +245,70 @@ def customer_view():
             render_customer_journey(cid,profile)
 
 
+def offer_chat_choices(cid):
+    reopen,new=st.columns(2)
+    if reopen.button('Reopen chat',key='reopen_current',width='stretch',icon=':material/replay:'):
+        st.session_state.chat_stage='reopen';st.rerun()
+    if new.button('Start a new chat',key='new_from_chat',width='stretch',icon=':material/add:'):
+        reset_customer_state(cid,True);st.rerun()
+
+
+def render_evidence(cid,last):
+    oid=(last or {}).get('order_id') or st.session_state.memory.get('order_id')
+    intent=(last or {}).get('intent') or st.session_state.memory.get('intent')
+    if intent not in ('damaged_item','wrong_item','quality_issue') or not oid:return
+    if oid not in {o['Order_ID'] for o in profiles[cid]['orders']}:return
+    session=st.session_state.conversation_id
+    with st.container(border=True):
+        st.markdown('**Add photos for your Support Expert**')
+        st.caption('A clear photo of the damage and the full item will help us understand what happened. Up to 3 photos, 5 MB each. JPG, PNG or WebP.')
+        existing=agent.photos(session,cid)
+        if existing:
+            st.success(f'{len(existing)} photo(s) saved with this conversation.')
+            with st.expander('View saved photos'):
+                for photo in existing:st.image(photo['data'],caption=photo['name'],width=180)
+        if len(existing)<3:
+            files=st.file_uploader('Choose photos',type=['jpg','jpeg','png','webp'],accept_multiple_files=True,key='damage_photos_'+session)
+            if st.button('Save photos',key='save_photos',disabled=not files):
+                try:
+                    for photo in files:agent.add_photo(session,cid,oid,photo.name,photo.getvalue())
+                    st.rerun()
+                except ValueError as error:st.error(str(error))
+        st.caption('Photos are saved for Support review. Tia does not assess the images or approve a replacement from them. You can request help without a photo.')
+
 def render_customer_journey(cid,profile):
     stage=st.session_state.chat_stage
+    if stage=='recent':
+        st.subheader('Your previous chats')
+        st.caption('Pick a conversation to read it or reopen it.')
+        conversations=agent.customer_conversations(cid)
+        if not conversations:st.info('No previous chats yet. Start a new chat whenever you need help.')
+        for conversation in conversations:
+            label=agent.conversation_label(conversation['id'],cid)+' · '+conversation['updated_at'][:10]
+            if st.button(label,key='recent_'+conversation['id'],width='stretch'):
+                open_saved_conversation(cid,conversation['id']);st.rerun()
+        return
+    if stage in ('review','reopen'):
+        with st.expander('Earlier conversation',expanded=stage=='review'):
+            for message in agent.messages(st.session_state.conversation_id,cid):render_message(message)
+        if stage=='review':
+            st.caption('Continue this conversation or start fresh for a different concern.')
+            offer_chat_choices(cid)
+        else:
+            st.markdown('<div class="intro">I’m here to help. What brings you back to this conversation?</div>',unsafe_allow_html=True)
+            with st.form('reopen_chat_'+st.session_state.conversation_id):
+                reason=st.radio('Why are you reopening this chat?',['I was unhappy with the previous help','Something is still pending'],index=None)
+                description=st.text_area('Tell us what still needs attention',max_chars=4000,placeholder='What wasn’t resolved, or what are you waiting for?')
+                if st.form_submit_button('Reopen and continue',type='primary'):
+                    try:
+                        agent.reopen_conversation(st.session_state.conversation_id,cid,reason,description)
+                        state=feedback_state();state.update(phase='open',rounds=0,support_result=None);save_feedback(state)
+                        st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
+                        st.session_state.chat_stage='chat';st.rerun()
+                    except ValueError as error:st.warning(str(error))
+            if st.button('Start a new chat',key='new_from_reopen',width='stretch'):
+                reset_customer_state(cid,True);st.rerun()
+        return
     if stage=='order':
         st.markdown(f'<div class="intro">Hi {html.escape(profile["name"])}, I’m Tia. I can help with your delivery, a return, an exchange, or something else.<br>Which order is this about?</div>',unsafe_allow_html=True)
         for index,order in enumerate(sorted(profile['orders'],key=lambda o:o['Order_Date'],reverse=True)):
@@ -288,6 +360,7 @@ def render_customer_journey(cid,profile):
     for message in st.session_state.history:render_message(message)
 
     last=st.session_state.last
+    render_evidence(cid,last)
     needs_condition=feedback_state()['phase'] in ['open','retry'] and last and last.get('status')=='needs_information' and last.get('intent') in ['return_request','exchange_size','exchange_color','fit_issue'] and not last.get('condition_ok')
     if needs_condition:
         st.session_state.condition_ok=st.checkbox('The item is unworn, unwashed, unaltered, unstained, and has its original tags.',value=st.session_state.condition_ok)
@@ -334,6 +407,11 @@ def render_customer_journey(cid,profile):
                 st.session_state.last=None;st.rerun()
             except ValueError as error:st.error(str(error))
         c2.caption('Your conversation will be included with your request. Demo only; no live connection.')
+    if feedback['phase'] in ('closed','handoff'):
+        offer_chat_choices(cid)
+    elif feedback['phase'] in ('open','retry'):
+        if st.button('Finish chat',key='finish_chat',icon=':material/check_circle:'):
+            feedback['phase']='closed';save_feedback(feedback);st.rerun()
     prompt=st.chat_input('Tell Tia a little more…',disabled=feedback['phase'] not in ['open','retry'])
     if prompt:submit_message(prompt,cid)
 
@@ -379,6 +457,8 @@ def support_view():
             chosen=st.selectbox('Open transcript',choices,format_func=lambda x:labels.get(x,x),key='support_transcript')
             for message in agent.messages(chosen):
                 render_message(message,show_meta=True)
+            for photo in agent.photos(chosen):
+                st.image(photo['data'],caption=photo['name']+' · '+photo['order_id'],width=240)
     with requests:
         rows=agent.support_actions()
         if rows:

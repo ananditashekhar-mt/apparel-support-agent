@@ -1,5 +1,7 @@
 """ApparelCare: model-assisted understanding, code-enforced mock actions."""
 import json
+import io
+import hashlib
 import logging
 import os
 import re
@@ -183,6 +185,13 @@ class Agent:
         for row in self.catalog:
             self.db.execute('INSERT OR IGNORE INTO stock VALUES(?,?)',(self.variant(row),row['Stock_Qty']))
         self.db.execute('CREATE TABLE IF NOT EXISTS request_updates (action_id TEXT PRIMARY KEY, status TEXT NOT NULL, assignee TEXT NOT NULL, note TEXT NOT NULL, updated_at TEXT NOT NULL)')
+        self.db.executescript("""CREATE TABLE IF NOT EXISTS evidence (
+            id TEXT PRIMARY KEY, session TEXT NOT NULL, customer_id TEXT NOT NULL,
+            order_id TEXT NOT NULL, name TEXT NOT NULL, mime TEXT NOT NULL, data BLOB NOT NULL,
+            created_at TEXT NOT NULL, UNIQUE(session,id));
+            CREATE TABLE IF NOT EXISTS reopenings (
+            id TEXT PRIMARY KEY, session TEXT NOT NULL, customer_id TEXT NOT NULL,
+            reason TEXT NOT NULL, description TEXT NOT NULL, created_at TEXT NOT NULL);""")
         self.db.commit()
         from langgraph.graph import StateGraph, START, END
         graph=StateGraph(State)
@@ -259,7 +268,7 @@ class Agent:
             if age>7:return escalation('I’m sorry your item wasn’t right. Damaged or incorrect items normally need to be reported within 7 days. Since that window has passed, a Support Expert will need to review what we can do.')
             matched=ISSUE_INTENT_MAP.get(intent)
             note=f' This matches the {matched.lower()} already noted on this order.' if matched and o.get('Issue_Type')==matched else ''
-            return escalation('I’m sorry your item arrived this way. Please keep a photo of the item ready for your Support Expert.'+note+' I can’t approve a replacement here, but I can help you request a review.')
+            return escalation('I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help.'+note+' I can’t approve a replacement here, but I can help you request a review.')
         out['tools'].append('check_eligibility')
         if age>30:
             out['feedback_required']=True
@@ -359,6 +368,59 @@ class Agent:
         return aid
     def actions(self,session):
         return [{'id':r[0],'order_id':r[1],'kind':r[2],'details':json.loads(r[3])} for r in self.db.execute('SELECT id,order_id,kind,payload FROM actions WHERE session=?',(session,))]
+    def require_conversation_owner(self,session,customer_id):
+        row=self.db.execute('SELECT customer_id FROM conversations WHERE id=?',(session,)).fetchone()
+        if not row or row[0]!=customer_id:raise ValueError('This conversation is not available for this customer.')
+    def add_photo(self,session,customer_id,order_id,name,data):
+        """Store evidence for Support; never interpret it as a verified damage claim."""
+        from PIL import Image, UnidentifiedImageError
+        self.require_conversation_owner(session,customer_id)
+        order=self.orders.get(order_id)
+        if not order or order.get('Customer_ID')!=customer_id:
+            raise ValueError('Please choose one of your orders before adding photos.')
+        if not data or len(data)>5*1024*1024:raise ValueError('Each photo must be 5 MB or smaller.')
+        try:
+            with Image.open(io.BytesIO(data)) as picture:
+                if picture.format not in ('JPEG','PNG','WEBP') or picture.width*picture.height>20_000_000:
+                    raise ValueError('Please use a JPG, PNG or WebP photo under 20 megapixels.')
+                mime=Image.MIME[picture.format]
+                picture.verify()
+        except (UnidentifiedImageError,OSError,Image.DecompressionBombError) as error:
+            raise ValueError('That file could not be read as a photo. Please try another image.') from error
+        eid=hashlib.sha256((session+order_id).encode()+data).hexdigest()
+        if self.db.execute('SELECT 1 FROM evidence WHERE id=?',(eid,)).fetchone():return eid
+        if self.db.execute('SELECT COUNT(*) FROM evidence WHERE session=?',(session,)).fetchone()[0]>=3:
+            raise ValueError('You can add up to 3 photos to this chat.')
+        safe_name=Path(name.replace('\\','/')).name[:120]
+        with self.db:
+            self.db.execute('INSERT INTO evidence VALUES(?,?,?,?,?,?,?,?)',
+                (eid,session,customer_id,order_id,safe_name,mime,data,self.now()))
+            self.log_message(session,customer_id,'user','Added a photo for review: '+safe_name)
+            self.db.execute('UPDATE conversations SET updated_at=? WHERE id=?',(self.now(),session))
+        return eid
+    def photos(self,session,customer_id=None):
+        if customer_id is not None:self.require_conversation_owner(session,customer_id)
+        return [{'id':r[0],'order_id':r[1],'name':r[2],'mime':r[3],'data':r[4]} for r in self.db.execute(
+            'SELECT id,order_id,name,mime,data FROM evidence WHERE session=? ORDER BY rowid',(session,))]
+    def reopen_conversation(self,session,customer_id,reason,description):
+        self.require_conversation_owner(session,customer_id)
+        if reason not in ('I was unhappy with the previous help','Something is still pending'):
+            raise ValueError('Please choose why you are reopening this chat.')
+        if not description.strip() or len(description)>4000:
+            raise ValueError('Please describe what you would like us to look at (up to 4,000 characters).')
+        with self.db:
+            self.db.execute('INSERT INTO reopenings VALUES(?,?,?,?,?,?)',
+                (str(uuid.uuid4()),session,customer_id,reason,description.strip(),self.now()))
+            self.log_message(session,customer_id,'user',f'Reopened chat. {reason}. '+description.strip())
+            reply='I’m sorry the earlier conversation didn’t give you the help you needed.' if reason.startswith('I was unhappy') else 'Thank you for coming back. I’m sorry you’re still waiting for this to be resolved.'
+            self.log_message(session,customer_id,'assistant',reply+' I’ve added these details to this conversation. We can continue here, and your earlier messages and requests are still available.')
+            self.db.execute('UPDATE conversations SET updated_at=? WHERE id=?',(self.now(),session))
+    def conversation_label(self,session,customer_id):
+        self.require_conversation_owner(session,customer_id)
+        row=self.db.execute('SELECT payload FROM events WHERE session=? ORDER BY rowid DESC LIMIT 1',(session,)).fetchone()
+        result=json.loads(row[0]) if row else {}
+        intent=result.get('intent','Support question').replace('_',' ').capitalize()
+        return intent+(' · '+result['order_id'] if result.get('order_id') else '')
     def customer_conversations(self,customer_id):
         return [{'id':r[0],'mode':r[1],'started_at':r[2],'updated_at':r[3]} for r in self.db.execute(
             '''SELECT c.id,c.mode,c.started_at,c.updated_at FROM conversations c

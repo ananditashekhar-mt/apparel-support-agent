@@ -62,3 +62,34 @@ class CustomerJourneyTests(unittest.TestCase):
         self.assertEqual(len(self.app.warning),1)
         self.click('← Back to topics');self.click('← Choose a different order')
         self.assertEqual(self.app.session_state['chat_stage'],'order')
+
+    def test_damage_flow_offers_photo_upload(self):
+        self.click('Get help with this order');self.click('Damaged or faulty item')
+        self.assertEqual(len(self.app.get('file_uploader')),1)
+        self.assertIn('Save photos',[b.label for b in self.app.button])
+        self.assertTrue(next(b for b in self.app.button if b.label=='Save photos').disabled)
+
+    def test_closed_chat_reopens_only_after_reason_and_description(self):
+        self.click('Get help with this order');self.click('Delivery status')
+        conversation=self.app.session_state['conversation_id']
+        self.click('Finish chat');self.click('Reopen chat')
+        self.click('Reopen and continue')
+        self.assertEqual(self.app.session_state['chat_stage'],'reopen')
+        next(r for r in self.app.radio if r.label=='Why are you reopening this chat?').set_value('Something is still pending')
+        next(t for t in self.app.text_area if t.label=='Tell us what still needs attention').set_value('I am waiting for my delivery update.')
+        self.click('Reopen and continue')
+        self.assertEqual(self.app.session_state['conversation_id'],conversation)
+        self.assertEqual(self.app.session_state['chat_stage'],'chat')
+        self.assertFalse(self.app.chat_input[0].disabled)
+        self.assertTrue(any('I am waiting' in m['content'] for m in self.app.session_state['history']))
+
+    def test_previous_chat_read_then_reopen_or_start_new(self):
+        self.click('Get help with this order');self.click('Delivery status')
+        conversation=self.app.session_state['conversation_id']
+        self.click('Past chats')
+        self.app.button(key='recent_'+conversation).click().run()
+        self.assertEqual(self.app.session_state['chat_stage'],'review')
+        self.assertIn('Reopen chat',[b.label for b in self.app.button])
+        self.click('Start a new chat')
+        self.assertNotEqual(conversation,self.app.session_state['conversation_id'])
+        self.assertEqual(self.app.session_state['memory'],{})
