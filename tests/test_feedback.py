@@ -17,7 +17,10 @@ class FeedbackTests(unittest.TestCase):
         self.factory=patch('agent.Agent',side_effect=isolated)
         self.factory.start()
         self.at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py')).run()
-        self.at.chat_input[0].set_value('I want to return this item').run()
+        instance=self.at.session_state['agent']
+        order=next(o for o in instance.orders.values() if o['Customer_Name_Synthetic']=='Aarav' and o['City']=='Bengaluru' and o['Order_Status']=='Delivered')
+        self.at.button(key='choose_'+order['Order_ID']).click().run()
+        next(b for b in self.at.button if b.label=='Return an item').click().run()
 
     def tearDown(self):
         self.at.session_state['agent'].db.close()
@@ -25,11 +28,8 @@ class FeedbackTests(unittest.TestCase):
         self.temp.cleanup()
 
     def rate(self,stars):
-        # Streamlit 1.50 AppTest does not serialize the stars widget correctly.
-        # Supply the same zero-based value returned by st.feedback in the browser.
-        for widget in self.at.get('button_group'):widget.set_value([])
-        with patch('streamlit.feedback',return_value=stars-1):
-            self.at.run()
+        next(r for r in self.at.radio if r.label=='Rate your experience').set_value(stars)
+        next(b for b in self.at.button if b.label=='Submit feedback').click().run()
         self.assertEqual(len(self.at.exception),0)
 
     def test_two_low_ratings_end_loop_and_survive_reopening(self):
@@ -43,21 +43,21 @@ class FeedbackTests(unittest.TestCase):
         self.assertTrue(self.at.chat_input[0].disabled)
         self.rate(1)
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertIn('Request support engineer',[b.label for b in self.at.button])
-        self.assertEqual(len(self.at.get('button_group')),0)
+        self.assertIn('Request a Support Expert',[b.label for b in self.at.button])
+        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
         self.at.session_state['last']=None
         self.at.run()
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertIn('Request support engineer',[b.label for b in self.at.button])
-        button=next(b for b in self.at.button if b.label=='Request support engineer')
+        self.assertIn('Request a Support Expert',[b.label for b in self.at.button])
+        button=next(b for b in self.at.button if b.label=='Request a Support Expert')
         button.click().run()
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertIn('No support engineer has been contacted',self.at.session_state['history'][-1]['content'])
+        self.assertIn('a live expert has not been contacted',self.at.session_state['history'][-1]['content'])
         self.assertEqual(len(self.at.session_state['agent'].actions(self.at.session_state['conversation_id'])),1)
 
     def test_four_stars_closes_without_reopening(self):
         self.rate(4)
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertEqual(len(self.at.get('button_group')),0)
-        self.assertNotIn('Request support engineer',[b.label for b in self.at.button])
+        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
+        self.assertNotIn('Request a Support Expert',[b.label for b in self.at.button])
         self.assertEqual(self.at.session_state['history'][-1]['content'],'Thank you for your feedback.')

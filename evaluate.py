@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import date
 from dotenv import load_dotenv
 from agent import Agent, load
+from evaluation_checks import audit_references, score_reference
 
 def main():
     parser=argparse.ArgumentParser()
@@ -22,12 +23,14 @@ def main():
             result=agent.chat(row['Customer_Message'],{'order_id':row['Order_ID']},today=date.fromisoformat(args.date),session=row['Conversation_ID'])
             results.append({'conversation_id':row['Conversation_ID'],'expected_intent':row['Intent'],
                 'expected_action':row['Expected_Action'],'expected_escalation':row['Escalate'],
-                'intent_correct':result['intent']==row['Intent'],'actual':result,
+                'intent_correct':result['intent']==row['Intent'],'reference_label_checks':score_reference(row,result),'actual':result,
                 'manual_rubric_scores':{r['Dimension']:None for r in load('evaluation_rubric')}})
         agent.db.close()
     summary={'mode':args.mode,'split':args.split,'count':len(results),
         'intent_accuracy':sum(r['intent_correct'] for r in results)/len(results) if results else None,
-        'note':'Only intent accuracy is automated. Review grounding, policy, tools, escalation, tone and context manually. Synthetic expected responses may conflict with order status.'}
+        'escalation_label_agreement':sum(r['reference_label_checks']['escalation_label_agreement'] for r in results if r['reference_label_checks']['escalation_label_agreement'] is not None)/max(1,sum(r['reference_label_checks']['escalation_label_agreement'] is not None for r in results)),
+        'fixture_audit':audit_references(load('support_conversations'),agent.orders),
+        'note':'Intent accuracy and escalation label agreement are automated. Reference labels need review; agreement is not verified policy correctness. Grounding, tools, tone and context require separate checks.'}
     out=Path(f'evaluation_{args.mode.lower()}_{args.split}.json');out.write_text(json.dumps({'summary':summary,'results':results},indent=2))
     print(json.dumps(summary,indent=2));print('Results:',out)
 if __name__=='__main__':main()

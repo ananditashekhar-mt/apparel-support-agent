@@ -53,7 +53,7 @@ class AgentTests(unittest.TestCase):
     def test_future_delivery(self):
         r=self.ask('Return '+self.order['Order_ID'],condition_ok=True,today=self.day-timedelta(days=1));self.assertEqual(r['pending']['kind'],'escalation')
     def test_missing_carrier_data(self):
-        r=self.ask('My order ORD-10003 is late');self.assertIn('unavailable',r['response']);self.assertEqual(r['pending']['kind'],'escalation')
+        r=self.ask('My order ORD-10003 is late');self.assertIn('can’t check live carrier updates',r['response']);self.assertEqual(r['pending']['kind'],'escalation')
     def test_refunds_and_price_never_execute_payments(self):
         for text in ['Process my refund','The price dropped']:
             self.assertEqual(self.ask(text)['pending']['kind'],'escalation')
