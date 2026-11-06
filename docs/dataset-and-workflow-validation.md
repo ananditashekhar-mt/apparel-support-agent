@@ -72,3 +72,14 @@ Storage follows the existing SQLite deployment: photos and chat history survive
 reopening the database, but Streamlit hosting may reset local storage on restart
 or redeployment. Production retention needs persistent storage. There is no model
 vision assessment or automatic replacement approval in this implementation.
+
+
+## End-of-chat CSAT
+
+Finish chat and saved Support handoffs show a 1–5 customer satisfaction survey
+with an optional comment and an explicit Submit feedback button. Selecting a
+score alone does not submit it. Customers can skip without losing access to
+reopening or new chats. Responses are stored in SQLite and shown in the Support
+transcript. A reopened conversation gets a new survey cycle when it ends again;
+reruns do not create duplicate responses. Existing low-score retry/handoff logic
+uses the same form, so comments can also be captured on those feedback rounds.

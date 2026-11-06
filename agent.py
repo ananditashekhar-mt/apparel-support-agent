@@ -192,6 +192,7 @@ class Agent:
             CREATE TABLE IF NOT EXISTS reopenings (
             id TEXT PRIMARY KEY, session TEXT NOT NULL, customer_id TEXT NOT NULL,
             reason TEXT NOT NULL, description TEXT NOT NULL, created_at TEXT NOT NULL);""")
+        self.db.execute('CREATE TABLE IF NOT EXISTS csat (id TEXT PRIMARY KEY, session TEXT NOT NULL, customer_id TEXT NOT NULL, rating INTEGER NOT NULL, comment TEXT NOT NULL, created_at TEXT NOT NULL)')
         self.db.commit()
         from langgraph.graph import StateGraph, START, END
         graph=StateGraph(State)
@@ -415,6 +416,17 @@ class Agent:
             reply='I’m sorry the earlier conversation didn’t give you the help you needed.' if reason.startswith('I was unhappy') else 'Thank you for coming back. I’m sorry you’re still waiting for this to be resolved.'
             self.log_message(session,customer_id,'assistant',reply+' I’ve added these details to this conversation. We can continue here, and your earlier messages and requests are still available.')
             self.db.execute('UPDATE conversations SET updated_at=? WHERE id=?',(self.now(),session))
+    def save_csat(self,session,customer_id,submission_id,rating,comment=''):
+        self.require_conversation_owner(session,customer_id)
+        if type(rating) is not int or rating not in range(1,6):
+            raise ValueError('Please choose a rating from 1 to 5.')
+        if len(comment)>2000:raise ValueError('Please keep your comment under 2,000 characters.')
+        with self.db:
+            self.db.execute('INSERT OR IGNORE INTO csat VALUES(?,?,?,?,?,?)',
+                            (submission_id,session,customer_id,rating,comment.strip(),self.now()))
+    def csat_responses(self,session):
+        return [{'rating':r[0],'comment':r[1],'created_at':r[2]} for r in self.db.execute(
+            'SELECT rating,comment,created_at FROM csat WHERE session=? ORDER BY rowid',(session,))]
     def conversation_label(self,session,customer_id):
         self.require_conversation_owner(session,customer_id)
         row=self.db.execute('SELECT payload FROM events WHERE session=? ORDER BY rowid DESC LIMIT 1',(session,)).fetchone()

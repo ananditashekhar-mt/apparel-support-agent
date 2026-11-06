@@ -44,3 +44,13 @@ class EvidenceReopenTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.agent.reopen_conversation(self.session,'other','Something is still pending','Waiting')
         with self.assertRaises(ValueError):self.agent.reopen_conversation(self.session,self.cid,'Something is still pending',' ')
         with self.assertRaises(ValueError):self.agent.reopen_conversation(self.session,self.cid,None,'Waiting')
+
+    def test_csat_validation_ownership_and_idempotence(self):
+        for value in (None,0,6,True):
+            with self.assertRaises(ValueError):self.agent.save_csat(self.session,self.cid,'x',value)
+        with self.assertRaises(ValueError):self.agent.save_csat(self.session,'other','x',5)
+        self.agent.save_csat(self.session,self.cid,'once',4,'Helpful')
+        self.agent.save_csat(self.session,self.cid,'once',4,'Helpful')
+        self.agent.db.close();self.agent=Agent(self.path,mode='Demo')
+        self.assertEqual(len(self.agent.csat_responses(self.session)),1)
+        self.assertEqual(self.agent.csat_responses(self.session)[0]['rating'],4)

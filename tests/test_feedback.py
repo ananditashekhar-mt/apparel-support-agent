@@ -28,11 +28,8 @@ class FeedbackTests(unittest.TestCase):
         self.temp.cleanup()
 
     def rate(self,stars):
-        # Streamlit 1.50 AppTest does not serialize the stars widget correctly.
-        # Supply the same zero-based value returned by st.feedback in the browser.
-        for widget in self.at.get('button_group'):widget.set_value([])
-        with patch('streamlit.feedback',return_value=stars-1):
-            self.at.run()
+        next(r for r in self.at.radio if r.label=='Rate your experience').set_value(stars)
+        next(b for b in self.at.button if b.label=='Submit feedback').click().run()
         self.assertEqual(len(self.at.exception),0)
 
     def test_two_low_ratings_end_loop_and_survive_reopening(self):
@@ -47,7 +44,7 @@ class FeedbackTests(unittest.TestCase):
         self.rate(1)
         self.assertTrue(self.at.chat_input[0].disabled)
         self.assertIn('Request a Support Expert',[b.label for b in self.at.button])
-        self.assertEqual(len(self.at.get('button_group')),0)
+        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
         self.at.session_state['last']=None
         self.at.run()
         self.assertTrue(self.at.chat_input[0].disabled)
@@ -61,6 +58,6 @@ class FeedbackTests(unittest.TestCase):
     def test_four_stars_closes_without_reopening(self):
         self.rate(4)
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertEqual(len(self.at.get('button_group')),0)
+        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
         self.assertNotIn('Request a Support Expert',[b.label for b in self.at.button])
         self.assertEqual(self.at.session_state['history'][-1]['content'],'Thank you for your feedback.')

@@ -93,3 +93,35 @@ class CustomerJourneyTests(unittest.TestCase):
         self.click('Start a new chat')
         self.assertNotEqual(conversation,self.app.session_state['conversation_id'])
         self.assertEqual(self.app.session_state['memory'],{})
+
+    def test_end_chat_csat_requires_rating_and_saves_optional_comment(self):
+        self.click('Get help with this order');self.click('Delivery status');self.click('Finish chat')
+        session=self.app.session_state['conversation_id'];instance=self.app.session_state['agent']
+        self.click('Submit feedback')
+        self.assertEqual(instance.csat_responses(session),[])
+        self.assertTrue(self.app.chat_input[0].disabled)
+        next(r for r in self.app.radio if r.label=='Rate your experience').set_value(5)
+        next(t for t in self.app.text_area if 'optional' in t.label).set_value('Clear and helpful, thank you.')
+        self.click('Submit feedback')
+        self.assertEqual(instance.csat_responses(session)[0]['comment'],'Clear and helpful, thank you.')
+        self.app.run()
+        self.assertNotIn('Submit feedback',[b.label for b in self.app.button])
+        self.assertEqual(len(instance.csat_responses(session)),1)
+        self.assertIn('Reopen chat',[b.label for b in self.app.button])
+
+    def test_csat_can_be_skipped_and_reopening_gets_fresh_survey(self):
+        self.click('Get help with this order');self.click('Delivery status');self.click('Finish chat')
+        self.click('Skip feedback')
+        # AppTest retains removed form controls for one rerun after Skip.
+        for widget in self.app.radio:
+            if widget.label=='Rate your experience':widget.set_value(None)
+        for field in self.app.text_area:
+            if 'optional' in field.label:field.set_value('')
+        self.click('Reopen chat')
+        next(r for r in self.app.radio if r.label=='Why are you reopening this chat?').set_value('Something is still pending')
+        next(t for t in self.app.text_area if t.label=='Tell us what still needs attention').set_value('I still need an update.')
+        self.click('Reopen and continue');self.click('Finish chat')
+        next(r for r in self.app.radio if r.label=='Rate your experience').set_value(3)
+        self.click('Submit feedback')
+        responses=self.app.session_state['agent'].csat_responses(self.app.session_state['conversation_id'])
+        self.assertEqual([(r['rating'],r['comment']) for r in responses],[(3,'')])

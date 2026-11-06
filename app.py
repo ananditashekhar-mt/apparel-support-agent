@@ -157,7 +157,7 @@ def submit_message(prompt,cid):
         if result.get('feedback_required') or feedback['phase']=='retry':
             if result.get('pending',{} ) and result['pending']['kind']=='escalation':
                 feedback['support_result']=result
-            feedback['phase']='rating'
+            feedback.update(phase='rating',csat_submitted=False,csat_skipped=False,csat_id=None)
             save_feedback(feedback)
             agent.log_message(st.session_state.conversation_id,cid,'assistant',
                 'Please let us know if there is anything else we can help you with.')
@@ -245,6 +245,43 @@ def customer_view():
             render_customer_journey(cid,profile)
 
 
+def render_csat(cid,state,allow_retry=False):
+    if state.get('csat_submitted') or state.get('csat_skipped'):
+        if state.get('csat_submitted'):st.caption('Thank you. Your feedback has been saved.')
+        return
+    if not state.get('csat_id'):
+        state['csat_id']=str(uuid.uuid4());save_feedback(state)
+    with st.container(border=True):
+        st.markdown('**How was your experience with Tia?**')
+        st.caption('Your feedback helps us improve our support.')
+        with st.form('csat_'+state['csat_id']):
+            rating=st.radio('Rate your experience',[1,2,3,4,5],key='score_'+state['csat_id'],index=None,horizontal=True,
+                format_func=lambda value: str(value))
+            st.caption('1 = Very dissatisfied · 5 = Very satisfied')
+            comment=st.text_area('Anything you’d like us to know? (optional)',key='comment_'+state['csat_id'],max_chars=2000,height=90,
+                placeholder='What went well, or what could we do better?')
+            if st.form_submit_button('Submit feedback',type='primary'):
+                try:
+                    agent.save_csat(st.session_state.conversation_id,cid,state['csat_id'],rating,comment)
+                    state['csat_submitted']=True
+                    if allow_retry:
+                        state['rounds']+=1
+                        agent.log_message(st.session_state.conversation_id,cid,'user',f'Feedback: {rating}/5 stars'+(' · '+comment.strip() if comment.strip() else ''))
+                        if rating>=4:
+                            state['phase']='closed';text='Thank you for your feedback.'
+                        elif state['rounds']<2:
+                            state['phase']='retry';text='I’m sorry we haven’t resolved this. What would you like us to look at again?'
+                        else:
+                            state['phase']='handoff';text='I’m sorry we haven’t resolved this. A Support Expert can take a closer look. I can save your concern with this conversation for review.'
+                        agent.log_message(st.session_state.conversation_id,cid,'assistant',text);agent.db.commit()
+                    save_feedback(state)
+                    st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
+                except ValueError as error:st.warning(str(error))
+        if st.button('Skip feedback',key='skip_'+state['csat_id']):
+            state['csat_skipped']=True
+            if allow_retry:state['phase']='closed'
+            save_feedback(state);st.rerun()
+
 def offer_chat_choices(cid):
     reopen,new=st.columns(2)
     if reopen.button('Reopen chat',key='reopen_current',width='stretch',icon=':material/replay:'):
@@ -292,6 +329,8 @@ def render_customer_journey(cid,profile):
         with st.expander('Earlier conversation',expanded=stage=='review'):
             for message in agent.messages(st.session_state.conversation_id,cid):render_message(message)
         if stage=='review':
+            state=feedback_state()
+            if state['phase']=='closed':render_csat(cid,state)
             st.caption('Continue this conversation or start fresh for a different concern.')
             offer_chat_choices(cid)
         else:
@@ -302,7 +341,7 @@ def render_customer_journey(cid,profile):
                 if st.form_submit_button('Reopen and continue',type='primary'):
                     try:
                         agent.reopen_conversation(st.session_state.conversation_id,cid,reason,description)
-                        state=feedback_state();state.update(phase='open',rounds=0,support_result=None);save_feedback(state)
+                        state=feedback_state();state.update(phase='open',rounds=0,support_result=None,csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(state)
                         st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
                         st.session_state.chat_stage='chat';st.rerun()
                     except ValueError as error:st.warning(str(error))
@@ -368,28 +407,12 @@ def render_customer_journey(cid,profile):
             submit_message('Yes, condition confirmed',cid)
     feedback=feedback_state()
     if feedback['phase']=='rating':
-        st.caption('Did this help with your concern?')
-        rating=st.feedback('stars',key='rating_'+st.session_state.conversation_id+'_'+str(feedback['rounds']))
-        if rating is not None:
-            stars=rating+1
-            feedback['rounds']+=1
-            agent.log_message(st.session_state.conversation_id,cid,'user',f'Feedback: {stars}/5 stars')
-            if stars>=4:
-                feedback['phase']='closed'
-                text='Thank you for your feedback.'
-            elif feedback['rounds']<2:
-                feedback['phase']='retry'
-                text='I’m sorry we haven’t resolved this. How can we help you further?'
-            else:
-                feedback['phase']='handoff'
-                text='I’m sorry we haven’t resolved this. You deserve a closer look from a Support Expert. I can save your concern and this conversation for review, so you won’t need to explain it all again. In this demo, no live expert is connected.'
-            agent.log_message(st.session_state.conversation_id,cid,'assistant',text)
-            save_feedback(feedback)
-            st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
+        render_csat(cid,feedback,allow_retry=True)
     elif feedback['phase']=='closed':
-        st.caption('Chat closed. Thank you for your feedback.')
+        st.caption('This chat has ended. You can reopen it or start a new chat below.')
+        render_csat(cid,feedback)
     elif feedback['phase']=='handoff':
-        st.caption('Chat closed. You can request support below or start a new chat for a different issue.')
+        st.caption('You can request a Support Expert below, reopen this chat, or start a new one.')
     if feedback['phase']=='handoff' and feedback.get('support_result'):
         last=feedback['support_result']
     show_action=feedback['phase']!='closed'
@@ -403,7 +426,7 @@ def render_customer_journey(cid,profile):
                 agent.log_message(st.session_state.conversation_id,cid,'assistant',message);agent.db.commit()
                 st.session_state.history.append({'role':'assistant','content':message})
                 if last['pending']['kind']=='escalation':
-                    feedback['phase']='closed';save_feedback(feedback)
+                    feedback.update(phase='closed',csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(feedback)
                 st.session_state.last=None;st.rerun()
             except ValueError as error:st.error(str(error))
         c2.caption('Your conversation will be included with your request. Demo only; no live connection.')
@@ -411,7 +434,7 @@ def render_customer_journey(cid,profile):
         offer_chat_choices(cid)
     elif feedback['phase'] in ('open','retry'):
         if st.button('Finish chat',key='finish_chat',icon=':material/check_circle:'):
-            feedback['phase']='closed';save_feedback(feedback);st.rerun()
+            feedback.update(phase='closed',csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(feedback);st.rerun()
     prompt=st.chat_input('Tell Tia a little more…',disabled=feedback['phase'] not in ['open','retry'])
     if prompt:submit_message(prompt,cid)
 
@@ -457,6 +480,9 @@ def support_view():
             chosen=st.selectbox('Open transcript',choices,format_func=lambda x:labels.get(x,x),key='support_transcript')
             for message in agent.messages(chosen):
                 render_message(message,show_meta=True)
+            for response in agent.csat_responses(chosen):
+                st.write(f"Customer satisfaction: {response['rating']}/5")
+                if response['comment']:st.write(response['comment'])
             for photo in agent.photos(chosen):
                 st.image(photo['data'],caption=photo['name']+' · '+photo['order_id'],width=240)
     with requests:
