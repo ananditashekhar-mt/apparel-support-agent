@@ -12,16 +12,18 @@ class AgentTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.agent=Agent(Path(self.temp.name)/'test.sqlite')
         self.order=next(o for o in self.agent.orders.values() if o['Order_Status']=='Delivered')
         self.day=date.fromisoformat(self.order['Delivered_Date'][:10])
+        self.shipped=next(o for o in self.agent.orders.values() if o['Order_Status']=='Shipped')
+        self.cancelled=next(o for o in self.agent.orders.values() if o['Order_Status']=='Cancelled')
     def tearDown(self):self.agent.db.close();self.temp.cleanup()
     def ask(self,text,**kwargs):
         return self.agent.chat(text,today=kwargs.pop('today',self.day),session='test',**kwargs)
     def test_tracking_and_unknown_order(self):
-        r=self.ask('Where is ORD-10003?');self.assertIn('Xpressbees',r['response'])
+        r=self.ask('Where is '+self.shipped['Order_ID'],today=date.fromisoformat(self.shipped['Snapshot_Date']));self.assertIn(self.shipped['Carrier'],r['response'])
         self.assertIsNone(self.ask('Where is ORD-99999?')['pending'])
     def test_missing_order(self):self.assertIn('order ID',self.ask('I want to return this')['response'])
     def test_active_order_context_avoids_repeating_order_id(self):
-        result=self.agent.chat('Where is my order?',memory={'order_id':'ORD-10003'})
-        self.assertIn('ORD-10003',result['response'])
+        result=self.agent.chat('Where is my order?',memory={'order_id':self.shipped['Order_ID']})
+        self.assertIn(self.shipped['Order_ID'],result['response'])
         self.assertEqual([m['role'] for m in self.agent.messages('demo')],['user','assistant'])
     def test_condition_confirmation_continues_return_flow(self):
         first=self.ask('Return '+self.order['Order_ID'])
@@ -49,19 +51,19 @@ class AgentTests(unittest.TestCase):
         self.assertNotIn('condition rules',follow['response'])
 
     def test_non_delivered_block(self):
-        r=self.ask('Return ORD-10003',condition_ok=True);self.assertEqual(r['status'],'blocked')
-    def test_future_delivery(self):
-        r=self.ask('Return '+self.order['Order_ID'],condition_ok=True,today=self.day-timedelta(days=1));self.assertEqual(r['pending']['kind'],'escalation')
+        r=self.ask('Return '+self.shipped['Order_ID'],condition_ok=True,today=date.fromisoformat(self.shipped['Snapshot_Date']));self.assertEqual(r['status'],'blocked')
+    def test_return_before_delivery_is_blocked(self):
+        r=self.ask('Return '+self.order['Order_ID'],condition_ok=True,today=self.day-timedelta(days=1));self.assertEqual(r['status'],'blocked');self.assertIsNone(r['pending'])
     def test_missing_carrier_data(self):
-        r=self.ask('My order ORD-10003 is late');self.assertIn('can’t check live carrier updates',r['response']);self.assertEqual(r['pending']['kind'],'escalation')
+        r=self.ask('My order '+self.shipped['Order_ID']+' is late',today=date.fromisoformat(self.shipped['Snapshot_Date']));self.assertIn('can’t check live carrier updates',r['response']);self.assertEqual(r['pending']['kind'],'escalation')
     def test_refunds_and_price_never_execute_payments(self):
         for text in ['Process my refund','The price dropped']:
             self.assertEqual(self.ask(text)['pending']['kind'],'escalation')
     def test_used_item_exception(self):
         self.assertEqual(self.ask('Return my washed item '+self.order['Order_ID'])['pending']['kind'],'escalation')
     def test_cancel_shipped_and_already_cancelled(self):
-        self.assertIsNone(self.ask('Cancel ORD-10003')['pending'])
-        self.assertEqual(self.ask('Cancel ORD-10001')['status'],'answered')
+        self.assertIsNone(self.ask('Cancel '+self.shipped['Order_ID'],today=date.fromisoformat(self.shipped['Snapshot_Date']))['pending'])
+        self.assertEqual(self.ask('Cancel '+self.cancelled['Order_ID'],today=date.fromisoformat(self.cancelled['Snapshot_Date']))['status'],'answered')
     def test_confirmation_idempotence_and_session_isolation(self):
         r=self.ask('Return '+self.order['Order_ID'],condition_ok=True)
         a=self.agent.confirm(r,'test');self.assertEqual(a,self.agent.confirm(r,'test'))

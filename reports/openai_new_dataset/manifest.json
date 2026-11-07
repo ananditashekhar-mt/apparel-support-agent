@@ -1,0 +1,15 @@
+{
+  "mode": "OpenAI",
+  "model": "gpt-4.1-mini",
+  "agent_sha256": "a2f1620b8204a5fbe19c0bc47b927a21d095877ba0b49bb9338a3f36b843edd7",
+  "dataset_sha256": "2e547871d0aa33740fc189f84f69e5799df3468e37892aba3f46d43bb3a41fe1",
+  "orders_sha256": "bcc7fb4036183ab7a879beed5d97aef25d13df4da90485b3439ee9c33284e5a3",
+  "catalogue_sha256": "342c231b789ad5fb5d24b494ef929d23432cd0b94cfd809516a1030129287991",
+  "policy_sha256": "11c1eb59dad36466a0284ea5191e08d2478ffcf810f9ad110d5aee8536ef38db",
+  "taxonomy_sha256": "25b97c5ab123924241fc4815f94cd1638861e0da242fe8c7f5807c3af971beac",
+  "date_projection_sha256": "da8ea4d108c181b3f862ebec872724b70a47e5c9de356372750b652548796207",
+  "runner_sha256": "2c81cdc4a1647c650c5c3685c606f1cd3b47222897bd1c2f2b725c3f581eb1bb",
+  "planned_cases": 600,
+  "shadow_enabled": false,
+  "started_utc": "2026-11-06T21:57:47.218700+00:00"
+}

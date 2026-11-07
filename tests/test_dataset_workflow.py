@@ -1,4 +1,3 @@
-import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -21,14 +20,13 @@ class DatasetTests(unittest.TestCase):
             builder.main()
             self.assertEqual(first,{p.name:p.read_bytes() for p in builder.DATA.glob('*.json')})
             orders=json.loads(first['orders.json'])
-            self.assertEqual(len(orders),262)
+            self.assertEqual(len(orders),600)
             for o in orders:
                 dates=[e['Date'] for e in o['Shipment_Events']]
                 self.assertEqual(dates,sorted(dates),o['Order_ID'])
                 self.assertTrue(0<=o['Delivered_Qty']<=o['Qty'])
                 if o['Order_Status']!='Delivered':self.assertEqual(o['Delivered_Qty'],0)
-                seed=f"{o['Customer_Name_Synthetic']}|{o['City']}".lower()
-                self.assertEqual(o['Customer_ID'],'CUST-'+hashlib.sha256(seed.encode()).hexdigest()[:10].upper())
+                self.assertIn(o['Customer_ID'],{c['Customer_ID'] for c in json.loads(first['customers.json'])})
 
     def test_reference_audit_flags_conflicts(self):
         row={'Conversation_ID':'x','Order_ID':'o','Intent':'exchange_size','Split':'test','Customer_Message':'size M'}
@@ -44,7 +42,7 @@ class RequestWorkflowTests(unittest.TestCase):
     def tearDown(self):
         self.agent.db.close();self.temp.cleanup()
     def ask(self,text,session='customer',customer=None,**kwargs):
-        return self.agent.chat(text,session=session,customer_id=customer or self.cid,today=date(2026,9,17),**kwargs)
+        return self.agent.chat(text,session=session,customer_id=customer or self.cid,today=kwargs.pop('today',date(2026,12,31)),**kwargs)
     def test_cancellation_support_update_survives_reopen_and_new_chat(self):
         proposal=self.ask('Cancel '+self.oid)
         aid=self.agent.confirm(proposal,'customer')
@@ -64,7 +62,7 @@ class RequestWorkflowTests(unittest.TestCase):
         result=self.ask('An item is missing from '+partial['Order_ID'])
         self.assertIn('1 of 2',result['response']);self.assertEqual(result['pending']['kind'],'escalation')
         damaged=next(o for o in self.agent.orders.values() if o['Issue_Type']=='Damaged')
-        result=self.agent.chat('My item arrived damaged '+damaged['Order_ID'],today=date.fromisoformat(damaged['Delivered_Date'][:10]))
+        result=self.agent.chat('My item arrived damaged '+damaged['Order_ID'],today=date.fromisoformat(damaged['Issue_Reported_Date'][:10]))
         self.assertIn('already noted',result['response']);self.assertEqual(result['pending']['kind'],'escalation')
     def test_undelivered_quantity_does_not_claim_items_are_missing(self):
         result=self.ask('An item is missing from '+self.oid)

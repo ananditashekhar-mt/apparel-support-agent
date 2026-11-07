@@ -18,7 +18,14 @@ class FeedbackTests(unittest.TestCase):
         self.factory.start()
         self.at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py')).run()
         instance=self.at.session_state['agent']
-        order=next(o for o in instance.orders.values() if o['Customer_Name_Synthetic']=='Aarav' and o['City']=='Bengaluru' and o['Order_Status']=='Delivered')
+        case=next(r for r in agent.load('showcase_scenarios') if r['Intent']=='return_outside_window')
+        order=instance.orders[case['Order_ID']]
+        self.name=order['Customer_Name_Synthetic']
+        picker=next(w for w in self.at.selectbox if w.label=='Preview customer')
+        picker.set_value(next(label for label in picker.options if label.startswith(self.name+' · ') and order['Customer_ID'][-4:] in label)).run()
+        if not any(b.key=='choose_'+order['Order_ID'] for b in self.at.button):
+            count=sum(o['Customer_ID']==order['Customer_ID'] for o in instance.orders.values())
+            next(b for b in self.at.button if b.label==f'View all {count} orders').click().run()
         self.at.button(key='choose_'+order['Order_ID']).click().run()
         next(b for b in self.at.button if b.label=='Return an item').click().run()
 
@@ -34,7 +41,7 @@ class FeedbackTests(unittest.TestCase):
 
     def test_two_low_ratings_end_loop_and_survive_reopening(self):
         first=self.at.session_state['history'][-2]['content']
-        self.assertTrue(first.startswith('Hi Aarav,\nI’m Tia from Threadly support.\n\n'))
+        self.assertTrue(first.startswith(f'Hi {self.name},\nI’m Tia from Threadly support.\n\n'))
         self.assertNotIn('—',first)
         self.assertTrue(self.at.chat_input[0].disabled)
         self.rate(3)

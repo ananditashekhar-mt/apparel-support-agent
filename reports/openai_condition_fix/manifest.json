@@ -1,0 +1,7 @@
+{
+  "model": "gpt-4.1-mini",
+  "agent_sha256": "78f36d636c87827ae94c21a6c56a53025af967249a1155b27893adcdbbc7f71f",
+  "fresh_cases_sha256": "0cf0ab3efff7ea5f56b84d31cd93c35c16ca28b10165777e995ec62b8ccf1a9d",
+  "dataset_sha256": "2e547871d0aa33740fc189f84f69e5799df3468e37892aba3f46d43bb3a41fe1",
+  "started_utc": "2026-11-06T22:08:27.468992+00:00"
+}

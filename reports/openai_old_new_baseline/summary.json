@@ -1,0 +1,141 @@
+{
+  "manifest": {
+    "model": "gpt-4.1-mini",
+    "agent_sha256": "a2f1620b8204a5fbe19c0bc47b927a21d095877ba0b49bb9338a3f36b843edd7",
+    "dataset_sha256": "2e547871d0aa33740fc189f84f69e5799df3468e37892aba3f46d43bb3a41fe1"
+  },
+  "old_native": {
+    "count": 124,
+    "intent_passed": 113,
+    "intent_accuracy": 91.13,
+    "api_errors": 0
+  },
+  "new_native": {
+    "count": 600,
+    "completed_without_api_error": 600,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 585,
+      "total": 600,
+      "percent": 97.5
+    },
+    "outcome_accuracy": {
+      "passed": 587,
+      "total": 600,
+      "percent": 97.83
+    },
+    "strict_success": {
+      "passed": 585,
+      "total": 600,
+      "percent": 97.5
+    },
+    "escalation_agreement": {
+      "passed": 587,
+      "total": 600,
+      "percent": 97.83
+    },
+    "tokens": {
+      "input_tokens": 384770,
+      "output_tokens": 48977,
+      "requests": 1218
+    },
+    "mock_confirmations": {
+      "attempted": 334,
+      "passed": 334
+    }
+  },
+  "matched": {
+    "old": {
+      "count": 105,
+      "passed": 104,
+      "percent": 99.05,
+      "failures": [
+        {
+          "scenario": "partial-delivery",
+          "intent": "missing_item",
+          "order_id": "ORD-10041",
+          "customer_id": "CUST-7C73BC6156",
+          "as_of": "2026-09-03",
+          "message": "The order is a partial delivery.",
+          "turns": [
+            {
+              "message": "The order is a partial delivery.",
+              "condition": false
+            }
+          ],
+          "expected_status": "escalation_proposed",
+          "expected_pending": "escalation",
+          "mode": "OpenAI",
+          "model": "gpt-4.1-mini",
+          "actual_intent": "delivery_delay",
+          "actual_status": "escalation_proposed",
+          "actual_pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI see part of your order arrived while the rest is still missing. I can’t check the carrier updates here, but a Support Expert can review this for you. Please select \"Request a Support Expert\" below, and I’ll make sure your concern is included for their review.",
+          "intent_correct": false,
+          "outcome_correct": true,
+          "proposal_persisted": true,
+          "success": false
+        }
+      ]
+    },
+    "new": {
+      "count": 105,
+      "passed": 103,
+      "percent": 98.1,
+      "failures": [
+        {
+          "scenario": "partial-delivery",
+          "intent": "missing_item",
+          "order_id": "ORD-20042",
+          "customer_id": "CUST-2026-0018",
+          "as_of": "2026-12-17",
+          "message": "The order is a partial delivery.",
+          "turns": [
+            {
+              "message": "The order is a partial delivery.",
+              "condition": false
+            }
+          ],
+          "expected_status": "escalation_proposed",
+          "expected_pending": "escalation",
+          "mode": "OpenAI",
+          "model": "gpt-4.1-mini",
+          "actual_intent": "delivery_delay",
+          "actual_status": "escalation_proposed",
+          "actual_pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI see your order shows a partial delivery near Bhubaneswar, and I know this can be confusing. Since I can’t check live updates, the best step is to have a Support Expert review your delivery details. Please select \"Request a Support Expert\" below so we can look into this further for you.",
+          "intent_correct": false,
+          "outcome_correct": true,
+          "proposal_persisted": true,
+          "success": false
+        },
+        {
+          "scenario": "washed-item",
+          "intent": "used_item_return",
+          "order_id": "ORD-20007",
+          "customer_id": "CUST-2026-0006",
+          "as_of": "2026-10-31",
+          "message": "I removed tags and want to send it back.",
+          "turns": [
+            {
+              "message": "I removed tags and want to send it back.",
+              "condition": false
+            }
+          ],
+          "expected_status": "escalation_proposed",
+          "expected_pending": "escalation",
+          "mode": "OpenAI",
+          "model": "gpt-4.1-mini",
+          "actual_intent": "return_request",
+          "actual_status": "needs_information",
+          "actual_pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for letting us know. Since the original tags need to be attached for returns, please confirm if the item is still unworn, unwashed, unaltered, unstained, and with its original tags intact. That will help us guide you on the next steps.",
+          "intent_correct": false,
+          "outcome_correct": false,
+          "proposal_persisted": null,
+          "success": false
+        }
+      ]
+    }
+  }
+}

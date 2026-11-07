@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-07",
+  "configured_model": "gpt-4.1-mini",
+  "status": "completed",
+  "successful_live_samples": 600,
+  "api_failures": 0,
+  "summary_path": "reports/openai_new_dataset/summary.json",
+  "previous_probe_failure": {
+    "http_status": 401,
+    "error_code": "expired_secret_key"
+  },
+  "note": "Updated key verified. Full 600-case OpenAI evaluation completed; prior expired-key result was historical.",
+  "condition_fix_status": "validated",
+  "condition_fix_report": "reports/openai_condition_fix/summary.json",
+  "condition_fix_regression_passed": 599,
+  "condition_fix_regression_total": 600,
+  "fresh_policy_outcomes_passed": 60,
+  "fresh_total": 60
+}

@@ -10,7 +10,8 @@
     "Size": "XXL",
     "Price_INR": 799,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -23,7 +24,8 @@
     "Size": "M",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -36,7 +38,8 @@
     "Size": "S",
     "Price_INR": 799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -49,7 +52,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -62,7 +66,8 @@
     "Size": "XXL",
     "Price_INR": 799,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -75,7 +80,8 @@
     "Size": "XL",
     "Price_INR": 799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -88,7 +94,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -101,7 +108,8 @@
     "Size": "M",
     "Price_INR": 799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -114,7 +122,8 @@
     "Size": "S",
     "Price_INR": 799,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -127,7 +136,8 @@
     "Size": "XXL",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -140,7 +150,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-001",
@@ -153,7 +164,8 @@
     "Size": "M",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-M-002",
@@ -166,7 +178,8 @@
     "Size": "L",
     "Price_INR": 999,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -179,7 +192,8 @@
     "Size": "XL",
     "Price_INR": 999,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -192,7 +206,8 @@
     "Size": "M",
     "Price_INR": 999,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -205,7 +220,8 @@
     "Size": "XS",
     "Price_INR": 999,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -218,7 +234,8 @@
     "Size": "M",
     "Price_INR": 999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -231,7 +248,8 @@
     "Size": "S",
     "Price_INR": 999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -244,7 +262,8 @@
     "Size": "XL",
     "Price_INR": 999,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -257,7 +276,8 @@
     "Size": "L",
     "Price_INR": 999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -270,7 +290,8 @@
     "Size": "M",
     "Price_INR": 999,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -283,7 +304,8 @@
     "Size": "XXL",
     "Price_INR": 999,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -296,7 +318,8 @@
     "Size": "XL",
     "Price_INR": 999,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-002",
@@ -309,7 +332,8 @@
     "Size": "XS",
     "Price_INR": 999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-M-003",
@@ -322,7 +346,8 @@
     "Size": "M",
     "Price_INR": 1299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -335,7 +360,8 @@
     "Size": "XL",
     "Price_INR": 1299,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -348,7 +374,8 @@
     "Size": "XXL",
     "Price_INR": 1299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -361,7 +388,8 @@
     "Size": "L",
     "Price_INR": 1299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -374,7 +402,8 @@
     "Size": "XXL",
     "Price_INR": 1299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -387,7 +416,8 @@
     "Size": "S",
     "Price_INR": 1299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -400,7 +430,8 @@
     "Size": "M",
     "Price_INR": 1299,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -413,7 +444,8 @@
     "Size": "XS",
     "Price_INR": 1299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -426,7 +458,8 @@
     "Size": "L",
     "Price_INR": 1299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -439,7 +472,8 @@
     "Size": "M",
     "Price_INR": 1299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -452,7 +486,8 @@
     "Size": "S",
     "Price_INR": 1299,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-M-003",
@@ -465,7 +500,8 @@
     "Size": "XXL",
     "Price_INR": 1299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-001",
@@ -478,7 +514,8 @@
     "Size": "XS",
     "Price_INR": 699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -491,7 +528,8 @@
     "Size": "XL",
     "Price_INR": 699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -504,7 +542,8 @@
     "Size": "S",
     "Price_INR": 699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -517,7 +556,8 @@
     "Size": "M",
     "Price_INR": 699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -530,7 +570,8 @@
     "Size": "L",
     "Price_INR": 699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -543,7 +584,8 @@
     "Size": "M",
     "Price_INR": 699,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -556,7 +598,8 @@
     "Size": "S",
     "Price_INR": 699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -569,7 +612,8 @@
     "Size": "XL",
     "Price_INR": 699,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -582,7 +626,8 @@
     "Size": "M",
     "Price_INR": 699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -595,7 +640,8 @@
     "Size": "L",
     "Price_INR": 699,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -608,7 +654,8 @@
     "Size": "XXL",
     "Price_INR": 699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-001",
@@ -621,7 +668,8 @@
     "Size": "XS",
     "Price_INR": 699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "TS-W-002",
@@ -634,7 +682,8 @@
     "Size": "L",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -647,7 +696,8 @@
     "Size": "XXL",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -660,7 +710,8 @@
     "Size": "S",
     "Price_INR": 899,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -673,7 +724,8 @@
     "Size": "XL",
     "Price_INR": 899,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -686,7 +738,8 @@
     "Size": "XL",
     "Price_INR": 899,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -699,7 +752,8 @@
     "Size": "M",
     "Price_INR": 899,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -712,7 +766,8 @@
     "Size": "L",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -725,7 +780,8 @@
     "Size": "XXL",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -738,7 +794,8 @@
     "Size": "XL",
     "Price_INR": 899,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -751,7 +808,8 @@
     "Size": "L",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -764,7 +822,8 @@
     "Size": "XS",
     "Price_INR": 899,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-002",
@@ -777,7 +836,8 @@
     "Size": "XXL",
     "Price_INR": 899,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "TS-W-003",
@@ -790,7 +850,8 @@
     "Size": "XL",
     "Price_INR": 799,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -803,7 +864,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -816,7 +878,8 @@
     "Size": "L",
     "Price_INR": 799,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -829,7 +892,8 @@
     "Size": "S",
     "Price_INR": 799,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -842,7 +906,8 @@
     "Size": "XL",
     "Price_INR": 799,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -855,7 +920,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -868,7 +934,8 @@
     "Size": "XXL",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -881,7 +948,8 @@
     "Size": "M",
     "Price_INR": 799,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -894,7 +962,8 @@
     "Size": "XS",
     "Price_INR": 799,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -907,7 +976,8 @@
     "Size": "M",
     "Price_INR": 799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -920,7 +990,8 @@
     "Size": "L",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "TS-W-003",
@@ -933,7 +1004,8 @@
     "Size": "XXL",
     "Price_INR": 799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-001",
@@ -946,7 +1018,8 @@
     "Size": "36",
     "Price_INR": 1999,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -959,7 +1032,8 @@
     "Size": "28",
     "Price_INR": 1999,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -972,7 +1046,8 @@
     "Size": "32",
     "Price_INR": 1999,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -985,7 +1060,8 @@
     "Size": "34",
     "Price_INR": 1999,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -998,7 +1074,8 @@
     "Size": "32",
     "Price_INR": 1999,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1011,7 +1088,8 @@
     "Size": "30",
     "Price_INR": 1999,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1024,7 +1102,8 @@
     "Size": "28",
     "Price_INR": 1999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1037,7 +1116,8 @@
     "Size": "38",
     "Price_INR": 1999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1050,7 +1130,8 @@
     "Size": "32",
     "Price_INR": 1999,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1063,7 +1144,8 @@
     "Size": "38",
     "Price_INR": 1999,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1076,7 +1158,8 @@
     "Size": "30",
     "Price_INR": 1999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-001",
@@ -1089,7 +1172,8 @@
     "Size": "28",
     "Price_INR": 1999,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-M-002",
@@ -1102,7 +1186,8 @@
     "Size": "36",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1115,7 +1200,8 @@
     "Size": "30",
     "Price_INR": 2199,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1128,7 +1214,8 @@
     "Size": "38",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1141,7 +1228,8 @@
     "Size": "32",
     "Price_INR": 2199,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1154,7 +1242,8 @@
     "Size": "36",
     "Price_INR": 2199,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1167,7 +1256,8 @@
     "Size": "38",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1180,7 +1270,8 @@
     "Size": "34",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1193,7 +1284,8 @@
     "Size": "28",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1206,7 +1298,8 @@
     "Size": "38",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1219,7 +1312,8 @@
     "Size": "32",
     "Price_INR": 2199,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1232,7 +1326,8 @@
     "Size": "34",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-002",
@@ -1245,7 +1340,8 @@
     "Size": "36",
     "Price_INR": 2199,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-M-003",
@@ -1258,7 +1354,8 @@
     "Size": "30",
     "Price_INR": 2299,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1271,7 +1368,8 @@
     "Size": "28",
     "Price_INR": 2299,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1284,7 +1382,8 @@
     "Size": "32",
     "Price_INR": 2299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1297,7 +1396,8 @@
     "Size": "36",
     "Price_INR": 2299,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1310,7 +1410,8 @@
     "Size": "30",
     "Price_INR": 2299,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1323,7 +1424,8 @@
     "Size": "28",
     "Price_INR": 2299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1336,7 +1438,8 @@
     "Size": "36",
     "Price_INR": 2299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1349,7 +1452,8 @@
     "Size": "32",
     "Price_INR": 2299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1362,7 +1466,8 @@
     "Size": "28",
     "Price_INR": 2299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1375,7 +1480,8 @@
     "Size": "32",
     "Price_INR": 2299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1388,7 +1494,8 @@
     "Size": "38",
     "Price_INR": 2299,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-M-003",
@@ -1401,7 +1508,8 @@
     "Size": "36",
     "Price_INR": 2299,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-001",
@@ -1414,7 +1522,8 @@
     "Size": "38",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1427,7 +1536,8 @@
     "Size": "36",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1440,7 +1550,8 @@
     "Size": "34",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1453,7 +1564,8 @@
     "Size": "28",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1466,7 +1578,8 @@
     "Size": "28",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1479,7 +1592,8 @@
     "Size": "34",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1492,7 +1606,8 @@
     "Size": "32",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1505,7 +1620,8 @@
     "Size": "30",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1518,7 +1634,8 @@
     "Size": "38",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1531,7 +1648,8 @@
     "Size": "28",
     "Price_INR": 2199,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1544,7 +1662,8 @@
     "Size": "36",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-001",
@@ -1557,7 +1676,8 @@
     "Size": "30",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DN-W-002",
@@ -1570,7 +1690,8 @@
     "Size": "34",
     "Price_INR": 2399,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1583,7 +1704,8 @@
     "Size": "30",
     "Price_INR": 2399,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1596,7 +1718,8 @@
     "Size": "38",
     "Price_INR": 2399,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1609,7 +1732,8 @@
     "Size": "28",
     "Price_INR": 2399,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1622,7 +1746,8 @@
     "Size": "34",
     "Price_INR": 2399,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1635,7 +1760,8 @@
     "Size": "36",
     "Price_INR": 2399,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1648,7 +1774,8 @@
     "Size": "28",
     "Price_INR": 2399,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1661,7 +1788,8 @@
     "Size": "38",
     "Price_INR": 2399,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1674,7 +1802,8 @@
     "Size": "30",
     "Price_INR": 2399,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1687,7 +1816,8 @@
     "Size": "38",
     "Price_INR": 2399,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1700,7 +1830,8 @@
     "Size": "34",
     "Price_INR": 2399,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-002",
@@ -1713,7 +1844,8 @@
     "Size": "36",
     "Price_INR": 2399,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DN-W-003",
@@ -1726,7 +1858,8 @@
     "Size": "34",
     "Price_INR": 2099,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1739,7 +1872,8 @@
     "Size": "32",
     "Price_INR": 2099,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1752,7 +1886,8 @@
     "Size": "38",
     "Price_INR": 2099,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1765,7 +1900,8 @@
     "Size": "30",
     "Price_INR": 2099,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1778,7 +1914,8 @@
     "Size": "38",
     "Price_INR": 2099,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1791,7 +1928,8 @@
     "Size": "34",
     "Price_INR": 2099,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1804,7 +1942,8 @@
     "Size": "30",
     "Price_INR": 2099,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1817,7 +1956,8 @@
     "Size": "28",
     "Price_INR": 2099,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1830,7 +1970,8 @@
     "Size": "38",
     "Price_INR": 2099,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1843,7 +1984,8 @@
     "Size": "36",
     "Price_INR": 2099,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1856,7 +1998,8 @@
     "Size": "28",
     "Price_INR": 2099,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DN-W-003",
@@ -1869,7 +2012,8 @@
     "Size": "32",
     "Price_INR": 2099,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-001",
@@ -1882,7 +2026,8 @@
     "Size": "S",
     "Price_INR": 2499,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1895,7 +2040,8 @@
     "Size": "XS",
     "Price_INR": 2499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1908,7 +2054,8 @@
     "Size": "M",
     "Price_INR": 2499,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1921,7 +2068,8 @@
     "Size": "L",
     "Price_INR": 2499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1934,7 +2082,8 @@
     "Size": "S",
     "Price_INR": 2499,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1947,7 +2096,8 @@
     "Size": "L",
     "Price_INR": 2499,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1960,7 +2110,8 @@
     "Size": "XS",
     "Price_INR": 2499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1973,7 +2124,8 @@
     "Size": "M",
     "Price_INR": 2499,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1986,7 +2138,8 @@
     "Size": "XS",
     "Price_INR": 2499,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -1999,7 +2152,8 @@
     "Size": "L",
     "Price_INR": 2499,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -2012,7 +2166,8 @@
     "Size": "M",
     "Price_INR": 2499,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-001",
@@ -2025,7 +2180,8 @@
     "Size": "S",
     "Price_INR": 2499,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-002",
@@ -2038,7 +2194,8 @@
     "Size": "L",
     "Price_INR": 2699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2051,7 +2208,8 @@
     "Size": "S",
     "Price_INR": 2699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2064,7 +2222,8 @@
     "Size": "M",
     "Price_INR": 2699,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2077,7 +2236,8 @@
     "Size": "XL",
     "Price_INR": 2699,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2090,7 +2250,8 @@
     "Size": "L",
     "Price_INR": 2699,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2103,7 +2264,8 @@
     "Size": "XS",
     "Price_INR": 2699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2116,7 +2278,8 @@
     "Size": "XL",
     "Price_INR": 2699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2129,7 +2292,8 @@
     "Size": "M",
     "Price_INR": 2699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2142,7 +2306,8 @@
     "Size": "XS",
     "Price_INR": 2699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2155,7 +2320,8 @@
     "Size": "S",
     "Price_INR": 2699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2168,7 +2334,8 @@
     "Size": "L",
     "Price_INR": 2699,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-002",
@@ -2181,7 +2348,8 @@
     "Size": "M",
     "Price_INR": 2699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "DR-W-003",
@@ -2194,7 +2362,8 @@
     "Size": "XL",
     "Price_INR": 2299,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2207,7 +2376,8 @@
     "Size": "XS",
     "Price_INR": 2299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2220,7 +2390,8 @@
     "Size": "M",
     "Price_INR": 2299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2233,7 +2404,8 @@
     "Size": "S",
     "Price_INR": 2299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2246,7 +2418,8 @@
     "Size": "XS",
     "Price_INR": 2299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2259,7 +2432,8 @@
     "Size": "XL",
     "Price_INR": 2299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2272,7 +2446,8 @@
     "Size": "M",
     "Price_INR": 2299,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2285,7 +2460,8 @@
     "Size": "L",
     "Price_INR": 2299,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2298,7 +2474,8 @@
     "Size": "M",
     "Price_INR": 2299,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2311,7 +2488,8 @@
     "Size": "S",
     "Price_INR": 2299,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2324,7 +2502,8 @@
     "Size": "XL",
     "Price_INR": 2299,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-003",
@@ -2337,7 +2516,8 @@
     "Size": "L",
     "Price_INR": 2299,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "DR-W-004",
@@ -2350,7 +2530,8 @@
     "Size": "M",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2363,7 +2544,8 @@
     "Size": "XS",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2376,7 +2558,8 @@
     "Size": "L",
     "Price_INR": 2199,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2389,7 +2572,8 @@
     "Size": "S",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2402,7 +2586,8 @@
     "Size": "L",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2415,7 +2600,8 @@
     "Size": "XL",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2428,7 +2614,8 @@
     "Size": "M",
     "Price_INR": 2199,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2441,7 +2628,8 @@
     "Size": "XS",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2454,7 +2642,8 @@
     "Size": "XL",
     "Price_INR": 2199,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2467,7 +2656,8 @@
     "Size": "XS",
     "Price_INR": 2199,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2480,7 +2670,8 @@
     "Size": "S",
     "Price_INR": 2199,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "DR-W-004",
@@ -2493,7 +2684,8 @@
     "Size": "L",
     "Price_INR": 2199,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-001",
@@ -2506,7 +2698,8 @@
     "Size": "M",
     "Price_INR": 1799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2519,7 +2712,8 @@
     "Size": "S",
     "Price_INR": 1799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2532,7 +2726,8 @@
     "Size": "XL",
     "Price_INR": 1799,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2545,7 +2740,8 @@
     "Size": "XS",
     "Price_INR": 1799,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2558,7 +2754,8 @@
     "Size": "L",
     "Price_INR": 1799,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2571,7 +2768,8 @@
     "Size": "S",
     "Price_INR": 1799,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2584,7 +2782,8 @@
     "Size": "XS",
     "Price_INR": 1799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2597,7 +2796,8 @@
     "Size": "M",
     "Price_INR": 1799,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2610,7 +2810,8 @@
     "Size": "M",
     "Price_INR": 1799,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2623,7 +2824,8 @@
     "Size": "L",
     "Price_INR": 1799,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2636,7 +2838,8 @@
     "Size": "XL",
     "Price_INR": 1799,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-001",
@@ -2649,7 +2852,8 @@
     "Size": "XS",
     "Price_INR": 1799,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-002",
@@ -2662,7 +2866,8 @@
     "Size": "S",
     "Price_INR": 1499,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2675,7 +2880,8 @@
     "Size": "XL",
     "Price_INR": 1499,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2688,7 +2894,8 @@
     "Size": "L",
     "Price_INR": 1499,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2701,7 +2908,8 @@
     "Size": "M",
     "Price_INR": 1499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2714,7 +2922,8 @@
     "Size": "S",
     "Price_INR": 1499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2727,7 +2936,8 @@
     "Size": "L",
     "Price_INR": 1499,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2740,7 +2950,8 @@
     "Size": "XL",
     "Price_INR": 1499,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2753,7 +2964,8 @@
     "Size": "M",
     "Price_INR": 1499,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2766,7 +2978,8 @@
     "Size": "XL",
     "Price_INR": 1499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2779,7 +2992,8 @@
     "Size": "L",
     "Price_INR": 1499,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2792,7 +3006,8 @@
     "Size": "M",
     "Price_INR": 1499,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-002",
@@ -2805,7 +3020,8 @@
     "Size": "S",
     "Price_INR": 1499,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-03"
   },
   {
     "SKU": "SK-W-003",
@@ -2818,7 +3034,8 @@
     "Size": "XS",
     "Price_INR": 1899,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2831,7 +3048,8 @@
     "Size": "L",
     "Price_INR": 1899,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2844,7 +3062,8 @@
     "Size": "S",
     "Price_INR": 1899,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2857,7 +3076,8 @@
     "Size": "M",
     "Price_INR": 1899,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2870,7 +3090,8 @@
     "Size": "L",
     "Price_INR": 1899,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2883,7 +3104,8 @@
     "Size": "S",
     "Price_INR": 1899,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2896,7 +3118,8 @@
     "Size": "XL",
     "Price_INR": 1899,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2909,7 +3132,8 @@
     "Size": "XS",
     "Price_INR": 1899,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2922,7 +3146,8 @@
     "Size": "XL",
     "Price_INR": 1899,
     "Stock_Qty": 0,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2935,7 +3160,8 @@
     "Size": "S",
     "Price_INR": 1899,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2948,7 +3174,8 @@
     "Size": "L",
     "Price_INR": 1899,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-003",
@@ -2961,7 +3188,8 @@
     "Size": "M",
     "Price_INR": 1899,
     "Stock_Qty": 20,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-01"
   },
   {
     "SKU": "SK-W-004",
@@ -2974,7 +3202,8 @@
     "Size": "M",
     "Price_INR": 1699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -2987,7 +3216,8 @@
     "Size": "XL",
     "Price_INR": 1699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3000,7 +3230,8 @@
     "Size": "L",
     "Price_INR": 1699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3013,7 +3244,8 @@
     "Size": "S",
     "Price_INR": 1699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3026,7 +3258,8 @@
     "Size": "XL",
     "Price_INR": 1699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3039,7 +3272,8 @@
     "Size": "S",
     "Price_INR": 1699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3052,7 +3286,8 @@
     "Size": "XS",
     "Price_INR": 1699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3065,7 +3300,8 @@
     "Size": "L",
     "Price_INR": 1699,
     "Stock_Qty": 35,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3078,7 +3314,8 @@
     "Size": "S",
     "Price_INR": 1699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3091,7 +3328,8 @@
     "Size": "M",
     "Price_INR": 1699,
     "Stock_Qty": 5,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3104,7 +3342,8 @@
     "Size": "XL",
     "Price_INR": 1699,
     "Stock_Qty": 2,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   },
   {
     "SKU": "SK-W-004",
@@ -3117,6 +3356,7 @@
     "Size": "XS",
     "Price_INR": 1699,
     "Stock_Qty": 10,
-    "Status": "Active"
+    "Status": "Active",
+    "Vendor_ID": "VEN-02"
   }
 ]
