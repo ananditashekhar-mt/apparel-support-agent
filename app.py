@@ -14,8 +14,10 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from agent import Agent, load
+from dataset import DEFAULT_DATE, order_as_of
 
 load_dotenv()
+APP_ENV=os.getenv('APP_ENV','local' if (Path(__file__).parent/'.env').is_file() else 'hosted').lower()
 BRAND_NAME=os.getenv('BRAND_NAME','Threadly')
 AGENT_NAME=os.getenv('AGENT_NAME','Tia')
 st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide', initial_sidebar_state='collapsed')
@@ -89,33 +91,35 @@ with st.sidebar:
     st.caption('A little care, beyond checkout.')
     interface=st.radio('Interface',['Customer','Support','Admin'])
 
-configured_mode=os.getenv('APP_MODE','Demo').title()
-if configured_mode not in ['Demo','Openai','Ollama']:configured_mode='Demo'
+configured_mode=os.getenv('APP_MODE','OpenAI' if APP_ENV=='hosted' else 'Demo').title()
+if configured_mode not in ['Demo','Openai','Ollama','Gemini','Groq']:configured_mode='Demo'
 configured_mode='OpenAI' if configured_mode=='Openai' else configured_mode
-for key,value in [('admin_openai_model',os.getenv('OPENAI_MODEL','')),
+for key,value in [('admin_openai_model',os.getenv('OPENAI_MODEL','gpt-4.1-mini' if APP_ENV=='hosted' else '')),
                   ('admin_ollama_model',os.getenv('OLLAMA_MODEL','')),
+                  ('admin_gemini_model',os.getenv('GEMINI_MODEL','gemini-2.5-flash')),
+                  ('admin_groq_model',os.getenv('GROQ_MODEL','openai/gpt-oss-20b')),
                   ('admin_input_rate',float(os.getenv('OPENAI_INPUT_USD_PER_M','0') or 0)),
                   ('admin_output_rate',float(os.getenv('OPENAI_OUTPUT_USD_PER_M','0') or 0)),
                   ('admin_usd_inr',float(os.getenv('USD_INR_RATE','0') or 0))]:
     if key not in st.session_state:st.session_state[key]=value
 mode=configured_mode
-model=st.session_state.admin_ollama_model if mode=='Ollama' else st.session_state.admin_openai_model
+model=st.session_state.get('admin_'+mode.lower()+'_model','')
 input_rate=st.session_state.admin_input_rate;output_rate=st.session_state.admin_output_rate
 usd_inr=st.session_state.admin_usd_inr
 if interface=='Customer':
     with st.sidebar.expander('Demo settings',expanded=False):
-        if os.getenv('ALLOW_MODE_SWITCH','true').lower()=='true':
-            choices=['Demo','OpenAI','Ollama']
+        if os.getenv('ALLOW_MODE_SWITCH','false' if APP_ENV=='hosted' else 'true').lower()=='true':
+            choices=['Demo','OpenAI','Gemini','Groq','Ollama']
             mode=st.radio('Assistant',choices,index=choices.index(configured_mode),horizontal=True)
-            st.caption('Demo is deterministic. OpenAI and Ollama add model-based understanding and writing; business rules remain in code.')
+            st.caption('Demo is deterministic. OpenAI, Gemini, Groq and Ollama add model-based understanding and writing; business rules remain in code.')
         else:st.caption(f'Assistant: {mode}')
-        model=st.session_state.admin_ollama_model if mode=='Ollama' else st.session_state.admin_openai_model
-        demo_date=st.date_input('Simulation date',value=date(2026,9,17),help='The sample orders use fixed dates.')
+        model=st.session_state.get('admin_'+mode.lower()+'_model','')
+        demo_date=st.date_input('Simulation date',value=DEFAULT_DATE, key='simulation_date', help='October–December 2026. Earlier dates hide future orders and shipment events.')
         st.caption('All customers, orders and actions are synthetic.')
 else:
-    demo_date=date(2026,9,17)
+    demo_date=DEFAULT_DATE
 
-agent_key=(mode,model,'feedback-v2')
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1')
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -156,7 +160,7 @@ def submit_message(prompt,cid):
         with st.spinner('Checking your request…'):
             result=agent.chat(prompt,st.session_state.memory,st.session_state.history,demo_date,
                 st.session_state.condition_ok,st.session_state.conversation_id,cid,input_rate,output_rate,usd_inr,
-                [order['Order_ID'] for order in profiles[cid]['orders']],customer_name=profiles[cid]['name'],
+                [order['Order_ID'] for order in profiles[cid]['orders'] if order_as_of(order,demo_date)],customer_name=profiles[cid]['name'],
                 review_unlisted=st.session_state.get('unlisted_issue',False),offer_order_picker=True)
         if not result.get('needs_order_selection') and (result.get('feedback_required') or feedback['phase']=='retry'):
             if result.get('pending',{} ) and result['pending']['kind']=='escalation':
@@ -240,13 +244,57 @@ def open_saved_conversation(cid,conversation_id):
     st.session_state.unlisted_issue=False
 
 
+def queue_showcase(scenario):
+    st.session_state.pending_showcase=scenario
+    st.session_state.simulation_date=date.fromisoformat(scenario['As_Of'])
+
+
 def customer_view():
-    profile_options=sorted(profiles,key=lambda c:(profiles[c]['name'],profiles[c]['city']))
-    profile_labels={f"{profiles[c]['name']} · {profiles[c]['city']} · Customer {c[-4:]}":c for c in profile_options}
+    showcase=load('showcase_scenarios')
     with st.sidebar:
-        selected_profile=st.selectbox('Preview customer',list(profile_labels),key='customer_profile_picker',help='Choose a sample customer to preview their support experience.')
+        st.markdown('**Showcase scenarios**')
+        use_case=st.selectbox('Support use case',['Browse customers']+sorted({r['Use_Case'] for r in showcase}),key='showcase_use_case')
+        scenario=None
+        if use_case!='Browse customers':
+            variants=sorted({r['Scenario_Variant'] for r in showcase if r['Use_Case']==use_case})
+            variant=st.selectbox('Scenario variant',variants,key='showcase_variant')
+            matches=[r for r in showcase if r['Use_Case']==use_case and r['Scenario_Variant']==variant]
+            scenario=st.selectbox('Matching customer and order',matches,
+                format_func=lambda r: f"{profiles[r['Customer_ID']]['name']} · {r['Order_ID']} · {r['As_Of']}",key='showcase_match')
+            st.caption('Scenario date: '+scenario['As_Of'])
+            st.button('Load scenario',key='load_showcase',on_click=queue_showcase,args=(scenario,))
+    pending=st.session_state.pop('pending_showcase',None)
+    visible={cid:dict(p,orders=[view for o in p['orders'] if (view:=order_as_of(o,demo_date))]) for cid,p in profiles.items()}
+    visible={cid:p for cid,p in visible.items() if p['orders']}
+    profile_options=sorted(visible,key=lambda c:(visible[c]['name'],visible[c]['city']))
+    if not profile_options:
+        st.info('No orders have been placed by the selected simulation date. Choose a date in October–December 2026.')
+        return
+    profile_labels={f"{visible[c]['name']} · {visible[c]['city']} · Customer {c[-4:]}":c for c in profile_options}
+    if pending:
+        st.session_state.customer_profile_picker=next(label for label,c in profile_labels.items() if c==pending['Customer_ID'])
+    if st.session_state.get('customer_profile_picker') not in profile_labels:
+        st.session_state.customer_profile_picker=next(iter(profile_labels))
+    with st.sidebar:
+        selected_profile=st.selectbox('Preview customer',list(profile_labels),key='customer_profile_picker',help='Choose a synthetic Indian customer to preview their support experience.')
     cid=profile_labels[selected_profile]
-    reset_customer_state(cid);profile=profiles[cid]
+    date_changed=st.session_state.get('active_simulation_date')!=demo_date.isoformat()
+    reset_customer_state(cid,new=date_changed);profile=visible[cid]
+    st.session_state.active_simulation_date=demo_date.isoformat()
+    if pending:
+        reset_customer_state(cid,True)
+        st.session_state.selected_order=pending['Order_ID']
+        st.session_state.memory={'order_id':pending['Order_ID']}
+        st.session_state.chat_stage='issue'
+        st.session_state.loaded_showcase=pending
+    loaded=st.session_state.get('loaded_showcase')
+    if loaded and loaded['Customer_ID']==cid and loaded['Order_ID']==st.session_state.selected_order and loaded['As_Of']==demo_date.isoformat():
+        st.info(loaded['Use_Case']+' · '+loaded['Scenario_Variant']+' · '+loaded['As_Of'])
+        st.caption('Example customer message: '+loaded['Customer_Message'])
+        if st.button('Ask Tia this example',key='ask_showcase'):
+            st.session_state.condition_ok=loaded['Condition_OK']
+            submit_message(loaded['Customer_Message'],cid)
+            st.rerun()
     brand,account=st.columns([2,1])
     with brand:
         st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div><div class="brand-sub">Customer care</div></div>',unsafe_allow_html=True)
@@ -514,6 +562,9 @@ def access_allowed(env_name,label):
     access_code=os.getenv(env_name)
     if access_code and st.text_input(f'{label} access code',type='password')!=access_code:
         st.info(f'Enter the {label.lower()} access code to continue.');return False
+    if not access_code and APP_ENV=='hosted':
+        st.warning(f'{label} is unavailable until its access code is configured in Streamlit secrets.')
+        return False
     if not access_code:
         st.caption(f'Local demo: {label.lower()} access is open on this computer. Configure {env_name} before hosting.')
     return True
@@ -583,6 +634,13 @@ def admin_view():
         if rows:st.dataframe(rows,hide_index=True,width='stretch')
         else:st.success('No failures have been logged.')
     with diagnostics:
+        st.subheader('Jev shadow decisions')
+        st.caption('Experimental judgments only. They do not change replies, eligibility, CSAT closure or handoffs. Jev usage is separate from the model cost totals above.')
+        shadows=agent.shadow_rows()
+        if shadows:
+            st.json(shadows[:100],expanded=False)
+            st.download_button('Download Jev shadow results',json.dumps(shadows,indent=2),'jev-shadow.json','application/json')
+        else:st.info('No Jev shadow decisions recorded. Enable JEV_SHADOW_ENABLED and configure TYPESAFE_API_KEY to collect comparisons.')
         log_path=os.path.join(os.path.dirname(__file__),'logs','app.log')
         if os.path.exists(log_path):
             with open(log_path,encoding='utf-8',errors='replace') as handle:log_text=handle.read()
@@ -593,7 +651,7 @@ def admin_view():
     with configuration:
         st.subheader('Model configuration')
         c1,c2,c3=st.columns(3)
-        c1.metric('API key','Configured' if os.getenv('OPENAI_API_KEY') else 'Missing')
+        c1.metric('API key','Configured' if os.getenv(mode.upper()+'_API_KEY') else 'Missing')
         c2.metric('Selected model',model or 'Missing')
         c3.metric('Default mode',configured_mode)
         st.write('For the complete app, keep credentials and pricing in the `.env` file beside `app.py`. Never paste the API key into customer-facing fields or commit `.env` to source control.')
@@ -612,12 +670,14 @@ ADMIN_ACCESS_CODE=choose_a_different_admin_code''',language='text')
         with st.form('session_cost_settings'):
             st.write('Temporary settings for this browser session')
             new_openai_model=st.text_input('OpenAI model ID',value=st.session_state.admin_openai_model)
+            new_gemini_model=st.text_input('Gemini model ID',value=st.session_state.admin_gemini_model)
+            new_groq_model=st.text_input('Groq model ID',value=st.session_state.admin_groq_model)
             new_ollama_model=st.text_input('Ollama model name',value=st.session_state.admin_ollama_model)
             new_input=st.number_input('Input price ($ / 1M tokens)',min_value=0.0,value=float(input_rate),step=0.01)
             new_output=st.number_input('Output price ($ / 1M tokens)',min_value=0.0,value=float(output_rate),step=0.01)
             new_inr=st.number_input('USD to INR rate',min_value=0.0,value=float(usd_inr),step=0.1)
             if st.form_submit_button('Apply for this session'):
-                st.session_state.admin_openai_model=new_openai_model.strip();st.session_state.admin_ollama_model=new_ollama_model.strip();st.session_state.admin_input_rate=new_input
+                st.session_state.admin_gemini_model=new_gemini_model.strip();st.session_state.admin_groq_model=new_groq_model.strip();st.session_state.admin_openai_model=new_openai_model.strip();st.session_state.admin_ollama_model=new_ollama_model.strip();st.session_state.admin_input_rate=new_input
                 st.session_state.admin_output_rate=new_output;st.session_state.admin_usd_inr=new_inr;st.rerun()
     with reference:
         st.subheader('Policies');st.dataframe(load('policies'),hide_index=True,width='stretch')

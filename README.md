@@ -27,10 +27,10 @@ For Windows, create the environment using `py -m venv .venv`, activate it with `
 
 ## Try the chat
 
-Use the default demo date, 17 September 2026. This makes eligibility relative to the synthetic workbook dates, rather than today.
+Use the default simulation date, 31 December 2026, or load a showcase scenario to select its October–December 2026 date automatically. Orders and shipment events after the selected date are hidden. Advancing beyond a recorded snapshot does not invent new carrier updates.
 
-* Tracking: `Where is ORD-10003?`
-* Delivery problem: `My order ORD-10003 is late.`
+* Tracking: `Where is ORD-20002?`
+* Delivery problem: `My order ORD-20002 is late.`
 * Payment handoff: `Can you process my refund?`
 * Return: use the delivered order shown in the sidebar. Tick the item-condition checkbox, then ask `I want to return ORD-xxxxx`.
 * Exchange: ask `I want to exchange ORD-xxxxx` for a delivered order. When asked for the variant, reply `Size XL`. Availability comes from your catalog and may be zero.
@@ -47,7 +47,7 @@ Choose the interface in the sidebar:
 * **Support** shows customer conversations, complete transcripts, and confirmed mock requests.
 * **Admin** shows API usage/cost, database failures, the rotating diagnostic log, policies, and configuration status. Set separate `SUPPORT_ACCESS_CODE` and `ADMIN_ACCESS_CODE` values before deployment. When they are blank, the app explains that the corresponding local page is open only for prototype use.
 
-Demo, OpenAI and Ollama conversations are stored in `runtime.sqlite`. Messages are partitioned by customer ID and conversation ID. Support can inspect all records, while customer retrieval always includes that customer's ID in the query.
+Demo, OpenAI and Ollama conversations are stored in `runtime_india_2026.sqlite`. Messages are partitioned by customer ID and conversation ID. Support can inspect all records, while customer retrieval always includes that customer's ID in the query.
 
 ## Try different language models
 
@@ -109,42 +109,52 @@ This is a constrained hybrid agent. The model understands variable language and 
 
 ## Dataset preparation
 
-The project includes JSON exports of all six useful workbook tabs: nine policies, 240 product variants, 250 orders, 400 conversations, 16 intents and seven rubric dimensions. Expected answers are **not** read by the runtime agent.
+The refreshed dataset contains **200 India-based customers, 600 orders, 240 product variants and 1,200 support conversations**. Orders, deliveries and shipment events cover October–December 2026. Policies retain the 16 supported intents, with an additional unknown fallback.
 
-Some workbook headers do not match their values. Preparation renamed fields without modifying the uploaded workbook:
+75% of customers have multiple orders: 50 have one, 70 have two, 50 have four and 30 have seven. Customer gender and recipient gender are explicit; purchases across men's/women's categories are marked as gifts. Names are fictional; 71 names are shared across 200 customers with common names weighted more heavily. Repeated names have different IDs, emails use `example.test`, and phone numbers are omitted. Thirty-five Indian cities/towns are represented. Three fixed fictional vendors are mapped by SKU; delivery partners are maintained separately in a fixed four-carrier list.
 
-| Sheet | Original heading | Prepared heading |
-| --- | --- | --- |
-| Orders | Customer_Last_Name | Customer_Name_Synthetic |
-| Orders | Customer_Email | City |
-| Support_Conversations | Customer_First_Name | Split |
-| Support_Conversations | Customer_Last_Name | Order_ID |
-| Support_Conversations | Customer_Email | SKU |
+Regenerate with:
 
-Blank columns were removed. Dates remain ISO strings. The synthetic conversations can contradict the linked order status, and expected answers sometimes imply carrier information absent from the workbook. The prototype follows the actual available records and identifies missing facts.
+```bash
+python scripts/build_dataset.py
+```
+
+The seeded generator replaces the generated JSON files deterministically. It does not edit policies, modify the runtime database or read the old source orders. Original customers/orders/conversations are preserved under `data/archive/original/`; the earlier raw orders remain in `data/source/orders.json`. See [dataset details](docs/dataset-and-workflow-validation.md).
+
+## Showcase
+
+In Customer view, use **Support use case → Scenario variant → Matching customer and order → Load scenario**. Loading selects the customer, order and scenario date, and starts a fresh chat. **Ask Tia this example** submits the visible example with the fixture's explicitly confirmed item condition when applicable. Expected outcomes are not read by the app or agent.
+
+The 12 umbrella filters cover tracking, delay, delivered-not-received, incorrect items, damage/quality, missing quantities, returns, exchanges/fit, cancellations, refund enquiries, price adjustments and unrelated requests. Variants include 7/8-day reporting boundaries, 29/30/31/40-day returns, exchange availability and cancellation stages.
 
 ## Scope and limitations
 
-Tracking, returns/exchanges, delivery exceptions, cancellation checks and human handoffs are implemented. The dataset contains no clearly pre-shipment confirmed orders, so cancellation creation has no eligible example in the supplied orders. No refund or financial action is implemented.
+Tracking, returns/exchanges, delivery exceptions, cancellation checks and human handoffs are implemented. Confirmed orders provide eligible cancellation examples. Recorded shipment events are synthetic; there is no live carrier, split-parcel tracking, verified proof of delivery or payment integration. Refund enquiries and price adjustments lead to human review. Photos can be attached but are not automatically assessed. Escalations create local mock cases; no external notification is sent.
 
-Carrier scans, split shipments, proof of delivery and refund status are absent. Those queries cannot be fully resolved and propose human review. Photo verification is not implemented; damage/incorrect-item cases request evidence and human review. An escalation creates a mock case locally, not a notification to a real person.
-
-Orders are fixed mock records. Requests do not change their fulfilment status. Chat transcripts persist in SQLite; reasoning memory is not yet reconstructed when an old transcript is reopened. This is an academic demonstration without real customer authentication or external commerce integrations. Use only the supplied synthetic data. A scheduled proactive-update preview is included in `proactive.py`; delivery notifications are previews only.
-
-To reset mock reservations and requests, stop the app and delete `runtime.sqlite`, then restart. Do not delete that file while the app is running.
+The new dataset uses `runtime_india_2026.sqlite`, preserving the old `runtime.sqlite` separately so legacy chats and inventory do not attach to new identities. Requests and reservations remain local mock actions. Stop the app before removing the new database if you want a clean reset. Hosted local SQLite storage can reset on redeployment.
 
 ## Evaluate and verify
 
 ```bash
 python -m unittest discover -s tests -v
-python evaluate.py --split test
+python evaluate.py --split showcase
 ```
 
-The evaluation runner preserves the supplied splits. It does not pass expected answers or labels to the agent. It provides the explicitly mapped order ID as initial customer context. It does not assume item condition, which must be confirmed separately.
+| Partition | Conversations | Purpose |
+| --- | ---: | --- |
+| train | 500 | Development |
+| showcase | 100 | Curated demonstrations |
+| test | 300 | Unseen standard evaluation |
+| challenge | 200 | Unseen boundaries, Hinglish, identity checks, instruction overrides and size follow-ups |
+| reserve | 100 | Unseen final reserve |
 
-Twenty-three workflow tests cover the original business rules plus active-order context, question/reply ordering, return-condition continuation, customer-history isolation, order-ownership checks, provider adapters, failure logging, and token or cost persistence. The held-out **Demo** baseline identified the exact intent in 47 of 62 test conversations, **75.8%**. This measures the rule classifier, not live LLM quality or end-to-end resolution. No test-set prompt tuning was performed after this baseline. `verification.json` records the earlier baseline checks.
+All five partitions have separate customers and orders and separately worded message banks. The challenge partition includes unknown order IDs, another customer's order, missing order context and multi-turn exchanges. These are synthetic template-based evaluation cases, not a production-language benchmark. Repeated scenario families are intentional; manual review of expected outcomes and more independently authored language are needed before strong quality claims.
 
-For OpenAI evaluation, run `python evaluate.py --mode OpenAI --split test` after configuring `.env`. This makes billed API calls. For a local model, run `python evaluate.py --mode Ollama --split test`. The output contains actual responses, expected actions and empty rubric-score fields for manual review. Run a small validation subset before the 62 held-out test conversations, and run multi-turn cases separately in the UI because the evaluation runner tests single-turn scenarios only.
+The runner uses each scenario's `As_Of` date, active-order context, explicit condition confirmation and allowed order IDs. It executes follow-up messages sequentially when provided. It never passes expected outcomes to the agent. It reports intent accuracy, expected status/action agreement and escalation-label agreement; grounding, tone, evidence handling and request execution still require workflow tests or manual review.
+
+The three evaluation partitions were subsequently run for the old/new comparison on 7 November 2026; they are now recorded regression sets. [Results and methodology](docs/dataset-comparison.md). Use `--split test`, `--split challenge` or `--split reserve` when ready to record a benchmark. Once used to guide fixes, a set becomes a regression set. The old 47/62 Demo result in `verification.json` belongs to the archived dataset and does not measure this one.
+
+For model evaluation, configure `.env` and use `--mode OpenAI` (billed calls) or `--mode Ollama`. After the key was updated, a 600-case OpenAI evaluation using gpt-4.1-mini completed: 97.50% exact intent accuracy, 97.83% policy status/action agreement, zero API errors. That initial run exposed weak used/tagless-return handling. A subsequent condition-fact fix scored 17/17 on that category and 599/600 overall; fresh condition checks had 60/60 correct policy outcomes (59/60 exact intent labels). See the [initial live evaluation](docs/openai-new-dataset-evaluation.md) and [same-model comparison and fix](docs/openai-comparison-and-condition-fix.md). These are local synthetic-data tests; the deployed site remains unchanged.
 
 ## Cost analysis
 
@@ -172,3 +182,29 @@ Tia greets the selected synthetic customer by name, introduces herself on the ne
 For this outcome, a separate closing message is followed by a 1–5 star rating with chat input closed. A rating of 4 or 5 ends the flow. The first rating below 4 reopens the chat for one further response and rating. A second rating below 4 offers a support engineer and cannot restart the automated loop. The round count and closure state persist in SQLite per conversation, including when a saved chat is reopened. Support requests remain local simulations and contact nobody. Starting a new chat creates a separate conversation.
 
 The 26 automated tests include isolated UI-flow tests for the star-rating threshold, two-round cap, persisted closure, greeting layout and mock support request. No fresh live-model quality score is claimed for this revision. Earlier accuracy figures do not measure the updated prompts and workflow.
+
+### Optional Jev shadow experiment
+
+Jev can classify intent and analyze written CSAT feedback alongside the existing workflow. It never changes extracted order/size/colour fields, replies, eligibility, actions, ratings, closure, retry limits or handoffs. This is an experiment, not a replacement for the current parser.
+
+To enable locally, set these in `.env` and restart the app:
+
+```dotenv
+JEV_SHADOW_ENABLED=true
+TYPESAFE_API_KEY=your_private_key
+JEV_MODEL=jev-latest
+```
+
+The default is disabled and makes no TypeSafe requests. When enabled, each message sends the latest message, up to eight history entries and prior parsed context to TypeSafe. Each new CSAT submission with a nonempty comment sends its rating and comment; empty comments and duplicate submissions make no extra request. Use synthetic data for initial evaluation. The fixed HTTPS endpoint uses a five-second timeout and no application retries. Provider errors or malformed responses are recorded without replacing the existing customer decision. Requests run synchronously, so shadow mode adds latency. Keep it off for ordinary demos until configured.
+
+Inspect **Admin → Diagnostic log → Jev shadow decisions**, or download the JSON results. Records include resolved model, answer probabilities/confidence, reported token usage, request latency, baseline intent/agreement or CSAT submission ID/rating, and sanitized failure types. Jev token usage is separate from the existing OpenAI/Ollama cost totals; monetary savings are not calculated. Raw customer inputs and API keys are not copied into shadow records. Records live in the existing local SQLite database.
+
+CSAT questions identify the main expressed reason, an explicit request for a person and an explicitly unresolved issue. This can expose a high star rating with an unresolved complaint and distinguish policy dissatisfaction from unclear communication. These are review signals only: a predicted label does not prove a cause, authorize a handoff or override a customer's rating. The existing first-low-rating retry, second-low-rating handoff offer, and 4–5-star closure remain controlled by code.
+
+Evaluate intent against independently labeled examples, including multi-turn exchanges, Hinglish and ambiguous requests. Agreement with the current parser is a comparison, not accuracy. Independently label CSAT comments before measuring unresolved-issue and human-request recall. Keep regression cases distinct from fresh evaluation data; compare total latency and actual billed costs before promoting any decision to live routing. No live Jev quality or performance result is claimed. Integration follows the [TypeSafe HTTP API](https://docs.typesafe.ai/api/system-one) and [Choice schema](https://docs.typesafe.ai/primitives/choice).
+
+### Gemini and GroqCloud
+
+The Assistant selector also supports Gemini and Groq. Double-click `Configure Models.command` to enter or replace provider keys privately. Press Enter to skip any key you do not want to change. Gemini uses `GEMINI_API_KEY` and `GEMINI_MODEL`; Groq uses `GROQ_API_KEY` and `GROQ_MODEL`. Suggested starting models are `gemini-2.5-flash` and `openai/gpt-oss-20b`. Availability and free quotas depend on your account. These providers use their OpenAI-compatible Chat Completions endpoints, including JSON schema extraction. Business rules remain in Python. Hosted adapters are tested with simulated responses; live use requires valid keys.
+
+Double-click `Start App.command` to launch the app, then choose a provider under **Demo settings → Assistant**. Restart after saving new keys. Keep Demo selected until credentials are configured.

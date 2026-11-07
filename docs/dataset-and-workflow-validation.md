@@ -4,17 +4,26 @@ Integrated Deepti's richer dataset and response/UI changes with corrections.
 
 ## Dataset generation
 
-Run `.venv/bin/python scripts/build_dataset.py` to rebuild 134 customers and 262 orders.
-The immutable input is `data/source/orders.json` (the original 250 orders). Edit that
-source when intentionally changing base orders. Generated orders and customers are
-recreated, rather than appended. Customer IDs retain the app's original name/city
-hash so existing saved conversations remain attached to their profiles.
+Run `.venv/bin/python scripts/build_dataset.py` to rebuild the October–December 2026 India-only dataset:
 
-Undelivered orders have zero delivered quantity. Partial deliveries have one of two
-items delivered. Generated event timestamps never decrease along the lifecycle;
-where source dates have only day precision, adjacent synthetic events can share a
-timestamp. Shipment histories remain synthetic, rather than verified carrier scans.
-Existing conversation messages and expected answers are preserved.
+- 200 synthetic customers across 35 cities/towns; 71 naturally repeated names with independent IDs, explicit gender, fictional email addresses and no real phone numbers.
+- 600 orders: 50 single-order, 70 two-order, 50 four-order and 30 seven-order customer histories.
+- 240 existing product variants; stable SKU-to-vendor mapping using three fictional vendors in `data/vendors.json`. Carriers are separate and fixed in `data/carriers.json`.
+- 1,200 support conversations: 500 development, 100 showcase, 300 standard test, 200 challenge and 100 reserve.
+
+`data/dataset_manifest.json` records the seed, version, dates and counts. The generator uses fixed input dictionaries and the product catalogue; it does not consume the old `data/source/orders.json`. It replaces generated outputs rather than appending. The earlier customer/order/conversation files are preserved in `data/archive/original/`.
+
+Every order belongs to the same split as its customer and conversations. Customer gender and recipient apparel category agree except for explicitly marked gift purchases. Products, vendors, unit prices, totals, quantities and ordered shipment events are checked together. Pending deliveries have zero delivered quantity; partial deliveries have one of two items delivered. Dates and issue reports are coherent at each scenario's snapshot.
+
+The 29 scenario variants cover every existing intent plus unknown requests. They test reporting on days 7/8, returns on days 29/30/31/40, stock availability, pre/post-shipment cancellation and handoffs. The challenge set additionally exercises identity checks, missing order context, instruction overrides and sequential size selection.
+
+## Date-aware showcase
+
+The sidebar offers 12 support groups, scenario variants and matching customer/order pairs. Load scenario selects its date and starts a fresh chat; Ask Tia this example submits the visible synthetic question. Eligible item-condition confirmation is supplied explicitly for those curated examples. Expected status and action labels are stored only in the evaluation file, not the public showcase file.
+
+`dataset.order_as_of` hides future orders, filters future shipment events and removes delivery/issue facts until they occur. A historical order status is derived from its recorded events. After the snapshot date, the app preserves the last known facts rather than inventing delivery progress. The default simulation date is 31 December 2026. Changing dates starts a fresh chat.
+
+The refreshed app uses `runtime_india_2026.sqlite` by default. Old chats/requests in `runtime.sqlite` remain untouched and separate from the new customer identities.
 
 ## Simulated customer and Support journey
 
@@ -33,24 +42,11 @@ are outside this change. Existing access-code configuration remains in effect.
 
 ## Verification and evaluation limits
 
-Run `.venv/bin/python -m unittest discover -s tests` for the existing suite plus
-repeatability, quantity/timeline invariants, legacy identities, partial delivery,
-damage, multi-turn cancellation, persistence, customer isolation and the Support form.
+Run `.venv/bin/python -m unittest discover -s tests` for policy/workflow tests, generator repeatability, split and identity contracts, price/quantity/vendor checks, timestamp ordering, temporal visibility, and the scenario loader across all support groups.
 
-Run `.venv/bin/python evaluate.py --mode Demo --split test` for held-out intent
-accuracy and escalation-label agreement. Agreement is reported only for explicit
-Yes/No labels; other values are unscored. It is not verified escalation correctness.
-The report also flags post-delivery reference cases linked to undelivered orders
-and identical customer messages shared between training and test splits.
+Use `.venv/bin/python evaluate.py --mode Demo --split showcase` for the visible demo cases. The three evaluation splits (`test`, `challenge`, `reserve`) were scored after the refresh at the user’s request. They were not used to tune the agent after scoring; the reserve is now a recorded regression set. See [old/new comparison](dataset-comparison.md). The evaluator supports per-case dates, condition confirmation, customer/order ownership constraints and sequential follow-up turns. Expected outcomes are policy-authored, not produced by asking the agent for its own answer.
 
-The Demo intent baseline remains 47/62 (75.8%). The audit flags 112 reference cases
-for review and 28 distinct shared messages. These are review flags, not 112 proven
-incorrect answers. Expected answers have not been rewritten automatically, and the
-original split is retained for comparability. A separately curated holdout and
-reviewed policy/tool labels are still needed for stronger quality claims.
-Grounding, tone and open-ended conversation quality are not automatically graded.
-No live OpenAI/Ollama run or Jev integration was performed in this change.
-
+These are deterministic synthetic templates with separately worded partition banks, not an independently collected natural-language benchmark. Customer/order separation prevents identity overlap but does not imply language or scenario-family independence. Review labels and diversify authored conversations before using the results as a production quality claim. Old baseline results apply only to the archived dataset.
 
 ## Photo evidence and reopened conversations
 

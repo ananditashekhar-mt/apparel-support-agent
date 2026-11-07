@@ -1,0 +1,755 @@
+{
+  "manifest": {
+    "model": "gpt-4.1-mini",
+    "agent_sha256": "78f36d636c87827ae94c21a6c56a53025af967249a1155b27893adcdbbc7f71f",
+    "fresh_cases_sha256": "0cf0ab3efff7ea5f56b84d31cd93c35c16ca28b10165777e995ec62b8ccf1a9d",
+    "dataset_sha256": "2e547871d0aa33740fc189f84f69e5799df3468e37892aba3f46d43bb3a41fe1"
+  },
+  "regression": {
+    "count": 600,
+    "completed_without_api_error": 600,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 599,
+      "total": 600,
+      "percent": 99.83
+    },
+    "outcome_accuracy": {
+      "passed": 599,
+      "total": 600,
+      "percent": 99.83
+    },
+    "strict_success": {
+      "passed": 599,
+      "total": 600,
+      "percent": 99.83
+    },
+    "escalation_agreement": {
+      "passed": 599,
+      "total": 600,
+      "percent": 99.83
+    },
+    "tokens": {
+      "input_tokens": 894692,
+      "output_tokens": 52145,
+      "requests": 1218
+    },
+    "mock_confirmations": {
+      "attempted": 346,
+      "passed": 346
+    }
+  },
+  "regression_by_intent": {
+    "cancel_order": {
+      "count": 54,
+      "completed_without_api_error": 54,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 74154,
+        "output_tokens": 3744,
+        "requests": 108
+      },
+      "mock_confirmations": {
+        "attempted": 17,
+        "passed": 17
+      }
+    },
+    "damaged_item": {
+      "count": 38,
+      "completed_without_api_error": 38,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 37,
+        "total": 38,
+        "percent": 97.37
+      },
+      "outcome_accuracy": {
+        "passed": 37,
+        "total": 38,
+        "percent": 97.37
+      },
+      "strict_success": {
+        "passed": 37,
+        "total": 38,
+        "percent": 97.37
+      },
+      "escalation_agreement": {
+        "passed": 37,
+        "total": 38,
+        "percent": 97.37
+      },
+      "tokens": {
+        "input_tokens": 56055,
+        "output_tokens": 4088,
+        "requests": 76
+      },
+      "mock_confirmations": {
+        "attempted": 37,
+        "passed": 37
+      }
+    },
+    "delivered_not_received": {
+      "count": 21,
+      "completed_without_api_error": 21,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 31989,
+        "output_tokens": 2057,
+        "requests": 42
+      },
+      "mock_confirmations": {
+        "attempted": 21,
+        "passed": 21
+      }
+    },
+    "delivery_delay": {
+      "count": 44,
+      "completed_without_api_error": 44,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 64882,
+        "output_tokens": 4365,
+        "requests": 88
+      },
+      "mock_confirmations": {
+        "attempted": 44,
+        "passed": 44
+      }
+    },
+    "exchange_color": {
+      "count": 32,
+      "completed_without_api_error": 32,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 47952,
+        "output_tokens": 2270,
+        "requests": 64
+      },
+      "mock_confirmations": {
+        "attempted": 17,
+        "passed": 17
+      }
+    },
+    "exchange_size": {
+      "count": 37,
+      "completed_without_api_error": 37,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 70319,
+        "output_tokens": 3366,
+        "requests": 92
+      },
+      "mock_confirmations": {
+        "attempted": 18,
+        "passed": 18
+      }
+    },
+    "fit_issue": {
+      "count": 15,
+      "completed_without_api_error": 15,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 22568,
+        "output_tokens": 1294,
+        "requests": 30
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "missing_item": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 23906,
+        "output_tokens": 1480,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "order_tracking": {
+      "count": 150,
+      "completed_without_api_error": 150,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 218690,
+        "output_tokens": 12035,
+        "requests": 300
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "price_adjustment": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 22922,
+        "output_tokens": 1270,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "quality_issue": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 25516,
+        "output_tokens": 1873,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "refund_status": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 22950,
+        "output_tokens": 1296,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "return_outside_window": {
+      "count": 36,
+      "completed_without_api_error": 36,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 52902,
+        "output_tokens": 3264,
+        "requests": 72
+      },
+      "mock_confirmations": {
+        "attempted": 36,
+        "passed": 36
+      }
+    },
+    "return_request": {
+      "count": 38,
+      "completed_without_api_error": 38,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 55544,
+        "output_tokens": 3181,
+        "requests": 76
+      },
+      "mock_confirmations": {
+        "attempted": 38,
+        "passed": 38
+      }
+    },
+    "unknown": {
+      "count": 17,
+      "completed_without_api_error": 17,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 24415,
+        "output_tokens": 1229,
+        "requests": 34
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "used_item_return": {
+      "count": 17,
+      "completed_without_api_error": 17,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 25553,
+        "output_tokens": 1566,
+        "requests": 34
+      },
+      "mock_confirmations": {
+        "attempted": 17,
+        "passed": 17
+      }
+    },
+    "wrong_item": {
+      "count": 37,
+      "completed_without_api_error": 37,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 54375,
+        "output_tokens": 3767,
+        "requests": 74
+      },
+      "mock_confirmations": {
+        "attempted": 37,
+        "passed": 37
+      }
+    }
+  },
+  "fresh": {
+    "count": 60,
+    "passed": 59,
+    "percent": 98.33,
+    "outcome_passed": 60,
+    "api_errors": 0
+  },
+  "fresh_by_kind": {
+    "clarify": {
+      "count": 6,
+      "passed": 6,
+      "percent": 100.0,
+      "outcome_passed": 6,
+      "api_errors": 0
+    },
+    "condition_followup": {
+      "count": 4,
+      "passed": 4,
+      "percent": 100.0,
+      "outcome_passed": 4,
+      "api_errors": 0
+    },
+    "different_order": {
+      "count": 2,
+      "passed": 2,
+      "percent": 100.0,
+      "outcome_passed": 2,
+      "api_errors": 0
+    },
+    "eligible_exchange": {
+      "count": 4,
+      "passed": 4,
+      "percent": 100.0,
+      "outcome_passed": 4,
+      "api_errors": 0
+    },
+    "eligible_return": {
+      "count": 16,
+      "passed": 16,
+      "percent": 100.0,
+      "outcome_passed": 16,
+      "api_errors": 0
+    },
+    "used_exchange": {
+      "count": 4,
+      "passed": 3,
+      "percent": 75.0,
+      "outcome_passed": 4,
+      "api_errors": 0
+    },
+    "used_return": {
+      "count": 24,
+      "passed": 24,
+      "percent": 100.0,
+      "outcome_passed": 24,
+      "api_errors": 0
+    }
+  },
+  "failures": [
+    {
+      "id": "CONV-RESERVE-0011",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Reported on day 8",
+      "test_kind": "Standard policy scenario",
+      "message": "A tear was visible before I tried the garment on. ORD-20556",
+      "order_id": "ORD-20556",
+      "customer_id": "CUST-2026-0191",
+      "as_of": "2026-11-25",
+      "expected_intent": "damaged_item",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1436,
+        "output_tokens": 79,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "A tear was visible before I tried the garment on. ORD-20556",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThank you for letting us know about the tear. To move forward, could you please confirm that the garment is unworn, unwashed, unaltered, unstained, and still has its original tags? This will help us assist you better.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.47,
+      "suite": "regression"
+    },
+    {
+      "id": "FRESH-E01",
+      "kind": "used_exchange",
+      "message": "I have worn it outside once. I want a size exchange.",
+      "expected_intent": "exchange_size",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "turns": [
+        {
+          "message": "I have worn it outside once. I want a size exchange. ORD-20103 Requested size XL.",
+          "intent": "used_item_return",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "memory": {
+            "order_id": "ORD-20103",
+            "condition_review_required": true,
+            "intent": "used_item_return",
+            "size": "XL",
+            "condition_issues": [
+              "worn"
+            ]
+          },
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThank you for letting me know. Since the item has been worn, it doesn’t qualify for a standard exchange based on our condition policy. However, a Support Expert can take a closer look at your request. Please select “Request a Support Expert” below and I’ll make sure your concern is saved for their review.",
+          "decision_response": "You mentioned that this item has been worn. I’m sorry, this item cannot be automatically approved for a standard return or exchange under the item-condition rules. A Support Expert can review your request. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "actual_intent": "used_item_return",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": false,
+      "outcome_correct": true,
+      "success": false,
+      "suite": "fresh"
+    }
+  ]
+}

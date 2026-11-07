@@ -3,10 +3,13 @@ import argparse
 import json
 from datetime import date
 from agent import load
+from dataset import DEFAULT_DATE, order_as_of
 
 def updates(as_of):
     result=[]
-    for order in load('orders'):
+    for record in load('orders'):
+        order=order_as_of(record,as_of)
+        if order is None:continue
         status=order['Order_Status']
         promised=date.fromisoformat(order['Promised_Delivery'][:10])
         if status in ['Cancelled','Delivered']:continue
@@ -22,5 +25,5 @@ def updates(as_of):
     return result
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--date',default='2026-09-17');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--date',default=DEFAULT_DATE.isoformat());args=p.parse_args()
     print(json.dumps({'as_of':args.date,'preview_only':True,'updates':updates(date.fromisoformat(args.date))},indent=2))

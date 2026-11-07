@@ -1,0 +1,1309 @@
+{
+  "metadata": {
+    "mode": "OpenAI",
+    "model": "gpt-4.1-mini",
+    "agent_sha256": "a2f1620b8204a5fbe19c0bc47b927a21d095877ba0b49bb9338a3f36b843edd7",
+    "dataset_sha256": "2e547871d0aa33740fc189f84f69e5799df3468e37892aba3f46d43bb3a41fe1",
+    "orders_sha256": "bcc7fb4036183ab7a879beed5d97aef25d13df4da90485b3439ee9c33284e5a3",
+    "catalogue_sha256": "342c231b789ad5fb5d24b494ef929d23432cd0b94cfd809516a1030129287991",
+    "policy_sha256": "11c1eb59dad36466a0284ea5191e08d2478ffcf810f9ad110d5aee8536ef38db",
+    "taxonomy_sha256": "25b97c5ab123924241fc4815f94cd1638861e0da242fe8c7f5807c3af971beac",
+    "date_projection_sha256": "da8ea4d108c181b3f862ebec872724b70a47e5c9de356372750b652548796207",
+    "runner_sha256": "2c81cdc4a1647c650c5c3685c606f1cd3b47222897bd1c2f2b725c3f581eb1bb",
+    "planned_cases": 600,
+    "shadow_enabled": false,
+    "started_utc": "2026-11-06T21:57:47.218700+00:00"
+  },
+  "finished_utc": "2026-11-06T22:00:43.556413+00:00",
+  "overall": {
+    "count": 600,
+    "completed_without_api_error": 600,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 585,
+      "total": 600,
+      "percent": 97.5
+    },
+    "outcome_accuracy": {
+      "passed": 587,
+      "total": 600,
+      "percent": 97.83
+    },
+    "strict_success": {
+      "passed": 585,
+      "total": 600,
+      "percent": 97.5
+    },
+    "escalation_agreement": {
+      "passed": 587,
+      "total": 600,
+      "percent": 97.83
+    },
+    "tokens": {
+      "input_tokens": 384770,
+      "output_tokens": 48977,
+      "requests": 1218
+    },
+    "mock_confirmations": {
+      "attempted": 334,
+      "passed": 334
+    }
+  },
+  "by_split": {
+    "challenge": {
+      "count": 200,
+      "completed_without_api_error": 200,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 196,
+        "total": 200,
+        "percent": 98.0
+      },
+      "outcome_accuracy": {
+        "passed": 196,
+        "total": 200,
+        "percent": 98.0
+      },
+      "strict_success": {
+        "passed": 196,
+        "total": 200,
+        "percent": 98.0
+      },
+      "escalation_agreement": {
+        "passed": 196,
+        "total": 200,
+        "percent": 98.0
+      },
+      "tokens": {
+        "input_tokens": 131032,
+        "output_tokens": 15944,
+        "requests": 418
+      },
+      "mock_confirmations": {
+        "attempted": 86,
+        "passed": 86
+      }
+    },
+    "reserve": {
+      "count": 100,
+      "completed_without_api_error": 100,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 98,
+        "total": 100,
+        "percent": 98.0
+      },
+      "outcome_accuracy": {
+        "passed": 100,
+        "total": 100,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 98,
+        "total": 100,
+        "percent": 98.0
+      },
+      "escalation_agreement": {
+        "passed": 100,
+        "total": 100,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 63949,
+        "output_tokens": 8278,
+        "requests": 200
+      },
+      "mock_confirmations": {
+        "attempted": 67,
+        "passed": 67
+      }
+    },
+    "test": {
+      "count": 300,
+      "completed_without_api_error": 300,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 291,
+        "total": 300,
+        "percent": 97.0
+      },
+      "outcome_accuracy": {
+        "passed": 291,
+        "total": 300,
+        "percent": 97.0
+      },
+      "strict_success": {
+        "passed": 291,
+        "total": 300,
+        "percent": 97.0
+      },
+      "escalation_agreement": {
+        "passed": 291,
+        "total": 300,
+        "percent": 97.0
+      },
+      "tokens": {
+        "input_tokens": 189789,
+        "output_tokens": 24755,
+        "requests": 600
+      },
+      "mock_confirmations": {
+        "attempted": 181,
+        "passed": 181
+      }
+    }
+  },
+  "by_intent": {
+    "cancel_order": {
+      "count": 54,
+      "completed_without_api_error": 54,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 54,
+        "total": 54,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 29010,
+        "output_tokens": 3385,
+        "requests": 108
+      },
+      "mock_confirmations": {
+        "attempted": 17,
+        "passed": 17
+      }
+    },
+    "damaged_item": {
+      "count": 38,
+      "completed_without_api_error": 38,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 36,
+        "total": 38,
+        "percent": 94.74
+      },
+      "outcome_accuracy": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 36,
+        "total": 38,
+        "percent": 94.74
+      },
+      "escalation_agreement": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 24495,
+        "output_tokens": 3819,
+        "requests": 76
+      },
+      "mock_confirmations": {
+        "attempted": 38,
+        "passed": 38
+      }
+    },
+    "delivered_not_received": {
+      "count": 21,
+      "completed_without_api_error": 21,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 21,
+        "total": 21,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 14433,
+        "output_tokens": 1966,
+        "requests": 42
+      },
+      "mock_confirmations": {
+        "attempted": 21,
+        "passed": 21
+      }
+    },
+    "delivery_delay": {
+      "count": 44,
+      "completed_without_api_error": 44,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 44,
+        "total": 44,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 28098,
+        "output_tokens": 4302,
+        "requests": 88
+      },
+      "mock_confirmations": {
+        "attempted": 44,
+        "passed": 44
+      }
+    },
+    "exchange_color": {
+      "count": 32,
+      "completed_without_api_error": 32,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 32,
+        "total": 32,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 21200,
+        "output_tokens": 2063,
+        "requests": 64
+      },
+      "mock_confirmations": {
+        "attempted": 17,
+        "passed": 17
+      }
+    },
+    "exchange_size": {
+      "count": 37,
+      "completed_without_api_error": 37,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 31768,
+        "output_tokens": 3139,
+        "requests": 92
+      },
+      "mock_confirmations": {
+        "attempted": 18,
+        "passed": 18
+      }
+    },
+    "fit_issue": {
+      "count": 15,
+      "completed_without_api_error": 15,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 15,
+        "total": 15,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 10028,
+        "output_tokens": 1183,
+        "requests": 30
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "missing_item": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 10530,
+        "output_tokens": 1371,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "order_tracking": {
+      "count": 150,
+      "completed_without_api_error": 150,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 150,
+        "total": 150,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 93290,
+        "output_tokens": 11168,
+        "requests": 300
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "price_adjustment": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 9546,
+        "output_tokens": 1236,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "quality_issue": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 12140,
+        "output_tokens": 1824,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "refund_status": {
+      "count": 16,
+      "completed_without_api_error": 16,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 16,
+        "total": 16,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 9574,
+        "output_tokens": 1297,
+        "requests": 32
+      },
+      "mock_confirmations": {
+        "attempted": 16,
+        "passed": 16
+      }
+    },
+    "return_outside_window": {
+      "count": 36,
+      "completed_without_api_error": 36,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 36,
+        "total": 36,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 22806,
+        "output_tokens": 3097,
+        "requests": 72
+      },
+      "mock_confirmations": {
+        "attempted": 36,
+        "passed": 36
+      }
+    },
+    "return_request": {
+      "count": 38,
+      "completed_without_api_error": 38,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 38,
+        "total": 38,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 23776,
+        "output_tokens": 3023,
+        "requests": 76
+      },
+      "mock_confirmations": {
+        "attempted": 38,
+        "passed": 38
+      }
+    },
+    "unknown": {
+      "count": 17,
+      "completed_without_api_error": 17,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 17,
+        "total": 17,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 10203,
+        "output_tokens": 1112,
+        "requests": 34
+      },
+      "mock_confirmations": {
+        "attempted": 0,
+        "passed": 0
+      }
+    },
+    "used_item_return": {
+      "count": 17,
+      "completed_without_api_error": 17,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 4,
+        "total": 17,
+        "percent": 23.53
+      },
+      "outcome_accuracy": {
+        "passed": 4,
+        "total": 17,
+        "percent": 23.53
+      },
+      "strict_success": {
+        "passed": 4,
+        "total": 17,
+        "percent": 23.53
+      },
+      "escalation_agreement": {
+        "passed": 4,
+        "total": 17,
+        "percent": 23.53
+      },
+      "tokens": {
+        "input_tokens": 10430,
+        "output_tokens": 1368,
+        "requests": 34
+      },
+      "mock_confirmations": {
+        "attempted": 4,
+        "passed": 4
+      }
+    },
+    "wrong_item": {
+      "count": 37,
+      "completed_without_api_error": 37,
+      "api_failures": 0,
+      "intent_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "outcome_accuracy": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "strict_success": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "escalation_agreement": {
+        "passed": 37,
+        "total": 37,
+        "percent": 100.0
+      },
+      "tokens": {
+        "input_tokens": 23443,
+        "output_tokens": 3624,
+        "requests": 74
+      },
+      "mock_confirmations": {
+        "attempted": 37,
+        "passed": 37
+      }
+    }
+  },
+  "failures": [
+    {
+      "id": "CONV-TEST-0047",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. ORD-20407",
+      "order_id": "ORD-20407",
+      "customer_id": "CUST-2026-0139",
+      "as_of": "2026-11-15",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 77,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. ORD-20407",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about returning your item. To proceed with your return, please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags attached. This information will help us move forward with your request.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.07
+    },
+    {
+      "id": "CONV-TEST-0076",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. ORD-20436",
+      "order_id": "ORD-20436",
+      "customer_id": "CUST-2026-0151",
+      "as_of": "2026-10-16",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 76,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. ORD-20436",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your return. To move forward, could you please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags? This will help us check if your return fits the policy.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 1.85
+    },
+    {
+      "id": "CONV-TEST-0105",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. ORD-20465",
+      "order_id": "ORD-20465",
+      "customer_id": "CUST-2026-0158",
+      "as_of": "2026-12-23",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 82,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. ORD-20465",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your order ORD-20465. To help with your return, please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags attached. Once you confirm, we can guide you through the next steps.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.14
+    },
+    {
+      "id": "CONV-TEST-0138",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20378",
+      "order_id": "ORD-20378",
+      "customer_id": "CUST-2026-0132",
+      "as_of": "2026-12-14",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 70,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20378",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your return. Could you please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags? This will help us move forward with your request.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.19
+    },
+    {
+      "id": "CONV-TEST-0167",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20407",
+      "order_id": "ORD-20407",
+      "customer_id": "CUST-2026-0139",
+      "as_of": "2026-11-15",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 81,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20407",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your order ORD-20407. To help with your return, please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags attached. This is needed to make sure it meets the return guidelines.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.02
+    },
+    {
+      "id": "CONV-TEST-0196",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20436",
+      "order_id": "ORD-20436",
+      "customer_id": "CUST-2026-0151",
+      "as_of": "2026-10-16",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 81,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20436",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your recent purchase, ORD-20436. To help with your return, could you please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags? This will help us proceed with your request.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.16
+    },
+    {
+      "id": "CONV-TEST-0225",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20465",
+      "order_id": "ORD-20465",
+      "customer_id": "CUST-2026-0158",
+      "as_of": "2026-12-23",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 620,
+        "output_tokens": 82,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. I am contacting you about my recent purchase. ORD-20465",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your order ORD-20465. Before we can proceed with your return, could you please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags? This will help us move forward with your request.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.53
+    },
+    {
+      "id": "CONV-TEST-0258",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. Please explain the next step. ORD-20378",
+      "order_id": "ORD-20378",
+      "customer_id": "CUST-2026-0132",
+      "as_of": "2026-12-14",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 72,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. Please explain the next step. ORD-20378",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out. Before we can proceed, please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags attached. That will help us guide you on the next steps.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.2
+    },
+    {
+      "id": "CONV-TEST-0287",
+      "split": "test",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Standard policy scenario",
+      "message": "I have worn it once and want to send it back. Please explain the next step. ORD-20407",
+      "order_id": "ORD-20407",
+      "customer_id": "CUST-2026-0139",
+      "as_of": "2026-11-15",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 78,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "I have worn it once and want to send it back. Please explain the next step. ORD-20407",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your return. To move forward, please confirm that the item is unworn, unwashed, unaltered, unstained, and still has its original tags attached. Once I have that information, I can guide you on the next steps.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.03
+    },
+    {
+      "id": "CONV-CHALLENGE-0018",
+      "split": "challenge",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Removed tags already, can I still return? ORD-20498",
+      "order_id": "ORD-20498",
+      "customer_id": "CUST-2026-0172",
+      "as_of": "2026-12-19",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 541,
+        "output_tokens": 101,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Removed tags already, can I still return? ORD-20498",
+          "intent": "return_outside_window",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your return. To proceed, could you please confirm that your item is unworn, unwashed, unaltered, and unstained? Also, since the original tags are required for returns, please let us know if you still have them or if they've been removed. Once I have that information, I can help guide you on the next steps.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_outside_window",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 1.95
+    },
+    {
+      "id": "CONV-CHALLENGE-0047",
+      "split": "challenge",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Removed tags already, can I still return? ORD-20527",
+      "order_id": "ORD-20527",
+      "customer_id": "CUST-2026-0179",
+      "as_of": "2026-11-23",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 541,
+        "output_tokens": 76,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Removed tags already, can I still return? ORD-20527",
+          "intent": "return_outside_window",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThanks for reaching out about your return. To proceed, could you please confirm that the item is unworn, unwashed, unaltered, unstained, and has its original tags? This will help us determine if the return can be accepted.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_outside_window",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 1.72
+    },
+    {
+      "id": "CONV-CHALLENGE-0148",
+      "split": "challenge",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Removed tags already, can I still return? Please explain the next step. ORD-20498",
+      "order_id": "ORD-20498",
+      "customer_id": "CUST-2026-0172",
+      "as_of": "2026-12-19",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 608,
+        "output_tokens": 64,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Removed tags already, can I still return? Please explain the next step. ORD-20498",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nSince the original tags have been removed, please confirm whether the item is still unworn, unwashed, unaltered, and unstained. This will help determine the next step for your return.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 5.47
+    },
+    {
+      "id": "CONV-CHALLENGE-0177",
+      "split": "challenge",
+      "use_case": "Returns",
+      "variant": "Washed / tags removed",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Removed tags already, can I still return? Please explain the next step. ORD-20527",
+      "order_id": "ORD-20527",
+      "customer_id": "CUST-2026-0179",
+      "as_of": "2026-11-23",
+      "expected_intent": "used_item_return",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 608,
+        "output_tokens": 85,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Removed tags already, can I still return? Please explain the next step. ORD-20527",
+          "intent": "return_request",
+          "status": "needs_information",
+          "pending": null,
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThank you for reaching out. Since the original tags are removed, the item likely cannot meet the return condition requirements. Please confirm if the item is unworn, unwashed, unaltered, and unstained. Once we have this information, a Support Expert can guide you on what to do next.",
+          "decision_response": "Please confirm below that the item is unworn, unwashed, unaltered, unstained and has its original tags."
+        }
+      ],
+      "confirmation_ok": null,
+      "actual_intent": "return_request",
+      "actual_status": "needs_information",
+      "actual_pending": null,
+      "intent_correct": false,
+      "outcome_correct": false,
+      "escalation_correct": false,
+      "strict_success": false,
+      "elapsed_seconds": 2.48
+    },
+    {
+      "id": "CONV-RESERVE-0039",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Reported promptly",
+      "test_kind": "Standard policy scenario",
+      "message": "A tear was visible before I tried the garment on. ORD-20584",
+      "order_id": "ORD-20584",
+      "customer_id": "CUST-2026-0198",
+      "as_of": "2026-12-03",
+      "expected_intent": "damaged_item",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 741,
+        "output_tokens": 110,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "A tear was visible before I tried the garment on. ORD-20584",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI'm sorry to hear the garment arrived with a tear. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can't upload a photo right now, you can still request help. While I can't approve a replacement here, I can help you request a review by a Support Expert. Just select \"Request a Support Expert\" below, and I will save your concern for their review.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": false,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": false,
+      "elapsed_seconds": 2.52
+    },
+    {
+      "id": "CONV-RESERVE-0094",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Reported promptly",
+      "test_kind": "Standard policy scenario",
+      "message": "A tear was visible before I tried the garment on. I am contacting you about my recent purchase. ORD-20584",
+      "order_id": "ORD-20584",
+      "customer_id": "CUST-2026-0198",
+      "as_of": "2026-12-03",
+      "expected_intent": "damaged_item",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 759,
+        "output_tokens": 92,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "A tear was visible before I tried the garment on. I am contacting you about my recent purchase. ORD-20584",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with a tear. Please upload a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still ask for help. You can select “Request a Support Expert” below, and they will take a closer look at your concern.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": false,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": false,
+      "elapsed_seconds": 2.56
+    }
+  ],
+  "limits": "Expected intent/status/action agreement, plus local mock confirmation. Response tone and factual grounding require manual review. No live carrier, payment, refund or hosted-site integration is tested. API-error cases count as failures."
+}

@@ -1,0 +1,1074 @@
+[
+  {
+    "Customer_ID": "CUST-303A166EA2",
+    "Name": "Meera",
+    "City": "Pune",
+    "Email": "meera18@example.test",
+    "Phone": "+91-989719140",
+    "Member_Since": "2026-07-01"
+  },
+  {
+    "Customer_ID": "CUST-11612C1FF9",
+    "Name": "Neha",
+    "City": "Hyderabad",
+    "Email": "neha95@example.test",
+    "Phone": "+91-923940511",
+    "Member_Since": "2026-07-01"
+  },
+  {
+    "Customer_ID": "CUST-5837DB72A5",
+    "Name": "Riya",
+    "City": "Jaipur",
+    "Email": "riya54@example.test",
+    "Phone": "+91-936989057",
+    "Member_Since": "2026-07-01"
+  },
+  {
+    "Customer_ID": "CUST-6A6E4B51D3",
+    "Name": "Karan",
+    "City": "Noida",
+    "Email": "karan77@example.test",
+    "Phone": "+91-971366077",
+    "Member_Since": "2026-07-01"
+  },
+  {
+    "Customer_ID": "CUST-C75D91C23E",
+    "Name": "Tara",
+    "City": "Chennai",
+    "Email": "tara41@example.test",
+    "Phone": "+91-989613954",
+    "Member_Since": "2026-07-02"
+  },
+  {
+    "Customer_ID": "CUST-53EAB966C9",
+    "Name": "Dev",
+    "City": "Kolkata",
+    "Email": "dev57@example.test",
+    "Phone": "+91-958311137",
+    "Member_Since": "2026-07-02"
+  },
+  {
+    "Customer_ID": "CUST-D5149D6200",
+    "Name": "Dev",
+    "City": "Noida",
+    "Email": "dev48@example.test",
+    "Phone": "+91-943293088",
+    "Member_Since": "2026-07-02"
+  },
+  {
+    "Customer_ID": "CUST-FE1E19351F",
+    "Name": "Riya",
+    "City": "Chennai",
+    "Email": "riya37@example.test",
+    "Phone": "+91-967083273",
+    "Member_Since": "2026-07-02"
+  },
+  {
+    "Customer_ID": "CUST-A1CE25820B",
+    "Name": "Kabir",
+    "City": "Gurugram",
+    "Email": "kabir63@example.test",
+    "Phone": "+91-961854656",
+    "Member_Since": "2026-07-02"
+  },
+  {
+    "Customer_ID": "CUST-C1A79461C7",
+    "Name": "Sahil",
+    "City": "Pune",
+    "Email": "sahil86@example.test",
+    "Phone": "+91-913983135",
+    "Member_Since": "2026-07-03"
+  },
+  {
+    "Customer_ID": "CUST-3EDA43ACFA",
+    "Name": "Sneha",
+    "City": "Jaipur",
+    "Email": "sneha87@example.test",
+    "Phone": "+91-935636092",
+    "Member_Since": "2026-07-03"
+  },
+  {
+    "Customer_ID": "CUST-F66EC3A340",
+    "Name": "Aarav",
+    "City": "Bengaluru",
+    "Email": "aarav28@example.test",
+    "Phone": "+91-981226949",
+    "Member_Since": "2026-07-03"
+  },
+  {
+    "Customer_ID": "CUST-F89265B403",
+    "Name": "Pooja",
+    "City": "Kolkata",
+    "Email": "pooja48@example.test",
+    "Phone": "+91-972594676",
+    "Member_Since": "2026-07-04"
+  },
+  {
+    "Customer_ID": "CUST-C7CA0D552A",
+    "Name": "Aarav",
+    "City": "Chennai",
+    "Email": "aarav87@example.test",
+    "Phone": "+91-997053023",
+    "Member_Since": "2026-07-04"
+  },
+  {
+    "Customer_ID": "CUST-221399C644",
+    "Name": "Rohan",
+    "City": "Chennai",
+    "Email": "rohan97@example.test",
+    "Phone": "+91-984710008",
+    "Member_Since": "2026-07-04"
+  },
+  {
+    "Customer_ID": "CUST-71201A21C4",
+    "Name": "Diya",
+    "City": "Jaipur",
+    "Email": "diya67@example.test",
+    "Phone": "+91-965945790",
+    "Member_Since": "2026-07-04"
+  },
+  {
+    "Customer_ID": "CUST-8C18AA16A6",
+    "Name": "Nisha",
+    "City": "Mumbai",
+    "Email": "nisha86@example.test",
+    "Phone": "+91-912680862",
+    "Member_Since": "2026-07-05"
+  },
+  {
+    "Customer_ID": "CUST-40A99E4D47",
+    "Name": "Dev",
+    "City": "Mumbai",
+    "Email": "dev70@example.test",
+    "Phone": "+91-951111157",
+    "Member_Since": "2026-07-06"
+  },
+  {
+    "Customer_ID": "CUST-64092A3DF3",
+    "Name": "Tara",
+    "City": "Hyderabad",
+    "Email": "tara81@example.test",
+    "Phone": "+91-991144951",
+    "Member_Since": "2026-07-06"
+  },
+  {
+    "Customer_ID": "CUST-1A74F463CC",
+    "Name": "Sahil",
+    "City": "Gurugram",
+    "Email": "sahil59@example.test",
+    "Phone": "+91-972586774",
+    "Member_Since": "2026-07-06"
+  },
+  {
+    "Customer_ID": "CUST-FB71E53CE5",
+    "Name": "Tara",
+    "City": "Pune",
+    "Email": "tara16@example.test",
+    "Phone": "+91-916172496",
+    "Member_Since": "2026-07-07"
+  },
+  {
+    "Customer_ID": "CUST-FEC3197011",
+    "Name": "Ananya",
+    "City": "Hyderabad",
+    "Email": "ananya46@example.test",
+    "Phone": "+91-985222060",
+    "Member_Since": "2026-07-08"
+  },
+  {
+    "Customer_ID": "CUST-49C86E4139",
+    "Name": "Aditi",
+    "City": "Kolkata",
+    "Email": "aditi77@example.test",
+    "Phone": "+91-905452431",
+    "Member_Since": "2026-07-08"
+  },
+  {
+    "Customer_ID": "CUST-E53EB8DA74",
+    "Name": "Neha",
+    "City": "Gurugram",
+    "Email": "neha75@example.test",
+    "Phone": "+91-968630937",
+    "Member_Since": "2026-07-08"
+  },
+  {
+    "Customer_ID": "CUST-7B55157215",
+    "Name": "Arjun",
+    "City": "Gurugram",
+    "Email": "arjun44@example.test",
+    "Phone": "+91-970544934",
+    "Member_Since": "2026-07-09"
+  },
+  {
+    "Customer_ID": "CUST-4E507BF876",
+    "Name": "Ishita",
+    "City": "Gurugram",
+    "Email": "ishita61@example.test",
+    "Phone": "+91-923963871",
+    "Member_Since": "2026-07-09"
+  },
+  {
+    "Customer_ID": "CUST-70123A986D",
+    "Name": "Arjun",
+    "City": "Chennai",
+    "Email": "arjun72@example.test",
+    "Phone": "+91-918790260",
+    "Member_Since": "2026-07-09"
+  },
+  {
+    "Customer_ID": "CUST-02D62294D2",
+    "Name": "Sneha",
+    "City": "Hyderabad",
+    "Email": "sneha77@example.test",
+    "Phone": "+91-973099221",
+    "Member_Since": "2026-07-10"
+  },
+  {
+    "Customer_ID": "CUST-B691422D16",
+    "Name": "Riya",
+    "City": "Delhi",
+    "Email": "riya69@example.test",
+    "Phone": "+91-969607508",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-7859871572",
+    "Name": "Sneha",
+    "City": "Pune",
+    "Email": "sneha15@example.test",
+    "Phone": "+91-967411571",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-F11BAC1BA3",
+    "Name": "Ananya",
+    "City": "Jaipur",
+    "Email": "ananya21@example.test",
+    "Phone": "+91-905728497",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-44C3BD22BE",
+    "Name": "Neha",
+    "City": "Noida",
+    "Email": "neha65@example.test",
+    "Phone": "+91-942242803",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-A42F275714",
+    "Name": "Ishita",
+    "City": "Delhi",
+    "Email": "ishita66@example.test",
+    "Phone": "+91-927361779",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-A33BC68186",
+    "Name": "Vikram",
+    "City": "Kolkata",
+    "Email": "vikram78@example.test",
+    "Phone": "+91-920204585",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-C7D1AF6651",
+    "Name": "Nisha",
+    "City": "Pune",
+    "Email": "nisha68@example.test",
+    "Phone": "+91-905136326",
+    "Member_Since": "2026-07-11"
+  },
+  {
+    "Customer_ID": "CUST-221687D857",
+    "Name": "Nisha",
+    "City": "Chennai",
+    "Email": "nisha91@example.test",
+    "Phone": "+91-901557682",
+    "Member_Since": "2026-07-12"
+  },
+  {
+    "Customer_ID": "CUST-8DFFDE8D5D",
+    "Name": "Aarav",
+    "City": "Hyderabad",
+    "Email": "aarav58@example.test",
+    "Phone": "+91-966818571",
+    "Member_Since": "2026-07-12"
+  },
+  {
+    "Customer_ID": "CUST-B1387B4058",
+    "Name": "Rahul",
+    "City": "Bengaluru",
+    "Email": "rahul56@example.test",
+    "Phone": "+91-948484987",
+    "Member_Since": "2026-07-12"
+  },
+  {
+    "Customer_ID": "CUST-C3843E064C",
+    "Name": "Karan",
+    "City": "Gurugram",
+    "Email": "karan43@example.test",
+    "Phone": "+91-966979332",
+    "Member_Since": "2026-07-12"
+  },
+  {
+    "Customer_ID": "CUST-7C73BC6156",
+    "Name": "Riya",
+    "City": "Gurugram",
+    "Email": "riya76@example.test",
+    "Phone": "+91-998193061",
+    "Member_Since": "2026-07-13"
+  },
+  {
+    "Customer_ID": "CUST-87C283DE8A",
+    "Name": "Aditi",
+    "City": "Noida",
+    "Email": "aditi67@example.test",
+    "Phone": "+91-985762588",
+    "Member_Since": "2026-07-13"
+  },
+  {
+    "Customer_ID": "CUST-68BE034C57",
+    "Name": "Neha",
+    "City": "Bengaluru",
+    "Email": "neha12@example.test",
+    "Phone": "+91-919954379",
+    "Member_Since": "2026-07-13"
+  },
+  {
+    "Customer_ID": "CUST-255C12BA1A",
+    "Name": "Ananya",
+    "City": "Kolkata",
+    "Email": "ananya28@example.test",
+    "Phone": "+91-956643246",
+    "Member_Since": "2026-07-14"
+  },
+  {
+    "Customer_ID": "CUST-E5FAB977B1",
+    "Name": "Ishita",
+    "City": "Jaipur",
+    "Email": "ishita52@example.test",
+    "Phone": "+91-937983572",
+    "Member_Since": "2026-07-14"
+  },
+  {
+    "Customer_ID": "CUST-607F6A11FF",
+    "Name": "Karan",
+    "City": "Mumbai",
+    "Email": "karan48@example.test",
+    "Phone": "+91-937183786",
+    "Member_Since": "2026-07-14"
+  },
+  {
+    "Customer_ID": "CUST-2074592A90",
+    "Name": "Vikram",
+    "City": "Pune",
+    "Email": "vikram67@example.test",
+    "Phone": "+91-955268564",
+    "Member_Since": "2026-07-15"
+  },
+  {
+    "Customer_ID": "CUST-893894DD5D",
+    "Name": "Diya",
+    "City": "Mumbai",
+    "Email": "diya63@example.test",
+    "Phone": "+91-911254761",
+    "Member_Since": "2026-07-15"
+  },
+  {
+    "Customer_ID": "CUST-E854580350",
+    "Name": "Diya",
+    "City": "Bengaluru",
+    "Email": "diya67@example.test",
+    "Phone": "+91-916897174",
+    "Member_Since": "2026-07-16"
+  },
+  {
+    "Customer_ID": "CUST-A50CCDDB7D",
+    "Name": "Ananya",
+    "City": "Mumbai",
+    "Email": "ananya27@example.test",
+    "Phone": "+91-903821149",
+    "Member_Since": "2026-07-16"
+  },
+  {
+    "Customer_ID": "CUST-0969A3E810",
+    "Name": "Sneha",
+    "City": "Delhi",
+    "Email": "sneha71@example.test",
+    "Phone": "+91-945646021",
+    "Member_Since": "2026-07-16"
+  },
+  {
+    "Customer_ID": "CUST-C8EE34DD4B",
+    "Name": "Aditi",
+    "City": "Mumbai",
+    "Email": "aditi53@example.test",
+    "Phone": "+91-907550345",
+    "Member_Since": "2026-07-16"
+  },
+  {
+    "Customer_ID": "CUST-09DABFE491",
+    "Name": "Ishita",
+    "City": "Kolkata",
+    "Email": "ishita75@example.test",
+    "Phone": "+91-961939083",
+    "Member_Since": "2026-07-16"
+  },
+  {
+    "Customer_ID": "CUST-77F4F13746",
+    "Name": "Rohan",
+    "City": "Noida",
+    "Email": "rohan72@example.test",
+    "Phone": "+91-903277449",
+    "Member_Since": "2026-07-17"
+  },
+  {
+    "Customer_ID": "CUST-8BFEC7C7C4",
+    "Name": "Rohan",
+    "City": "Kolkata",
+    "Email": "rohan28@example.test",
+    "Phone": "+91-918014180",
+    "Member_Since": "2026-07-17"
+  },
+  {
+    "Customer_ID": "CUST-71202E5C3F",
+    "Name": "Rahul",
+    "City": "Noida",
+    "Email": "rahul58@example.test",
+    "Phone": "+91-973235017",
+    "Member_Since": "2026-07-18"
+  },
+  {
+    "Customer_ID": "CUST-7CEF2F7652",
+    "Name": "Aditi",
+    "City": "Gurugram",
+    "Email": "aditi99@example.test",
+    "Phone": "+91-997610604",
+    "Member_Since": "2026-07-18"
+  },
+  {
+    "Customer_ID": "CUST-77B047148A",
+    "Name": "Meera",
+    "City": "Mumbai",
+    "Email": "meera59@example.test",
+    "Phone": "+91-981019902",
+    "Member_Since": "2026-07-18"
+  },
+  {
+    "Customer_ID": "CUST-72EF2D2165",
+    "Name": "Riya",
+    "City": "Mumbai",
+    "Email": "riya10@example.test",
+    "Phone": "+91-973325979",
+    "Member_Since": "2026-07-19"
+  },
+  {
+    "Customer_ID": "CUST-5430A3B0DE",
+    "Name": "Nisha",
+    "City": "Gurugram",
+    "Email": "nisha55@example.test",
+    "Phone": "+91-956568769",
+    "Member_Since": "2026-07-20"
+  },
+  {
+    "Customer_ID": "CUST-EA86252506",
+    "Name": "Diya",
+    "City": "Kolkata",
+    "Email": "diya24@example.test",
+    "Phone": "+91-971147067",
+    "Member_Since": "2026-07-20"
+  },
+  {
+    "Customer_ID": "CUST-E74F1B65D4",
+    "Name": "Pooja",
+    "City": "Jaipur",
+    "Email": "pooja15@example.test",
+    "Phone": "+91-920835491",
+    "Member_Since": "2026-07-20"
+  },
+  {
+    "Customer_ID": "CUST-C9E6A1C87F",
+    "Name": "Ananya",
+    "City": "Delhi",
+    "Email": "ananya23@example.test",
+    "Phone": "+91-946737610",
+    "Member_Since": "2026-07-22"
+  },
+  {
+    "Customer_ID": "CUST-953A9F8CE9",
+    "Name": "Sneha",
+    "City": "Bengaluru",
+    "Email": "sneha44@example.test",
+    "Phone": "+91-969134448",
+    "Member_Since": "2026-07-22"
+  },
+  {
+    "Customer_ID": "CUST-4BED0AB1B1",
+    "Name": "Neha",
+    "City": "Delhi",
+    "Email": "neha86@example.test",
+    "Phone": "+91-905588729",
+    "Member_Since": "2026-07-23"
+  },
+  {
+    "Customer_ID": "CUST-BBC664B417",
+    "Name": "Sahil",
+    "City": "Jaipur",
+    "Email": "sahil47@example.test",
+    "Phone": "+91-937566999",
+    "Member_Since": "2026-07-23"
+  },
+  {
+    "Customer_ID": "CUST-DD5EFD8AC4",
+    "Name": "Tara",
+    "City": "Noida",
+    "Email": "tara29@example.test",
+    "Phone": "+91-937945830",
+    "Member_Since": "2026-07-23"
+  },
+  {
+    "Customer_ID": "CUST-A4AA784BEC",
+    "Name": "Rahul",
+    "City": "Chennai",
+    "Email": "rahul93@example.test",
+    "Phone": "+91-927985417",
+    "Member_Since": "2026-07-24"
+  },
+  {
+    "Customer_ID": "CUST-268DB985AF",
+    "Name": "Rohan",
+    "City": "Delhi",
+    "Email": "rohan50@example.test",
+    "Phone": "+91-965296921",
+    "Member_Since": "2026-07-25"
+  },
+  {
+    "Customer_ID": "CUST-2DC8E45538",
+    "Name": "Arjun",
+    "City": "Noida",
+    "Email": "arjun90@example.test",
+    "Phone": "+91-962179472",
+    "Member_Since": "2026-07-26"
+  },
+  {
+    "Customer_ID": "CUST-DA1B385CC6",
+    "Name": "Riya",
+    "City": "Kolkata",
+    "Email": "riya16@example.test",
+    "Phone": "+91-918766599",
+    "Member_Since": "2026-07-27"
+  },
+  {
+    "Customer_ID": "CUST-DD3B11F51F",
+    "Name": "Meera",
+    "City": "Jaipur",
+    "Email": "meera24@example.test",
+    "Phone": "+91-910961818",
+    "Member_Since": "2026-07-27"
+  },
+  {
+    "Customer_ID": "CUST-C00BAC13C5",
+    "Name": "Sahil",
+    "City": "Noida",
+    "Email": "sahil54@example.test",
+    "Phone": "+91-998942407",
+    "Member_Since": "2026-07-28"
+  },
+  {
+    "Customer_ID": "CUST-C60372201E",
+    "Name": "Sahil",
+    "City": "Chennai",
+    "Email": "sahil76@example.test",
+    "Phone": "+91-975207041",
+    "Member_Since": "2026-07-29"
+  },
+  {
+    "Customer_ID": "CUST-F4BC1E301C",
+    "Name": "Arjun",
+    "City": "Jaipur",
+    "Email": "arjun49@example.test",
+    "Phone": "+91-944188687",
+    "Member_Since": "2026-07-29"
+  },
+  {
+    "Customer_ID": "CUST-C4E297B94E",
+    "Name": "Riya",
+    "City": "Pune",
+    "Email": "riya45@example.test",
+    "Phone": "+91-954075057",
+    "Member_Since": "2026-07-29"
+  },
+  {
+    "Customer_ID": "CUST-AC38EA512B",
+    "Name": "Kabir",
+    "City": "Bengaluru",
+    "Email": "kabir16@example.test",
+    "Phone": "+91-900455031",
+    "Member_Since": "2026-07-30"
+  },
+  {
+    "Customer_ID": "CUST-44332D8B8B",
+    "Name": "Ishita",
+    "City": "Chennai",
+    "Email": "ishita30@example.test",
+    "Phone": "+91-944194222",
+    "Member_Since": "2026-07-30"
+  },
+  {
+    "Customer_ID": "CUST-00EC7DF28B",
+    "Name": "Karan",
+    "City": "Kolkata",
+    "Email": "karan51@example.test",
+    "Phone": "+91-948950510",
+    "Member_Since": "2026-07-30"
+  },
+  {
+    "Customer_ID": "CUST-AB07BB5F27",
+    "Name": "Ananya",
+    "City": "Bengaluru",
+    "Email": "ananya94@example.test",
+    "Phone": "+91-901285163",
+    "Member_Since": "2026-07-31"
+  },
+  {
+    "Customer_ID": "CUST-066D648623",
+    "Name": "Neha",
+    "City": "Mumbai",
+    "Email": "neha31@example.test",
+    "Phone": "+91-998111472",
+    "Member_Since": "2026-07-31"
+  },
+  {
+    "Customer_ID": "CUST-345475DC07",
+    "Name": "Rohan",
+    "City": "Gurugram",
+    "Email": "rohan97@example.test",
+    "Phone": "+91-989230396",
+    "Member_Since": "2026-07-31"
+  },
+  {
+    "Customer_ID": "CUST-E0F8681E6C",
+    "Name": "Pooja",
+    "City": "Chennai",
+    "Email": "pooja72@example.test",
+    "Phone": "+91-936980619",
+    "Member_Since": "2026-08-01"
+  },
+  {
+    "Customer_ID": "CUST-F87E47F97F",
+    "Name": "Riya",
+    "City": "Bengaluru",
+    "Email": "riya47@example.test",
+    "Phone": "+91-933326654",
+    "Member_Since": "2026-08-01"
+  },
+  {
+    "Customer_ID": "CUST-99C2DC487B",
+    "Name": "Sahil",
+    "City": "Kolkata",
+    "Email": "sahil26@example.test",
+    "Phone": "+91-931203271",
+    "Member_Since": "2026-08-03"
+  },
+  {
+    "Customer_ID": "CUST-3B8EA5B270",
+    "Name": "Sneha",
+    "City": "Chennai",
+    "Email": "sneha86@example.test",
+    "Phone": "+91-990731423",
+    "Member_Since": "2026-08-04"
+  },
+  {
+    "Customer_ID": "CUST-542E23776E",
+    "Name": "Rohan",
+    "City": "Bengaluru",
+    "Email": "rohan99@example.test",
+    "Phone": "+91-939240414",
+    "Member_Since": "2026-08-04"
+  },
+  {
+    "Customer_ID": "CUST-EE2B2FB4FE",
+    "Name": "Rohan",
+    "City": "Pune",
+    "Email": "rohan25@example.test",
+    "Phone": "+91-982325404",
+    "Member_Since": "2026-08-04"
+  },
+  {
+    "Customer_ID": "CUST-A43F066194",
+    "Name": "Karan",
+    "City": "Jaipur",
+    "Email": "karan12@example.test",
+    "Phone": "+91-967800604",
+    "Member_Since": "2026-08-05"
+  },
+  {
+    "Customer_ID": "CUST-5B4601C140",
+    "Name": "Rohan",
+    "City": "Hyderabad",
+    "Email": "rohan79@example.test",
+    "Phone": "+91-916420679",
+    "Member_Since": "2026-08-06"
+  },
+  {
+    "Customer_ID": "CUST-98F2CA9891",
+    "Name": "Nisha",
+    "City": "Delhi",
+    "Email": "nisha24@example.test",
+    "Phone": "+91-972817892",
+    "Member_Since": "2026-08-07"
+  },
+  {
+    "Customer_ID": "CUST-9C807FF8A4",
+    "Name": "Arjun",
+    "City": "Pune",
+    "Email": "arjun37@example.test",
+    "Phone": "+91-967240134",
+    "Member_Since": "2026-08-08"
+  },
+  {
+    "Customer_ID": "CUST-F010378BDC",
+    "Name": "Kabir",
+    "City": "Pune",
+    "Email": "kabir88@example.test",
+    "Phone": "+91-956166439",
+    "Member_Since": "2026-08-08"
+  },
+  {
+    "Customer_ID": "CUST-55F38DEDC1",
+    "Name": "Rahul",
+    "City": "Pune",
+    "Email": "rahul71@example.test",
+    "Phone": "+91-968464934",
+    "Member_Since": "2026-08-08"
+  },
+  {
+    "Customer_ID": "CUST-B432BC3FC9",
+    "Name": "Aditi",
+    "City": "Pune",
+    "Email": "aditi62@example.test",
+    "Phone": "+91-969408051",
+    "Member_Since": "2026-08-08"
+  },
+  {
+    "Customer_ID": "CUST-0E2F70FFA7",
+    "Name": "Pooja",
+    "City": "Mumbai",
+    "Email": "pooja81@example.test",
+    "Phone": "+91-906618748",
+    "Member_Since": "2026-08-10"
+  },
+  {
+    "Customer_ID": "CUST-4441A5163E",
+    "Name": "Sneha",
+    "City": "Kolkata",
+    "Email": "sneha28@example.test",
+    "Phone": "+91-999675614",
+    "Member_Since": "2026-08-11"
+  },
+  {
+    "Customer_ID": "CUST-FCFE094536",
+    "Name": "Ishita",
+    "City": "Pune",
+    "Email": "ishita80@example.test",
+    "Phone": "+91-920248254",
+    "Member_Since": "2026-08-12"
+  },
+  {
+    "Customer_ID": "CUST-6673536113",
+    "Name": "Diya",
+    "City": "Noida",
+    "Email": "diya24@example.test",
+    "Phone": "+91-919123544",
+    "Member_Since": "2026-08-13"
+  },
+  {
+    "Customer_ID": "CUST-CB17DD5F10",
+    "Name": "Pooja",
+    "City": "Hyderabad",
+    "Email": "pooja80@example.test",
+    "Phone": "+91-982782437",
+    "Member_Since": "2026-08-15"
+  },
+  {
+    "Customer_ID": "CUST-A65F245FC7",
+    "Name": "Karan",
+    "City": "Delhi",
+    "Email": "karan89@example.test",
+    "Phone": "+91-904753785",
+    "Member_Since": "2026-08-16"
+  },
+  {
+    "Customer_ID": "CUST-D3DD706901",
+    "Name": "Meera",
+    "City": "Kolkata",
+    "Email": "meera34@example.test",
+    "Phone": "+91-908088775",
+    "Member_Since": "2026-08-16"
+  },
+  {
+    "Customer_ID": "CUST-D3CCC19043",
+    "Name": "Dev",
+    "City": "Hyderabad",
+    "Email": "dev16@example.test",
+    "Phone": "+91-921552430",
+    "Member_Since": "2026-08-18"
+  },
+  {
+    "Customer_ID": "CUST-812D8B7D63",
+    "Name": "Meera",
+    "City": "Delhi",
+    "Email": "meera23@example.test",
+    "Phone": "+91-963097802",
+    "Member_Since": "2026-08-18"
+  },
+  {
+    "Customer_ID": "CUST-A2C91971E6",
+    "Name": "Vikram",
+    "City": "Gurugram",
+    "Email": "vikram11@example.test",
+    "Phone": "+91-910138491",
+    "Member_Since": "2026-08-18"
+  },
+  {
+    "Customer_ID": "CUST-F3817E35EE",
+    "Name": "Aarav",
+    "City": "Delhi",
+    "Email": "aarav57@example.test",
+    "Phone": "+91-904883110",
+    "Member_Since": "2026-08-18"
+  },
+  {
+    "Customer_ID": "CUST-D0C62736FC",
+    "Name": "Sneha",
+    "City": "Mumbai",
+    "Email": "sneha38@example.test",
+    "Phone": "+91-912682825",
+    "Member_Since": "2026-08-19"
+  },
+  {
+    "Customer_ID": "CUST-8A956A8473",
+    "Name": "Arjun",
+    "City": "Bengaluru",
+    "Email": "arjun78@example.test",
+    "Phone": "+91-900032475",
+    "Member_Since": "2026-08-20"
+  },
+  {
+    "Customer_ID": "CUST-E6391BBDE4",
+    "Name": "Meera",
+    "City": "Chennai",
+    "Email": "meera81@example.test",
+    "Phone": "+91-942786559",
+    "Member_Since": "2026-08-20"
+  },
+  {
+    "Customer_ID": "CUST-F3410B2DDC",
+    "Name": "Aarav",
+    "City": "Kolkata",
+    "Email": "aarav41@example.test",
+    "Phone": "+91-904225692",
+    "Member_Since": "2026-08-20"
+  },
+  {
+    "Customer_ID": "CUST-DDFDEDA5CC",
+    "Name": "Rahul",
+    "City": "Gurugram",
+    "Email": "rahul17@example.test",
+    "Phone": "+91-954511330",
+    "Member_Since": "2026-08-21"
+  },
+  {
+    "Customer_ID": "CUST-118133010E",
+    "Name": "Kabir",
+    "City": "Delhi",
+    "Email": "kabir93@example.test",
+    "Phone": "+91-960156025",
+    "Member_Since": "2026-08-22"
+  },
+  {
+    "Customer_ID": "CUST-D515ABBCE8",
+    "Name": "Aarav",
+    "City": "Pune",
+    "Email": "aarav26@example.test",
+    "Phone": "+91-989799094",
+    "Member_Since": "2026-08-22"
+  },
+  {
+    "Customer_ID": "CUST-FC51D3971B",
+    "Name": "Tara",
+    "City": "Kolkata",
+    "Email": "tara75@example.test",
+    "Phone": "+91-935600642",
+    "Member_Since": "2026-08-23"
+  },
+  {
+    "Customer_ID": "CUST-242D578854",
+    "Name": "Kabir",
+    "City": "Kolkata",
+    "Email": "kabir27@example.test",
+    "Phone": "+91-925906570",
+    "Member_Since": "2026-08-26"
+  },
+  {
+    "Customer_ID": "CUST-A0A98D5DDA",
+    "Name": "Rohan",
+    "City": "Mumbai",
+    "Email": "rohan28@example.test",
+    "Phone": "+91-925678479",
+    "Member_Since": "2026-08-28"
+  },
+  {
+    "Customer_ID": "CUST-446B461F20",
+    "Name": "Dev",
+    "City": "Gurugram",
+    "Email": "dev43@example.test",
+    "Phone": "+91-969010413",
+    "Member_Since": "2026-08-28"
+  },
+  {
+    "Customer_ID": "CUST-E20584F227",
+    "Name": "Tara",
+    "City": "Delhi",
+    "Email": "tara16@example.test",
+    "Phone": "+91-965172832",
+    "Member_Since": "2026-08-29"
+  },
+  {
+    "Customer_ID": "CUST-EE772DE96A",
+    "Name": "Aarav",
+    "City": "Gurugram",
+    "Email": "aarav35@example.test",
+    "Phone": "+91-936883035",
+    "Member_Since": "2026-08-29"
+  },
+  {
+    "Customer_ID": "CUST-EEDA30CD8B",
+    "Name": "Nisha",
+    "City": "Bengaluru",
+    "Email": "nisha70@example.test",
+    "Phone": "+91-990235720",
+    "Member_Since": "2026-08-29"
+  },
+  {
+    "Customer_ID": "CUST-C119E4C72A",
+    "Name": "Sahil",
+    "City": "Delhi",
+    "Email": "sahil90@example.test",
+    "Phone": "+91-944452633",
+    "Member_Since": "2026-08-29"
+  },
+  {
+    "Customer_ID": "CUST-49B9588BB2",
+    "Name": "Aarav",
+    "City": "Mumbai",
+    "Email": "aarav28@example.test",
+    "Phone": "+91-933911691",
+    "Member_Since": "2026-08-30"
+  },
+  {
+    "Customer_ID": "CUST-984EE2E12E",
+    "Name": "Nisha",
+    "City": "Jaipur",
+    "Email": "nisha99@example.test",
+    "Phone": "+91-917609401",
+    "Member_Since": "2026-08-30"
+  },
+  {
+    "Customer_ID": "CUST-1EF998704D",
+    "Name": "Neha",
+    "City": "Chennai",
+    "Email": "neha64@example.test",
+    "Phone": "+91-995930956",
+    "Member_Since": "2026-08-31"
+  },
+  {
+    "Customer_ID": "CUST-AB8FDA8309",
+    "Name": "Diya",
+    "City": "Pune",
+    "Email": "diya16@example.test",
+    "Phone": "+91-950919659",
+    "Member_Since": "2026-09-01"
+  },
+  {
+    "Customer_ID": "CUST-37EDCD76D9",
+    "Name": "Meera",
+    "City": "Gurugram",
+    "Email": "meera96@example.test",
+    "Phone": "+91-982552797",
+    "Member_Since": "2026-09-02"
+  },
+  {
+    "Customer_ID": "CUST-7DD82DF45D",
+    "Name": "Kabir",
+    "City": "Jaipur",
+    "Email": "kabir13@example.test",
+    "Phone": "+91-937722625",
+    "Member_Since": "2026-09-02"
+  },
+  {
+    "Customer_ID": "CUST-D177F0E17F",
+    "Name": "Vikram",
+    "City": "Chennai",
+    "Email": "vikram68@example.test",
+    "Phone": "+91-929839037",
+    "Member_Since": "2026-09-02"
+  },
+  {
+    "Customer_ID": "CUST-BDC216A2D8",
+    "Name": "Ananya",
+    "City": "Pune",
+    "Email": "ananya79@example.test",
+    "Phone": "+91-919228449",
+    "Member_Since": "2026-09-04"
+  },
+  {
+    "Customer_ID": "CUST-DE3C37A51A",
+    "Name": "Pooja",
+    "City": "Gurugram",
+    "Email": "pooja35@example.test",
+    "Phone": "+91-980501512",
+    "Member_Since": "2026-09-07"
+  },
+  {
+    "Customer_ID": "CUST-7127605A05",
+    "Name": "Meera",
+    "City": "Bengaluru",
+    "Email": "meera48@example.test",
+    "Phone": "+91-906421044",
+    "Member_Since": "2026-09-08"
+  },
+  {
+    "Customer_ID": "CUST-689990680D",
+    "Name": "Tara",
+    "City": "Gurugram",
+    "Email": "tara31@example.test",
+    "Phone": "+91-970795133",
+    "Member_Since": "2026-09-08"
+  },
+  {
+    "Customer_ID": "CUST-C77B03828B",
+    "Name": "Arjun",
+    "City": "Kolkata",
+    "Email": "arjun24@example.test",
+    "Phone": "+91-981700836",
+    "Member_Since": "2026-09-08"
+  },
+  {
+    "Customer_ID": "CUST-30CDE969A6",
+    "Name": "Aditi",
+    "City": "Hyderabad",
+    "Email": "aditi83@example.test",
+    "Phone": "+91-966659203",
+    "Member_Since": "2026-09-13"
+  },
+  {
+    "Customer_ID": "CUST-BA768C8027",
+    "Name": "Kabir",
+    "City": "Hyderabad",
+    "Email": "kabir32@example.test",
+    "Phone": "+91-981358888",
+    "Member_Since": "2026-09-14"
+  }
+]

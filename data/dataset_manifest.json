@@ -1,0 +1,26 @@
+{
+  "Version": "india-oct-dec-2026-v2",
+  "Seed": 20261107,
+  "Default_As_Of": "2026-12-31",
+  "Start_Date": "2026-10-01",
+  "End_Date": "2026-12-31",
+  "Customers": 200,
+  "Orders": 600,
+  "Conversations": 1200,
+  "Splits": {
+    "train": 500,
+    "showcase": 100,
+    "test": 300,
+    "challenge": 200,
+    "reserve": 100
+  },
+  "Order_Splits": {
+    "train": 300,
+    "showcase": 60,
+    "test": 120,
+    "challenge": 65,
+    "reserve": 55
+  },
+  "Vendors_Are_Fictional": true,
+  "Test_Design": "Customer/order-disjoint synthetic holdouts with partition-specific wording. Not a natural-language production benchmark. Manual review required before reporting model quality."
+}
