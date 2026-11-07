@@ -138,6 +138,7 @@ def reset_customer_state(cid,new=False):
         st.session_state.show_all_orders=False
         st.session_state.pop('issue_description',None)
         st.session_state.history=[]
+        st.session_state.pop('request_error',None)
         st.session_state.memory={};st.session_state.last=None;st.session_state.condition_ok=False
 
 
@@ -154,6 +155,7 @@ def save_feedback(state):
 
 
 def submit_message(prompt,cid):
+    st.session_state.pop('request_error',None)
     feedback=feedback_state()
     if feedback['phase'] not in ['open','retry']:return
     try:
@@ -179,7 +181,11 @@ def submit_message(prompt,cid):
         frames='; '.join(f'{Path(frame.filename).name}:{frame.lineno} in {frame.name}' for frame in traceback.extract_tb(error.__traceback__))
         agent.log_error(st.session_state.conversation_id,cid,RuntimeError(f'UI request failed: {type(error).__name__}; {frames}'))
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
-        st.error('I’m sorry, I couldn’t check that just now. Please try again in a moment. Your order hasn’t been changed.')
+        # Hosted logs need a safe diagnostic; never print provider bodies or keys.
+        status=getattr(error,'status_code',None)
+        print(f'Threadly request failed: {type(error).__name__}; http_status={status if isinstance(status,int) else None}',flush=True)
+        st.session_state.request_error='I’m sorry, I couldn’t check that just now. Please try again in a moment. Your order hasn’t been changed.'
+        st.error(st.session_state.request_error)
 
 
 def open_recent_chats():
@@ -295,6 +301,7 @@ def customer_view():
             st.session_state.condition_ok=loaded['Condition_OK']
             submit_message(loaded['Customer_Message'],cid)
             st.rerun()
+    if st.session_state.get('request_error'):st.error(st.session_state.request_error)
     brand,account=st.columns([2,1])
     with brand:
         st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div><div class="brand-sub">Customer care</div></div>',unsafe_allow_html=True)

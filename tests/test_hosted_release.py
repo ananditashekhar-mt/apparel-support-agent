@@ -36,3 +36,21 @@ class HostedReleaseTests(unittest.TestCase):
                     self.assertTrue(any(name+' is unavailable' in w.value for w in app.warning))
                     self.assertNotIn('Status',[w.label for w in app.selectbox])
                 app.session_state['agent'].db.close()
+
+    def test_request_failure_survives_rerun_without_exposing_provider_body(self):
+        from streamlit.testing.v1 import AppTest
+        original=agent.Agent
+        with tempfile.TemporaryDirectory() as t:
+            def isolated(*args,**kwargs):
+                kwargs['db_path']=Path(t)/'error.sqlite';return original(*args,**kwargs)
+            with patch('agent.Agent',side_effect=isolated):
+                app=AppTest.from_file(str(agent.ROOT/'app.py')).run()
+                next(b for b in app.button if b.label=='Get help with this order').click().run()
+                instance=app.session_state['agent']
+                with patch.object(instance,'chat',side_effect=RuntimeError('private provider error body')):
+                    next(b for b in app.button if b.label=='Delivery status').click().run()
+                    app.run()
+                self.assertEqual(len(app.exception),0)
+                self.assertTrue(any('couldn’t check' in error.value for error in app.error))
+                self.assertFalse(any('private provider' in error.value for error in app.error))
+                instance.db.close()
