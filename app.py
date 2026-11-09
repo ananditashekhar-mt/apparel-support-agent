@@ -23,7 +23,8 @@ load_dotenv()
 APP_ENV=os.getenv('APP_ENV','local' if (Path(__file__).parent/'.env').is_file() else 'hosted').lower()
 BRAND_NAME=os.getenv('BRAND_NAME','Threadly')
 AGENT_NAME=os.getenv('AGENT_NAME','Tia')
-st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide', initial_sidebar_state='collapsed')
+st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide',
+                   initial_sidebar_state='collapsed' if st.query_params.get('phone_preview')=='1' else 'expanded')
 st.markdown('<style>'+(Path(__file__).parent/'ui'/'threadly.css').read_text()+'</style>',unsafe_allow_html=True)
 PHONE_PREVIEW=st.query_params.get('phone_preview')=='1'
 if PHONE_PREVIEW:
