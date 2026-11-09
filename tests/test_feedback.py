@@ -1,3 +1,4 @@
+from star_widget_testing import enable_star_testing, set_stars
 """Exercise the rating flow with an isolated database and deterministic Demo replies."""
 import tempfile
 import unittest
@@ -9,6 +10,7 @@ from streamlit.testing.v1 import AppTest
 
 class FeedbackTests(unittest.TestCase):
     def setUp(self):
+        enable_star_testing(self)
         self.temp=tempfile.TemporaryDirectory()
         original=agent.Agent
         def isolated(*args,**kwargs):
@@ -35,7 +37,7 @@ class FeedbackTests(unittest.TestCase):
         self.temp.cleanup()
 
     def rate(self,stars):
-        next(r for r in self.at.radio if r.label=='Rate your experience').set_value(stars)
+        set_stars(self.at,stars)
         next(b for b in self.at.button if b.label=='Submit feedback').click().run()
         self.assertEqual(len(self.at.exception),0)
 
@@ -51,20 +53,72 @@ class FeedbackTests(unittest.TestCase):
         self.rate(1)
         self.assertTrue(self.at.chat_input[0].disabled)
         self.assertIn('Request a Support Expert',[b.label for b in self.at.button])
-        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
+        self.assertEqual(len(self.at.get('button_group')),0)
         self.at.session_state['last']=None
         self.at.run()
         self.assertTrue(self.at.chat_input[0].disabled)
         self.assertIn('Request a Support Expert',[b.label for b in self.at.button])
         button=next(b for b in self.at.button if b.label=='Request a Support Expert')
         button.click().run()
+        self.assertFalse(self.at.chat_input[0].disabled)
+        self.assertTrue(any('a live expert has not been contacted' in m['content'] for m in self.at.session_state['history']))
+        next(b for b in self.at.button if b.label=='No, end chat').click().run()
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertIn('a live expert has not been contacted',self.at.session_state['history'][-1]['content'])
         self.assertEqual(len(self.at.session_state['agent'].actions(self.at.session_state['conversation_id'])),1)
 
     def test_four_stars_closes_without_reopening(self):
         self.rate(4)
         self.assertTrue(self.at.chat_input[0].disabled)
-        self.assertNotIn('Rate your experience',[r.label for r in self.at.radio])
+        self.assertEqual(len(self.at.get('button_group')),0)
         self.assertNotIn('Request a Support Expert',[b.label for b in self.at.button])
         self.assertEqual(self.at.session_state['history'][-1]['content'],'Thank you for your feedback.')
+
+
+    def test_fifth_star_saves_five(self):
+        self.rate(5)
+        rows=self.at.session_state['agent'].csat_responses(self.at.session_state['conversation_id'])
+        self.assertEqual(rows[-1]['rating'],5)
+
+    def test_second_star_saves_two(self):
+        self.rate(2)
+        rows=self.at.session_state['agent'].csat_responses(self.at.session_state['conversation_id'])
+        self.assertEqual(rows[-1]['rating'],2)
+
+class FeedbackReportingTests(unittest.TestCase):
+    def test_multiple_tickets_do_not_duplicate_ratings(self):
+        import json
+        with tempfile.TemporaryDirectory() as directory:
+            instance=agent.Agent(Path(directory)/'feedback.sqlite')
+            try:
+                instance.ensure_conversation('chat','customer')
+                instance.save_csat('chat','customer','rating',2,'Still waiting')
+                instance.save_csat('chat','customer','rating',2,'Still waiting')
+                for index,kind in enumerate(['return','escalation']):
+                    instance.db.execute('INSERT INTO actions VALUES(?,?,?,?,?)',
+                        (f'T-{index}','chat','ORD-1',kind,json.dumps({})))
+                rows=instance.support_feedback()
+                self.assertEqual(len(rows),1)
+                self.assertEqual(rows[0]['rating'],2)
+                self.assertEqual(rows[0]['comment'],'Still waiting')
+                self.assertEqual(set(rows[0]['ticket_ids'].split(', ')),{'T-0','T-1'})
+                self.assertEqual(rows[0]['order_id'],'ORD-1')
+            finally:instance.db.close()
+
+    def test_support_feedback_tab_renders_saved_comment(self):
+        original=agent.Agent
+        with tempfile.TemporaryDirectory() as directory:
+            def isolated(*args,**kwargs):
+                kwargs['db_path']=Path(directory)/'ui.sqlite'
+                return original(*args,**kwargs)
+            with patch('agent.Agent',side_effect=isolated):
+                app=AppTest.from_file(str(agent.ROOT/'app.py')).run()
+                instance=app.session_state['agent']
+                cid=next(iter(app.session_state['agent'].orders.values()))['Customer_ID']
+                instance.ensure_conversation('feedback-chat',cid)
+                instance.save_csat('feedback-chat',cid,'feedback-ui',5,'Helpful service')
+                next(r for r in app.radio if r.label=='Interface').set_value('Support').run()
+                self.assertEqual(len(app.exception),0)
+                self.assertIn('CSAT & feedback',[tab.label for tab in app.tabs])
+                self.assertTrue(any(m.value=='100%' for m in app.metric))
+                self.assertIn('Helpful service',[m.value for m in app.markdown])
+                instance.db.close()
