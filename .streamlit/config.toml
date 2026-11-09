@@ -10,4 +10,4 @@ font = "sans serif"
 gatherUsageStats = false
 
 [client]
-toolbarMode = "viewer"
+toolbarMode = "auto"
