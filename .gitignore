@@ -13,3 +13,7 @@ report_assets/
 *.docx v1
 /outputs/
 /build_progress_report.py
+.neon
+node_modules/
+
+.env.local

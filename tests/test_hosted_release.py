@@ -45,7 +45,7 @@ class HostedReleaseTests(unittest.TestCase):
                 kwargs['db_path']=Path(t)/'error.sqlite';return original(*args,**kwargs)
             with patch('agent.Agent',side_effect=isolated):
                 app=AppTest.from_file(str(agent.ROOT/'app.py')).run()
-                next(b for b in app.button if b.label=='Get help with this order').click().run()
+                next(b for b in app.button if b.label=='Select order').click().run()
                 instance=app.session_state['agent']
                 with patch.object(instance,'chat',side_effect=RuntimeError('private provider error body')):
                     next(b for b in app.button if b.label=='Delivery status').click().run()

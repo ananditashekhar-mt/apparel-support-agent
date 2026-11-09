@@ -1,0 +1,486 @@
+{
+  "generator": "Built-in image_gen",
+  "purpose": "Synthetic catalogue photographs; reused across matching customer orders",
+  "images": [
+    {
+      "name": "A-Line Mini Skirt",
+      "colour": "Black",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-00c7865b-e814-4e04-9370-8cf39a65a106.png",
+      "filename": "a-line-mini-skirt-black-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Black A-Line Mini Skirt, designed for Women. EXACT featured garment colour Black; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "A-Line Mini Skirt",
+      "colour": "Grey",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c7a7adeb-c563-4ec2-aa22-773f65a4f167.png",
+      "filename": "a-line-mini-skirt-grey-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Grey A-Line Mini Skirt, designed for Women. EXACT featured garment colour Grey; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "A-Line Mini Skirt",
+      "colour": "Olive",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-3222b4a0-13e5-460e-acd7-67c76bc96491.png",
+      "filename": "a-line-mini-skirt-olive-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive A-Line Mini Skirt, designed for Women. EXACT featured garment colour Olive; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Bodycon Dress",
+      "colour": "Olive",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-244790fc-e3ef-4522-aec2-794492f05a01.png",
+      "filename": "bodycon-dress-olive-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive Bodycon Dress, designed for Women. EXACT featured garment colour Olive; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Bodycon Dress",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-56b47790-5698-4e4e-9a10-43e8845043b3.png",
+      "filename": "bodycon-dress-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Bodycon Dress, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Bodycon Dress",
+      "colour": "White",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-31a164a0-3d1f-4ca4-bb15-b8f17958583f.png",
+      "filename": "bodycon-dress-white-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: White Bodycon Dress, designed for Women. EXACT featured garment colour White; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "Black",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c63bd058-0081-454b-a08a-68f52c5a75fa.png",
+      "filename": "classic-crew-neck-t-shirt-black-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Black Classic Crew Neck T-Shirt, designed for Men. EXACT featured garment colour Black; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "Lavender",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-99a67a94-a3fb-4444-a338-8ee63f342ce7.png",
+      "filename": "classic-crew-neck-t-shirt-lavender-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Lavender Classic Crew Neck T-Shirt, designed for Women. EXACT featured garment colour Lavender; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "Maroon",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-b10b4329-d677-44a9-9a10-4d4a88cce513.png",
+      "filename": "classic-crew-neck-t-shirt-maroon-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Maroon Classic Crew Neck T-Shirt, designed for Women. EXACT featured garment colour Maroon; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "Red",
+      "gender": "Men",
+      "prompt": "Use case: product-mockup. Premium contemporary Indian fashion ecommerce photograph. Adult Indian male fashion model wearing a red classic crew neck T-shirt, rich cotton texture, flattering regular fit, styled with neutral trousers. Crop chin to hips so the entire tee is dominant. Warm pale stone studio, soft editorial sunlight, attractive polished natural styling. Exact red garment, no graphics, text, logos or watermark. Photographic, not illustration. Synthetic demo catalogue image.",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c3f64769-2ff5-4c7e-8edc-dacb6fef2b86.png",
+      "filename": "classic-crew-neck-t-shirt-red-men.png"
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-267c1091-49a7-4754-8fda-f38bd957687a.png",
+      "filename": "classic-crew-neck-t-shirt-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Classic Crew Neck T-Shirt, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Classic Crew Neck T-Shirt",
+      "colour": "White",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-4be25fb2-f935-47ba-8e15-499f66a4019a.png",
+      "filename": "classic-crew-neck-t-shirt-white-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: White Classic Crew Neck T-Shirt, designed for Men. EXACT featured garment colour White; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Floral Midi Dress",
+      "colour": "Beige",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-18cf94b0-a605-41da-92bc-f5d4e7a5e623.png",
+      "filename": "floral-midi-dress-beige-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Beige Floral Midi Dress, designed for Women. EXACT featured garment colour Beige; preserve category and fit in product name. Beautiful small botanical floral print on the stated base colour.  Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Floral Midi Dress",
+      "colour": "Grey",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-0dd59681-dff5-40bf-8e77-9b9779795df5.png",
+      "filename": "floral-midi-dress-grey-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Grey Floral Midi Dress, designed for Women. EXACT featured garment colour Grey; preserve category and fit in product name. Beautiful small botanical floral print on the stated base colour.  Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Floral Midi Dress",
+      "colour": "Lavender",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-077df9de-ce14-4b1e-ba55-5c19c09aa885.png",
+      "filename": "floral-midi-dress-lavender-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Lavender Floral Midi Dress, designed for Women. EXACT featured garment colour Lavender; preserve category and fit in product name. Beautiful small botanical floral print on the stated base colour.  Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "High-Rise Straight Jeans",
+      "colour": "Beige",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-b7e088ee-73b6-47e5-a9c5-0855830a024a.png",
+      "filename": "high-rise-straight-jeans-beige-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Beige High-Rise Straight Jeans, designed for Women. EXACT featured garment colour Beige; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "High-Rise Straight Jeans",
+      "colour": "Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-3764eb8e-4cc3-48f6-af01-d9847ce50399.png",
+      "filename": "high-rise-straight-jeans-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue High-Rise Straight Jeans, designed for Women. EXACT featured garment colour Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "High-Rise Straight Jeans",
+      "colour": "Navy",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-ca5f0a28-d28a-4534-bb0c-d1063dba2df7.png",
+      "filename": "high-rise-straight-jeans-navy-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Navy High-Rise Straight Jeans, designed for Women. EXACT featured garment colour Navy; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Oversized Graphic T-Shirt",
+      "colour": "Beige",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-ae564920-5ccf-46f4-97af-717c000366d3.png",
+      "filename": "oversized-graphic-t-shirt-beige-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Beige Oversized Graphic T-Shirt, designed for Men. EXACT featured garment colour Beige; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Oversized Graphic T-Shirt",
+      "colour": "Blue",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-933a672b-719f-4f78-b13d-be8b83786f01.png",
+      "filename": "oversized-graphic-t-shirt-blue-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue Oversized Graphic T-Shirt, designed for Men. EXACT featured garment colour Blue; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Oversized Graphic T-Shirt",
+      "colour": "Olive",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-66ab1caa-ac9d-439f-9b22-d2ca8a8f41f7.png",
+      "filename": "oversized-graphic-t-shirt-olive-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive Oversized Graphic T-Shirt, designed for Men. EXACT featured garment colour Olive; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pencil Skirt",
+      "colour": "Dark Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-aa27913a-5bb6-400f-9f9f-7818c9f1df54.png",
+      "filename": "pencil-skirt-dark-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Dark Blue Pencil Skirt, designed for Women. EXACT featured garment colour Dark Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pencil Skirt",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-09a9ba6d-63af-4c76-b4c8-60ac15376b07.png",
+      "filename": "pencil-skirt-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Pencil Skirt, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pencil Skirt",
+      "colour": "White",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c7d10ff0-e303-456a-9653-2605db68311e.png",
+      "filename": "pencil-skirt-white-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: White Pencil Skirt, designed for Women. EXACT featured garment colour White; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pleated Midi Skirt",
+      "colour": "Black",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-37706d1b-cda5-493d-8d3e-d255b4f85f47.png",
+      "filename": "pleated-midi-skirt-black-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Black Pleated Midi Skirt, designed for Women. EXACT featured garment colour Black; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pleated Midi Skirt",
+      "colour": "Dark Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-36a6999d-5f4a-4777-a702-7178255e9c3b.png",
+      "filename": "pleated-midi-skirt-dark-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Dark Blue Pleated Midi Skirt, designed for Women. EXACT featured garment colour Dark Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Pleated Midi Skirt",
+      "colour": "Lavender",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-80f38d44-3c7c-4cd9-b6dc-bca31f0309bc.png",
+      "filename": "pleated-midi-skirt-lavender-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Lavender Pleated Midi Skirt, designed for Women. EXACT featured garment colour Lavender; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Polo T-Shirt",
+      "prompt": "Use case: product-mockup. Premium contemporary Indian fashion ecommerce catalogue photograph. Subject: beige premium cotton pique polo shirt on an adult male Indian fashion model, styled with charcoal tailored trousers; crop from chin to upper thighs so the polo is dominant. Flattering confident natural stance, impeccable fit, rich real textile detail, realistic attractive clothing. Warm pale stone studio background, soft directional editorial light and subtle shadows, tasteful commercial art direction. Vertical portrait, complete featured garment visible, clean enough to read at small thumbnail size. No text, logos or watermark. Photographic, not illustration. This is a synthetic demo product image.",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-6167fb31-b1b3-472f-bf32-19f935cf7be4.png",
+      "filename": "polo-t-shirt-beige-men.png",
+      "colour": "Beige",
+      "gender": "Men"
+    },
+    {
+      "name": "Polo T-Shirt",
+      "colour": "Olive",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-323949f5-7b44-40a9-8def-138507cba0e8.png",
+      "filename": "polo-t-shirt-olive-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive Polo T-Shirt, designed for Men. EXACT featured garment colour Olive; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Polo T-Shirt",
+      "colour": "White",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-ff8ca669-a0e8-4540-aa09-a672083a7822.png",
+      "filename": "polo-t-shirt-white-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: White Polo T-Shirt, designed for Men. EXACT featured garment colour White; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Fit Jeans",
+      "colour": "Blue",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-457e2b5f-c123-4240-a508-426e01b30314.png",
+      "filename": "relaxed-fit-jeans-blue-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue Relaxed Fit Jeans, designed for Men. EXACT featured garment colour Blue; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Fit Jeans",
+      "colour": "Grey",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-43088fab-4b89-4ac4-aa6a-49fbdf9c3e5b.png",
+      "filename": "relaxed-fit-jeans-grey-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Grey Relaxed Fit Jeans, designed for Men. EXACT featured garment colour Grey; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Fit Jeans",
+      "colour": "White",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-906aa608-72fb-4d88-a08b-66117941c836.png",
+      "filename": "relaxed-fit-jeans-white-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: White Relaxed Fit Jeans, designed for Men. EXACT featured garment colour White; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Graphic T-Shirt",
+      "colour": "Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-03736dcf-121d-416d-a3a0-bd6b0140e615.png",
+      "filename": "relaxed-graphic-t-shirt-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue Relaxed Graphic T-Shirt, designed for Women. EXACT featured garment colour Blue; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Graphic T-Shirt",
+      "colour": "Grey",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-bfae35f0-b68a-4530-9d10-9606c331d697.png",
+      "filename": "relaxed-graphic-t-shirt-grey-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Grey Relaxed Graphic T-Shirt, designed for Women. EXACT featured garment colour Grey; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Relaxed Graphic T-Shirt",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-5249d06e-0799-4aca-832b-4f9e732972bb.png",
+      "filename": "relaxed-graphic-t-shirt-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Relaxed Graphic T-Shirt, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.  Tasteful small abstract graphic print, no lettering. Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Ribbed Fitted T-Shirt",
+      "colour": "Lavender",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-cb8ff0ee-85a5-4452-bfd9-46a8b832de1c.png",
+      "filename": "ribbed-fitted-t-shirt-lavender-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Lavender Ribbed Fitted T-Shirt, designed for Women. EXACT featured garment colour Lavender; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Ribbed Fitted T-Shirt",
+      "colour": "Olive",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-8e972d3f-3eee-4ed3-94cb-034f8adb08bd.png",
+      "filename": "ribbed-fitted-t-shirt-olive-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive Ribbed Fitted T-Shirt, designed for Women. EXACT featured garment colour Olive; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Ribbed Fitted T-Shirt",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-8d63f61c-dc20-4835-bba5-259c6c921b22.png",
+      "filename": "ribbed-fitted-t-shirt-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Ribbed Fitted T-Shirt, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Satin Midi Skirt",
+      "colour": "Black",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-1348406c-d502-4e58-b4ed-50e7b4480cbf.png",
+      "filename": "satin-midi-skirt-black-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Black Satin Midi Skirt, designed for Women. EXACT featured garment colour Black; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Satin Midi Skirt",
+      "colour": "Light Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-841987c5-334c-41b3-b013-8eff60d63415.png",
+      "filename": "satin-midi-skirt-light-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Light Blue Satin Midi Skirt, designed for Women. EXACT featured garment colour Light Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Satin Midi Skirt",
+      "colour": "Pink",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-98410d18-06c6-43a6-bf9d-595bf8a0379b.png",
+      "filename": "satin-midi-skirt-pink-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Pink Satin Midi Skirt, designed for Women. EXACT featured garment colour Pink; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Shirt Dress",
+      "colour": "Light Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-0ad62126-209d-462b-82fe-c7ed398e105a.png",
+      "filename": "shirt-dress-light-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Light Blue Shirt Dress, designed for Women. EXACT featured garment colour Light Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Shirt Dress",
+      "colour": "Pink",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-43eededc-de2f-40e8-9294-06fd420b0bb0.png",
+      "filename": "shirt-dress-pink-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Pink Shirt Dress, designed for Women. EXACT featured garment colour Pink; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Shirt Dress",
+      "colour": "Red",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-16ab1ab9-5ed0-40f3-a6bf-6bf773f9ba7b.png",
+      "filename": "shirt-dress-red-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Red Shirt Dress, designed for Women. EXACT featured garment colour Red; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Skinny Fit Jeans",
+      "colour": "Black",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-1b521f98-b517-4586-aaff-b7960f31d828.png",
+      "filename": "skinny-fit-jeans-black-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Black Skinny Fit Jeans, designed for Women. EXACT featured garment colour Black; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Skinny Fit Jeans",
+      "colour": "Navy",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c360a457-4814-4d07-9c3a-6c99bc0e367e.png",
+      "filename": "skinny-fit-jeans-navy-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Navy Skinny Fit Jeans, designed for Women. EXACT featured garment colour Navy; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Skinny Fit Jeans",
+      "colour": "Olive",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-dd9789fc-9787-42e4-8b4d-1aa69c84c7e5.png",
+      "filename": "skinny-fit-jeans-olive-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Olive Skinny Fit Jeans, designed for Women. EXACT featured garment colour Olive; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Slim Fit Jeans",
+      "colour": "Grey",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-e501ceef-7351-4d15-a30c-e824ee23f247.png",
+      "filename": "slim-fit-jeans-grey-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Grey Slim Fit Jeans, designed for Men. EXACT featured garment colour Grey; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Slim Fit Jeans",
+      "colour": "Maroon",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-73bcd6fb-9922-4a19-8d1a-667fde88fe28.png",
+      "filename": "slim-fit-jeans-maroon-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Maroon Slim Fit Jeans, designed for Men. EXACT featured garment colour Maroon; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Slim Fit Jeans",
+      "prompt": "Use case: product-mockup. Premium contemporary Indian fashion ecommerce catalogue photograph. Subject: white slim-fit denim jeans on an adult male Indian fashion model, styled with a charcoal fitted tee tucked in and clean white sneakers; crop from chest to shoes so the jeans are dominant. Flattering confident natural stance, impeccable fit, rich real textile detail, realistic attractive clothing. Warm pale stone studio background, soft directional editorial light and subtle shadows, tasteful commercial art direction. Vertical portrait, complete featured garment visible, clean enough to read at small thumbnail size. No text, logos or watermark. Photographic, not illustration. This is a synthetic demo product image.",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-f165f3f8-dd7e-40dc-ba96-013361b79fff.png",
+      "filename": "slim-fit-jeans-white-men.png",
+      "colour": "White",
+      "gender": "Men"
+    },
+    {
+      "name": "Straight Fit Jeans",
+      "colour": "Beige",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-79f3eb40-a570-4cf8-9c01-469839f9fd65.png",
+      "filename": "straight-fit-jeans-beige-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Beige Straight Fit Jeans, designed for Men. EXACT featured garment colour Beige; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Straight Fit Jeans",
+      "colour": "Light Blue",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-187ff5e0-0f13-426d-9988-fd8e934f3334.png",
+      "filename": "straight-fit-jeans-light-blue-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Light Blue Straight Fit Jeans, designed for Men. EXACT featured garment colour Light Blue; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Straight Fit Jeans",
+      "colour": "Navy",
+      "gender": "Men",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-029ade6c-4d09-477e-8535-c7a5a4401d86.png",
+      "filename": "straight-fit-jeans-navy-men.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Navy Straight Fit Jeans, designed for Men. EXACT featured garment colour Navy; preserve category and fit in product name.   Worn by an adult Indian male fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wide-Leg Jeans",
+      "colour": "Beige",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-03b0932d-7ac8-405c-aebd-eebfe9985fff.png",
+      "filename": "wide-leg-jeans-beige-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Beige Wide-Leg Jeans, designed for Women. EXACT featured garment colour Beige; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wide-Leg Jeans",
+      "colour": "Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-7d45db41-6322-4b68-b0f5-c121ed5439ce.png",
+      "filename": "wide-leg-jeans-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue Wide-Leg Jeans, designed for Women. EXACT featured garment colour Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wide-Leg Jeans",
+      "colour": "Green",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-1be37690-8a07-48fe-a156-f6ec7e38e96d.png",
+      "filename": "wide-leg-jeans-green-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Green Wide-Leg Jeans, designed for Women. EXACT featured garment colour Green; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wrap Dress",
+      "colour": "Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-6325903f-d0b1-4f76-bbd6-fa17dcc19a4e.png",
+      "filename": "wrap-dress-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Blue Wrap Dress, designed for Women. EXACT featured garment colour Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wrap Dress",
+      "colour": "Dark Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-d84a205e-722d-4a52-ab39-49a3247bd5d1.png",
+      "filename": "wrap-dress-dark-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Dark Blue Wrap Dress, designed for Women. EXACT featured garment colour Dark Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    },
+    {
+      "name": "Wrap Dress",
+      "colour": "Light Blue",
+      "gender": "Women",
+      "source": "/Users/ananditashekhar/.codex/generated_images/01a1b2b2-ae47-7fb2-8ac1-4638e112a389/exec-c7276067-4c91-4233-b4b2-a48803f064ef.png",
+      "filename": "wrap-dress-light-blue-women.png",
+      "prompt": "Use case: product-mockup. Attractive contemporary Indian fashion ecommerce catalogue photograph. Featured product: Light Blue Wrap Dress, designed for Women. EXACT featured garment colour Light Blue; preserve category and fit in product name.   Worn by an adult Indian female fashion model, flattering confident natural stance, sophisticated modern styling with neutral complementary pieces, realistic premium fabric texture. Show entire featured garment, crop so garment fills most of portrait; for tops chin to hips, for skirts waist to feet, for jeans waist to shoes, for dresses shoulders to hem. Soft flattering sunlight, warm pale stone studio backdrop, subtle editorial shadows. Desirable polished fashion photography, not illustration. No text, brands, logos or watermark. Synthetic demo product image; no other outfit piece should dominate."
+    }
+  ]
+}

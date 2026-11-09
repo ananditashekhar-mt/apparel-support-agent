@@ -9,65 +9,30 @@ import uuid
 import traceback
 from pathlib import Path
 from datetime import date
+from urllib.parse import urlencode
+import streamlit.components.v1 as components
 
 import streamlit as st
 from dotenv import load_dotenv
 
 from agent import Agent, load
 from dataset import DEFAULT_DATE, order_as_of
+from product_art import product_image_path
 
 load_dotenv()
 APP_ENV=os.getenv('APP_ENV','local' if (Path(__file__).parent/'.env').is_file() else 'hosted').lower()
 BRAND_NAME=os.getenv('BRAND_NAME','Threadly')
 AGENT_NAME=os.getenv('AGENT_NAME','Tia')
 st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide', initial_sidebar_state='collapsed')
-st.markdown('''<style>
-.stApp {background:#f3f4f8;color:#292c38}
-.block-container {max-width:1180px;padding:3.7rem 1.5rem 3rem}
-[data-testid="stHeader"] {background:#f3f4f8}
-[data-testid="stSidebar"] {background:#fff;border-right:1px solid #e7e8ef}
-[data-testid="stVerticalBlock"] {gap:.75rem}
-h1,h2,h3 {color:#282636;letter-spacing:-.025em}
-h3 {font-size:1.25rem!important;padding:0!important;margin:0!important}
-p {font-size:.94rem;line-height:1.55}
-.brand-lockup {display:flex;align-items:center;gap:9px}
-.brand-mark {width:32px;height:32px;border-radius:10px;background:#40365c;color:#fff;display:grid;place-items:center;font:italic 23px Georgia,serif}
-.brand-word {font:600 24px Georgia,serif;color:#302a42}
-.brand-sub {font:400 13px sans-serif;color:#777885;margin-left:10px;border-left:1px solid #d9dae4;padding-left:16px}
-.account {text-align:right;font-size:13px;color:#737582;padding-top:8px}
-.account b {color:#383344;font-weight:600}
-.st-key-care_workspace {background:#fff;border:1px solid #e4e4ed;border-radius:20px;padding:24px;box-shadow:0 8px 32px #28233d07;min-height:530px}
-.st-key-care_rail {padding:8px 16px 0 0}
-.st-key-care_rail [data-testid="stCaptionContainer"] p {font-size:12px}
-.assistant-header {display:flex;align-items:center;gap:11px;border-bottom:1px solid #eeeef4;padding-bottom:17px;margin-bottom:3px}
-.tia-avatar {width:42px;height:42px;border-radius:50%;background:#ede9f6;color:#685491;display:grid;place-items:center;font-size:19px;font-weight:600}
-.assistant-header strong {display:block;font-size:15px;font-weight:600;color:#2e293e}
-.assistant-header span {font-size:12px;color:#85818f}
-.intro {background:#f6f5fa;border-radius:3px 14px 14px;padding:14px 17px;color:#504a60;font-size:14px;line-height:1.6;margin:3px 0 10px;max-width:580px}
-.context-label {font-size:11px;letter-spacing:.07em;color:#888492;text-transform:uppercase;margin:20px 0 10px}
-.context-card {background:#ebeaf2;border-radius:14px;padding:16px;margin:4px 0 8px}
-.context-card strong {display:block;font-size:15px;color:#393246;margin:9px 0 5px}
-.context-card p {font-size:12px;color:#757080;margin:5px 0}
-.context-pill {display:inline-block;font-size:11px;background:#fff;color:#596a60;padding:3px 8px;border-radius:6px}
-.rail-note {font-size:12px;color:#85818e;line-height:1.6;margin-top:22px}
-.stButton>button {border:1px solid #e4e2ed;border-radius:10px;min-height:43px;color:#4b435b;background:white;font-size:14px;justify-content:flex-start;padding:9px 13px;box-shadow:none}
-.stButton>button p {font-size:14px;line-height:1.3}
-.stButton>button:hover {background:#f5f2fa;border-color:#b8a8d0;color:#4d3a6d}
-.stButton>button[kind="primary"] {background:#51416d;border-color:#51416d;color:#fff;justify-content:center}
-.stButton>button[kind="primary"]:hover {background:#403156;color:white}
-.st-key-care_workspace [data-testid="stExpander"] {border:1px solid #e8e6ef;border-radius:10px;background:#fbfaff}
-.st-key-care_workspace [data-testid="stVerticalBlockBorderWrapper"] {border-radius:12px}
-.chat-row {display:flex;gap:10px;align-items:flex-start;margin:12px 0}
-.chat-avatar {width:28px;height:28px;min-width:28px;border-radius:50%;display:grid;place-items:center;font-size:10px;background:#eee9f6;color:#675182}
-.chat-avatar.you {background:#e6edf2;color:#5e7182}
-.chat-bubble {max-width:88%;padding:12px 15px;border-radius:3px 13px 13px;background:#f6f5fa;color:#4d465b;line-height:1.6;font-size:14px}
-.chat-row.user {flex-direction:row-reverse}
-.chat-row.user .chat-bubble {background:#eee9f7;border-radius:13px 3px 13px 13px}
-[data-testid="stChatInput"] {border-radius:12px}
-[data-testid="stBottom"] {background:transparent}
-.mobile-order,.st-key-mobile_new_chat {display:none}
-@media(max-width:640px) {.block-container {padding:3.7rem .8rem 2rem}.st-key-care_workspace {padding:18px;min-height:0}.st-key-care_rail {padding:0}.st-key-care_context {display:none}.st-key-mobile_new_chat {display:block}[data-testid="stColumn"]:has(.st-key-care_rail) {display:none}.st-key-care_rail {margin-bottom:0}.mobile-order {display:block;font-size:12px;color:#81798c}.st-key-topic_primary [data-testid="stHorizontalBlock"],.st-key-topic_secondary [data-testid="stHorizontalBlock"] {flex-wrap:nowrap!important;gap:8px}.st-key-topic_primary [data-testid="stColumn"],.st-key-topic_secondary [data-testid="stColumn"] {min-width:0!important;flex:1!important}.st-key-topic_primary button {padding:9px 8px}.st-key-topic_primary button p {font-size:12px}.brand-sub {display:none}.account {font-size:12px}.intro {font-size:14px}}
-</style>''',unsafe_allow_html=True)
+st.markdown('<style>'+(Path(__file__).parent/'ui'/'threadly.css').read_text()+'</style>',unsafe_allow_html=True)
+PHONE_PREVIEW=st.query_params.get('phone_preview')=='1'
+if PHONE_PREVIEW:
+    st.markdown('<style>[data-testid=stSidebar],[data-testid=stSidebarCollapsedControl],[data-testid=stHeader]{display:none}.block-container{padding:16px 10px 10px!important}</style>',unsafe_allow_html=True)
+    if 'simulation_date' not in st.session_state:
+        try:
+            preview_date=date.fromisoformat(st.query_params.get('as_of',''))
+            if date(2026,10,1)<=preview_date<=date(2026,12,31):st.session_state.simulation_date=preview_date
+        except ValueError:pass
 
 
 def customer_id(order):
@@ -90,6 +55,7 @@ with st.sidebar:
     st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div></div>',unsafe_allow_html=True)
     st.caption('A little care, beyond checkout.')
     interface=st.radio('Interface',['Customer','Support','Admin'])
+if PHONE_PREVIEW:interface='Customer'
 
 configured_mode=os.getenv('APP_MODE','OpenAI' if APP_ENV=='hosted' else 'Demo').title()
 if configured_mode not in ['Demo','Openai','Ollama','Gemini','Groq']:configured_mode='Demo'
@@ -110,7 +76,8 @@ if interface=='Customer':
     with st.sidebar.expander('Demo settings',expanded=False):
         if os.getenv('ALLOW_MODE_SWITCH','false' if APP_ENV=='hosted' else 'true').lower()=='true':
             choices=['Demo','OpenAI','Gemini','Groq','Ollama']
-            mode=st.radio('Assistant',choices,index=choices.index(configured_mode),horizontal=True)
+            preview_mode=st.query_params.get('mode') if PHONE_PREVIEW else None
+            mode=st.radio('Assistant',choices,index=choices.index(preview_mode if preview_mode in choices else configured_mode),horizontal=True)
             st.caption('Demo is deterministic. OpenAI, Gemini, Groq and Ollama add model-based understanding and writing; business rules remain in code.')
         else:st.caption(f'Assistant: {mode}')
         model=st.session_state.get('admin_'+mode.lower()+'_model','')
@@ -119,12 +86,27 @@ if interface=='Customer':
 else:
     demo_date=DEFAULT_DATE
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1')
+from database import database_fingerprint
+@st.cache_resource(show_spinner=False)
+def preserve_hosted_database(database_key):
+    from hosted_cutover import preserve_and_import
+    return preserve_and_import(Path(__file__).parent/'runtime_india_2026.sqlite',
+                               os.getenv('DATABASE_URL_UNPOOLED') or os.environ['DATABASE_URL'])
+
+if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
+    try:
+        preserve_hosted_database(database_fingerprint())
+    except Exception:
+        st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
+        st.stop()
+
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
     st.session_state.agent_key=agent_key
 agent=st.session_state.agent
+if hasattr(agent.db,'check_connection'):agent.db.check_connection()
 
 
 def reset_customer_state(cid,new=False):
@@ -144,7 +126,6 @@ def reset_customer_state(cid,new=False):
 
 def feedback_state():
     # Persist the two-round limit across page reloads and reopening saved chats.
-    agent.db.execute('CREATE TABLE IF NOT EXISTS chat_feedback (conversation_id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
     row=agent.db.execute('SELECT payload FROM chat_feedback WHERE conversation_id=?',(st.session_state.conversation_id,)).fetchone()
     return json.loads(row[0]) if row else {'rounds':0,'phase':'open','support_result':None}
 
@@ -152,6 +133,45 @@ def feedback_state():
 def save_feedback(state):
     agent.db.execute('INSERT OR REPLACE INTO chat_feedback VALUES(?,?)',
         (st.session_state.conversation_id,json.dumps(state)));agent.db.commit()
+
+
+
+def ask_to_close(cid,state):
+    if not state.get('wrapup_pending'):
+        agent.log_message(st.session_state.conversation_id,cid,'assistant','Is there anything else I can help you with?')
+        agent.db.commit()
+        state['wrapup_pending']=True
+        save_feedback(state)
+
+
+def answer_checkin(cid,answer,customer_text=None):
+    state=feedback_state()
+    agent.log_message(st.session_state.conversation_id,cid,'user',customer_text or answer)
+    state['wrapup_pending']=False
+    if answer=='No, end chat':
+        state.update(phase='closed',csat_submitted=False,csat_skipped=False,csat_id=None)
+        reply='You’re all set. I’ve ended this chat. Thanks for stopping by!'
+    else:
+        reply='Of course. What else would you like help with on this issue?'
+    agent.log_message(st.session_state.conversation_id,cid,'assistant',reply)
+    agent.db.commit()
+    save_feedback(state)
+    st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
+    st.rerun()
+
+
+def handle_customer_message(prompt,cid):
+    state=feedback_state()
+    normal=' '.join(prompt.strip().lower().translate(str.maketrans('','','.,!?')).split())
+    if state.get('wrapup_pending') and state['phase'] in ('open','retry'):
+        if normal in ('no','no thanks','no thank you','nothing else','all done',"that's all",'that’s all'):
+            answer_checkin(cid,'No, end chat',prompt)
+        if normal in ('yes','yes please','i need more help'):
+            answer_checkin(cid,'Yes, I need more help',prompt)
+    state['wrapup_pending']=False
+    save_feedback(state)
+    st.session_state.unlisted_issue=True
+    submit_message(prompt,cid)
 
 
 def submit_message(prompt,cid):
@@ -172,6 +192,11 @@ def submit_message(prompt,cid):
             agent.log_message(st.session_state.conversation_id,cid,'assistant',
                 'Please let us know if there is anything else we can help you with.')
             agent.db.commit()
+        feedback=feedback_state()
+        feedback['wrapup_pending']=False
+        save_feedback(feedback)
+        if result.get('status')=='answered' and not result.get('pending') and feedback['phase'] in ('open','retry'):
+            ask_to_close(cid,feedback)
         st.session_state.pending_order_request=prompt if result.get('needs_order_selection') else None
         st.session_state.unlisted_issue=False
         st.session_state.chat_stage='pick_order' if result.get('needs_order_selection') else 'chat'
@@ -218,17 +243,18 @@ def back_in_journey(stage):
 def render_order_choices(cid,profile,resume=False):
     orders=sorted(profile['orders'],key=lambda o:(o['Order_Date'],o['Order_ID']),reverse=True)
     show_all=st.session_state.get('show_all_orders',False)
-    st.caption('Your recent purchases' if not show_all else 'All your orders')
+    st.caption('Your past orders · AI sample photos' if not show_all else 'All your orders · AI sample photos')
     for order in (orders if show_all else orders[:3]):
-        with st.container(border=True):
-            st.caption(order['Order_ID']+' · '+order['Order_Status']+' · '+str(order['Order_Date'])[:10])
-            st.markdown('**'+order['Product_Name']+'**')
-            st.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']}")
-            if st.button('Get help with this order',icon=':material/arrow_forward:',key='choose_'+order['Order_ID'],width='stretch'):
+        with st.container(border=True,key='order_card_'+order['Order_ID']):
+            photo,details,action=st.columns([1,6,3],vertical_alignment='center')
+            image_path=product_image_path(order)
+            if image_path:photo.image(str(image_path),width=48)
+            with details:
+                st.markdown(f'<div class="order-copy"><strong>{html.escape(order["Product_Name"])}</strong><span>{html.escape(order["Colour"])} · Size {html.escape(order["Size"])} · Qty {order["Qty"]}</span><span>{html.escape(order["Order_ID"])} · {html.escape(order["Order_Status"])}</span></div>',unsafe_allow_html=True)
+            if action.button('Select order',key='choose_'+order['Order_ID'],width='stretch'):
                 st.session_state.selected_order=order['Order_ID']
                 if resume:
                     st.session_state.memory=dict(st.session_state.memory,order_id=order['Order_ID'])
-                    # The original question and extracted details remain in history/memory.
                     submit_message('Please use '+order['Order_ID']+' for my question.',cid)
                 else:
                     st.session_state.memory={'order_id':order['Order_ID']};st.session_state.last=None
@@ -277,6 +303,9 @@ def customer_view():
         st.info('No orders have been placed by the selected simulation date. Choose a date in October–December 2026.')
         return
     profile_labels={f"{visible[c]['name']} · {visible[c]['city']} · Customer {c[-4:]}":c for c in profile_options}
+    if PHONE_PREVIEW and st.query_params.get('customer') in visible:
+        requested_customer=st.query_params['customer']
+        st.session_state.customer_profile_picker=next(label for label,c in profile_labels.items() if c==requested_customer)
     if pending:
         st.session_state.customer_profile_picker=next(label for label,c in profile_labels.items() if c==pending['Customer_ID'])
     if st.session_state.get('customer_profile_picker') not in profile_labels:
@@ -308,6 +337,15 @@ def customer_view():
     with account:
         st.markdown(f'<div class="account"><b>{html.escape(profile["name"])}</b> · {html.escape(profile["city"])}</div>',unsafe_allow_html=True)
     st.write('')
+    if not PHONE_PREVIEW:
+        with st.container(key='demo_view_switch'):
+            view=st.radio('Demo view',['Desktop','Mobile'],horizontal=True,key='demo_view')
+        if view=='Mobile':
+            st.caption('Phone preview · 390 px · A separate chat for the selected customer')
+            params=urlencode({'phone_preview':'1','embed':'true','customer':cid,'as_of':demo_date.isoformat(),'mode':mode})
+            with st.container(key='demo_phone_frame'):
+                components.iframe('?'+params,width=390,height=760,scrolling=True)
+            return
     with st.sidebar:
         st.divider()
         st.caption('YOUR CONVERSATIONS')
@@ -317,44 +355,38 @@ def customer_view():
                 open_saved_conversation(cid,conversation['id']);st.rerun()
         st.divider()
         st.caption('Demo experience · Orders and requests are examples. No live fulfilment or external support connection.')
-    with st.container(key='mobile_new_chat'):
-        mobile_new,mobile_history=st.columns([2,1])
-        if mobile_history.button('Past chats',key='mobile_history',width='stretch'):
-            open_recent_chats();st.rerun()
-        if mobile_new.button('＋ New chat',key='new_chat_mobile',type='primary',width='stretch'):
-            reset_customer_state(cid,True);st.rerun()
-    rail,workspace=st.columns([1,2.8],gap='large')
-    with rail:
-        with st.container(key='care_rail'):
-            if st.button('＋ New chat',key='new_chat_rail',type='primary',width='stretch'):
-                reset_customer_state(cid,True);st.rerun()
-            if st.button('Past chats',key='rail_history',width='stretch',icon=':material/history:'):
-                open_recent_chats();st.rerun()
-            with st.container(key='care_context'):
-                st.markdown('<div class="context-label">Your order</div>',unsafe_allow_html=True)
-                selected=st.session_state.selected_order
-                order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
-                if order:
-                    status=order['Order_Status']
-                    if any(r['kind']=='cancellation' and r['status']=='completed' for r in agent.order_requests(selected,cid,st.session_state.conversation_id)):status='Cancelled'
-                    st.markdown(f'''<div class="context-card"><span class="context-pill">{html.escape(status)}</span><strong>{html.escape(order['Product_Name'])}</strong><p>{html.escape(selected)}</p><p>{html.escape(order['Colour'])} · Size {html.escape(order['Size'])} · Qty {order['Qty']}</p></div>''',unsafe_allow_html=True)
-                    if st.button('Change order',width='stretch'):
-                        st.session_state.chat_stage='order';st.session_state.memory={}
-                        st.session_state.selected_order=None;st.session_state.last=None
-                        st.session_state.condition_ok=False;st.rerun()
-                    with st.expander('Order updates'):
-                        for event in order.get('Shipment_Events',[]):st.caption(f"{event['Status']} · {str(event['Date'])[:10]}")
-                        for request in agent.order_requests(selected,cid,st.session_state.conversation_id):st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
-                else:
-                    st.caption('Select an order in the chat to get started.' if st.session_state.chat_stage=='order' else 'General question · No order selected')
-                st.markdown('<div class="context-label">Need a closer look?</div><div class="rail-note">If I can’t resolve your concern, I’ll help you request a review from a Support Expert.</div>',unsafe_allow_html=True)
-    with workspace:
-        with st.container(key='care_workspace'):
-            st.markdown('<div class="assistant-header"><div class="tia-avatar">T</div><div><strong>Tia</strong><span>Your Threadly care assistant</span></div></div>',unsafe_allow_html=True)
-            selected=st.session_state.selected_order
-            order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
-            if order:st.markdown(f'<div class="mobile-order">{html.escape(order["Product_Name"])} · {html.escape(selected)}</div>',unsafe_allow_html=True)
+    with st.container(key='care_workspace'):
+        with st.container(key='chat_toolbar'):
+            header,controls=st.columns([3,2],vertical_alignment='center')
+            with header:
+                st.markdown('<div class="assistant-header"><div class="tia-avatar">T</div><div><strong>Tia</strong><span>Your shopping sidekick · AI</span></div></div>',unsafe_allow_html=True)
+            with controls:
+                new,past=st.columns(2)
+                if new.button('＋ New chat',key='new_chat_rail',width='stretch',type='primary'):
+                    reset_customer_state(cid,True);st.rerun()
+                if past.button('Past chats',key='rail_history',width='stretch'):
+                    open_recent_chats();st.rerun()
+        selected=st.session_state.selected_order
+        order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
+        if order and st.session_state.chat_stage not in ('order','pick_order','recent'):
+            with st.expander(order['Product_Name']+' · '+selected):
+                photo,details=st.columns([1,7])
+                image_path=product_image_path(order)
+                if image_path:photo.image(str(image_path),width=48)
+                details.caption(f"{order['Colour']} · Size {order['Size']} · Qty {order['Qty']} · {order['Order_Status']}")
+                if st.button('Change order'):
+                    st.session_state.chat_stage='order';st.session_state.memory={}
+                    st.session_state.selected_order=None;st.session_state.last=None
+                    st.session_state.condition_ok=False;st.rerun()
+                for event in order.get('Shipment_Events',[]):st.caption(f"{event['Status']} · {str(event['Date'])[:10]}")
+                for request in agent.order_requests(selected,cid,st.session_state.conversation_id):
+                    st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
+        with st.container(height=450,border=False,key='chat_transcript'):
             render_customer_journey(cid,profile)
+        phase=feedback_state()['phase']
+        disabled=phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
+        prompt=st.chat_input('Type your message…',key='customer_message',disabled=disabled)
+        if prompt:handle_customer_message(prompt,cid)
 
 
 def render_csat(cid,state,allow_retry=False):
@@ -367,11 +399,10 @@ def render_csat(cid,state,allow_retry=False):
         st.markdown('**How was your experience with Tia?**')
         st.caption('Your feedback helps us improve our support.')
         with st.form('csat_'+state['csat_id']):
-            rating=st.radio('Rate your experience',[1,2,3,4,5],key='score_'+state['csat_id'],index=None,horizontal=True,
-                format_func=lambda value: str(value))
-            st.caption('1 = Very dissatisfied · 5 = Very satisfied')
-            comment=st.text_area('Anything you’d like us to know? (optional)',key='comment_'+state['csat_id'],max_chars=2000,height=90,
-                placeholder='What went well, or what could we do better?')
+            st.caption('Rate your experience')
+            selected=st.feedback('stars',key='score_'+state['csat_id'])
+            rating=selected+1 if selected is not None else None
+            comment=st.text_area('Your feedback (optional)',key='comment_'+state['csat_id'],max_chars=2000,height=90)
             if st.form_submit_button('Submit feedback',type='primary'):
                 try:
                     agent.save_csat(st.session_state.conversation_id,cid,state['csat_id'],rating,comment)
@@ -431,7 +462,7 @@ def render_customer_journey(cid,profile):
         if st.button('Back',key='journey_back',icon=':material/arrow_back:'):
             back_in_journey(stage);st.rerun()
     if stage=='pick_order':
-        st.markdown('<div class="intro">Choose the order you’d like me to check. I’ll continue with your question.</div>',unsafe_allow_html=True)
+        for message in agent.messages(st.session_state.conversation_id,cid)[-2:]:render_message(message)
         render_order_choices(cid,profile,resume=True)
         return
     if stage=='recent':
@@ -460,7 +491,7 @@ def render_customer_journey(cid,profile):
                 if st.form_submit_button('Reopen and continue',type='primary'):
                     try:
                         agent.reopen_conversation(st.session_state.conversation_id,cid,reason,description)
-                        state=feedback_state();state.update(phase='open',rounds=0,support_result=None,csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(state)
+                        state=feedback_state();state.update(phase='open',rounds=0,support_result=None,csat_submitted=False,csat_skipped=False,csat_id=None,wrapup_pending=False);save_feedback(state)
                         st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
                         st.session_state.chat_stage='chat';st.rerun()
                     except ValueError as error:st.warning(str(error))
@@ -468,31 +499,23 @@ def render_customer_journey(cid,profile):
                 reset_customer_state(cid,True);st.rerun()
         return
     if stage=='order':
-        st.markdown(f'<div class="intro">Hi {html.escape(profile["name"])}, I’m Tia. I can help with your delivery, a return, an exchange, or something else.<br>Which order is this about?</div>',unsafe_allow_html=True)
+        render_message({'role':'assistant','content':f"Hi {profile['name']}, I’m Tia.\nHow can I help you today?\n\nChoose a recent order, or type your question below."})
         render_order_choices(cid,profile)
-        if st.button('Other',icon=':material/chat_bubble_outline:',width='stretch'):
-            st.session_state.selected_order=None;st.session_state.memory={}
-            st.session_state.chat_stage='issue';st.rerun()
         return
     if stage=='issue':
-        st.markdown('<div class="intro">Thanks. What would you like help with? Choose a topic below, or tell me what happened in your own words.</div>',unsafe_allow_html=True)
+        render_message({'role':'assistant','content':'How can I help with this order?\nChoose a topic or tell me what happened below.'})
         topics=[('Delivery status','Where is my order?'),('Return an item','I would like to return my item.'),
                 ('Exchange an item','I would like to exchange my item.'),('Delivery is late','My delivery is late.'),
                 ('Damaged or faulty item','My item arrived damaged.'),('Wrong item received','I received the wrong item.'),
                 ('An item is missing','An item is missing from my order.'),('Delivered, but not received','My order is marked delivered but I have not received it.'),
                 ('Cancel an order','I would like to cancel my order.'),('Refund or payment help','I need help with my refund.')]
         icons=['local_shipping','keyboard_return','swap_horiz','schedule','broken_image','inventory_2','package_2','location_off','cancel','payments']
-        with st.container(key='topic_primary'):
-            columns=st.columns(3)
-            for index,(label,prompt) in enumerate(topics[:3]):
-                if columns[index].button(label,key='topic_'+str(index),icon=':material/'+icons[index]+':',width='stretch'):submit_message(prompt,cid)
-        st.caption('More help with your order')
-        with st.container(key='topic_secondary'):
-            for index,(label,prompt) in enumerate(topics[3:],start=3):
-                if (index-3)%2==0:columns=st.columns(2)
-                if columns[(index-3)%2].button(label,key='topic_'+str(index),icon=':material/'+icons[index]+':',width='stretch'):submit_message(prompt,cid)
-        if st.button('My issue is not listed here',width='stretch'):
-            st.session_state.chat_stage='describe';st.session_state.unlisted_issue=True;st.rerun()
+        with st.container(key='topic_grid'):
+            for index,(label,prompt) in enumerate(topics):
+                if st.button(label,key='topic_'+str(index),icon=':material/'+icons[index]+':',width='stretch'):
+                    submit_message(prompt,cid)
+            if st.button('My issue is not listed here',width='stretch'):
+                st.session_state.chat_stage='describe';st.session_state.unlisted_issue=True;st.rerun()
         if st.button('← Choose a different order'):
             st.session_state.chat_stage='order';st.session_state.memory={};st.rerun()
         return
@@ -507,7 +530,11 @@ def render_customer_journey(cid,profile):
             st.session_state.chat_stage='issue';st.session_state.unlisted_issue=False;st.rerun()
         return
     st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
-    for message in st.session_state.history:render_message(message)
+    history=st.session_state.history
+    if len(history)>4:
+        with st.expander(f'Earlier messages ({len(history)-4})'):
+            for message in history[:-4]:render_message(message)
+    for message in history[-4:]:render_message(message)
 
     last=st.session_state.last
     render_evidence(cid,last)
@@ -529,25 +556,31 @@ def render_customer_journey(cid,profile):
     show_action=feedback['phase']!='closed'
     if last and last.get('pending') and show_action and last['as_of']==demo_date.isoformat():
         label={'return':'Request a return','exchange':'Request an exchange','cancellation':'Cancel order','escalation':'Request a Support Expert'}[last['pending']['kind']]
-        c1,c2=st.columns([2,3])
-        if c1.button(label,type='primary',width='stretch'):
+        if st.button(label,type='primary'):
             try:
                 request=agent.confirm(last,st.session_state.conversation_id)
                 message=f'Thank you for sharing this with me. Your request {request} and conversation are saved for a Support Expert to review. This is a demo, so a live expert has not been contacted.' if last['pending']['kind']=='escalation' else f'Your request {request} is saved. You can follow its progress here. This demo does not change a real order.'
                 agent.log_message(st.session_state.conversation_id,cid,'assistant',message);agent.db.commit()
                 st.session_state.history.append({'role':'assistant','content':message})
-                if last['pending']['kind']=='escalation':
-                    feedback.update(phase='closed',csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(feedback)
+                feedback.update(phase='open',wrapup_pending=False)
+                save_feedback(feedback)
+                ask_to_close(cid,feedback)
                 st.session_state.last=None;st.rerun()
             except ValueError as error:st.error(str(error))
-        c2.caption('Your conversation will be included with your request. Demo only; no live connection.')
+        st.caption('Includes this conversation · Demo request')
     if feedback['phase'] in ('closed','handoff'):
         offer_chat_choices(cid)
     elif feedback['phase'] in ('open','retry'):
-        if st.button('Finish chat',key='finish_chat',icon=':material/check_circle:'):
-            feedback.update(phase='closed',csat_submitted=False,csat_skipped=False,csat_id=None);save_feedback(feedback);st.rerun()
-    prompt=st.chat_input('Tell Tia a little more…',disabled=feedback['phase'] not in ['open','retry'])
-    if prompt:submit_message(prompt,cid)
+        with st.container(key='end_chat_actions'):
+            if feedback.get('wrapup_pending'):
+                with st.container(key='chat_checkin'):
+                    yes,no=st.columns(2)
+                    if yes.button('Yes, I need more help',key='continue_after_checkin'):
+                        answer_checkin(cid,'Yes, I need more help')
+                    if no.button('No, end chat',key='close_after_checkin'):
+                        answer_checkin(cid,'No, end chat')
+            elif st.button('End chat',key='finish_chat'):
+                ask_to_close(cid,feedback);st.rerun()
 
 
 def to_csv(rows):
@@ -556,11 +589,12 @@ def to_csv(rows):
 
 
 def render_message(message,show_meta=False):
-    role=message['role'];is_user=role=='user';avatar='You' if is_user else 'Tia'
-    safe=html.escape(str(message['content'])).replace('\n','<br>')
+    role=message['role'];is_user=role=='user';avatar='You' if is_user else 'T'
+    safe=''.join('<p>'+html.escape(part).replace('\n','<br>')+'</p>' for part in str(message['content']).split('\n\n') if part.strip())
     meta=''
     if show_meta:meta=f'<div style="color:#7a8582;font-size:.75rem;margin-top:5px">{html.escape(message.get("created_at", ""))} · {html.escape(message.get("mode", ""))}</div>'
-    st.markdown(f'''<div class="chat-row {'user' if is_user else 'assistant'}">
+    checkin=' checkin-question' if message['content']=='Is there anything else I can help you with?' else ''
+    st.markdown(f'''<div class="chat-row {'user' if is_user else 'assistant'}{checkin}">
         <div class="chat-avatar {'you' if is_user else 'tia'}">{avatar}</div>
         <div class="chat-bubble">{safe}{meta}</div></div>''',unsafe_allow_html=True)
 
@@ -581,7 +615,7 @@ def support_view():
     st.title('Support')
     st.caption('Customer conversations and service requests')
     if not access_allowed('SUPPORT_ACCESS_CODE','Support'):return
-    chats,requests=st.tabs(['Customer chats','Requests'])
+    chats,requests,feedback_tab=st.tabs(['Customer chats','Requests','CSAT & feedback'])
     with chats:
         rows=agent.support_conversations()
         if not rows:st.info('No conversations have been logged yet.')
@@ -614,6 +648,36 @@ def support_view():
                 if st.form_submit_button('Save update'):
                     agent.update_request(request_id,status,assignee,note);st.rerun()
         else:st.info('No mock requests have been created.')
+
+
+    with feedback_tab:
+        st.subheader('CSAT & feedback')
+        st.caption('CSAT: percentage of submitted ratings that are 4 or 5 out of 5.')
+        responses=agent.support_feedback()
+        if not responses:st.info('No ratings yet. Customers can rate their experience and leave a comment when they finish a chat.')
+        else:
+            a,b,c=st.columns(3)
+            a.metric('Responses',len(responses))
+            b.metric('Average rating',f"{sum(r['rating'] for r in responses)/len(responses):.1f} / 5")
+            c.metric('CSAT',f"{sum(r['rating']>=4 for r in responses)/len(responses):.0%}")
+            ratings=st.multiselect('Filter ratings',[1,2,3,4,5],default=[1,2,3,4,5])
+            comments_only=st.checkbox('Only responses with written feedback')
+            visible=[{'customer_name':profiles.get(r['customer_id'],{}).get('name','Unknown customer'),**r}
+                     for r in responses if r['rating'] in ratings and (not comments_only or r['comment'])]
+            if not visible:st.info('No feedback matches these filters.')
+            else:
+                st.dataframe(visible,hide_index=True,width='stretch')
+                st.download_button('Download feedback CSV',to_csv(visible),'threadly-feedback.csv','text/csv')
+                selected=st.selectbox('Feedback details',[r['feedback_id'] for r in visible],
+                    format_func=lambda key:next(f"{r['customer_name']} · {r['rating']}/5 · {r['created_at'][:16]}" for r in visible if r['feedback_id']==key))
+                response=next(r for r in visible if r['feedback_id']==selected)
+                st.write(response['comment'] or 'No written comment provided.')
+                st.caption('Conversation: '+response['conversation_id'])
+                tickets=[r for r in agent.support_actions() if r['conversation_id']==response['conversation_id']]
+                if tickets:st.dataframe(tickets,hide_index=True,width='stretch')
+                else:st.caption('No service request was created for this conversation.')
+                with st.expander('View conversation'):
+                    for message in agent.messages(response['conversation_id']):render_message(message,show_meta=True)
 
 
 def admin_view():
@@ -656,6 +720,11 @@ def admin_view():
             st.download_button('Download diagnostic log',log_text,'apparelcare-diagnostic.log','text/plain')
         else:st.info('No diagnostic events have been written yet.')
     with configuration:
+        st.subheader('Database storage')
+        if getattr(agent.db,'backend','sqlite')=='postgres':
+            st.success('PostgreSQL connected. Conversations, tickets and feedback use hosted storage.')
+        else:
+            st.warning('SQLite local storage. Back up runtime data before rebuilding this host.')
         st.subheader('Model configuration')
         c1,c2,c3=st.columns(3)
         c1.metric('API key','Configured' if os.getenv(mode.upper()+'_API_KEY') else 'Missing')

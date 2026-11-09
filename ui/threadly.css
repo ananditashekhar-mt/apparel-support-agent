@@ -1,0 +1,97 @@
+/* Threadly care: ink, paper, and a single fresh lime accent. */
+.stApp {background:#f5f5f0;color:#242522}
+.stApp,.stApp p,.stApp button,.stApp input,.stApp textarea {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.block-container {max-width:1120px;padding:3.4rem 1.5rem 2rem}
+[data-testid="stHeader"] {background:#f5f5f0}
+[data-testid="stSidebar"] {background:#fff;border-right:1px solid #e7e8e1}
+[data-testid="stVerticalBlock"] {gap:.7rem}
+h1,h2,h3 {color:#242522;letter-spacing:-.025em}
+h3 {font-size:20px!important;padding:0!important;margin:0!important}
+p {font-size:14px;line-height:1.5}
+.brand-lockup {display:flex;align-items:center;gap:9px}
+.brand-mark {width:31px;height:31px;border-radius:10px;background:#242522;color:#dffc94;display:grid;place-items:center;font-size:22px;font-weight:800;font-style:italic}
+.brand-word {font-size:27px;font-weight:850;letter-spacing:-1.5px;text-transform:lowercase;color:#242522}
+.brand-sub {font-size:12px;color:#808178;margin-left:8px;border-left:1px solid #dcded3;padding-left:14px}
+.account {text-align:right;font-size:12px;color:#898a81;padding-top:8px}
+.account b {color:#41433b;font-weight:550}
+.st-key-care_workspace {max-width:680px;margin:0 auto;background:white;border:1px solid #e2e4d9;border-radius:22px;padding:20px;box-shadow:0 12px 48px #30342207}
+.st-key-chat_toolbar {border-bottom:1px solid #eceee5;padding-bottom:14px}
+.assistant-header {display:flex;align-items:center;gap:10px}
+.tia-avatar {width:40px;height:40px;flex-shrink:0;border-radius:13px;background:#dffc94;color:#282d1c;display:grid;place-items:center;font-size:21px;font-weight:700;transform:rotate(-4deg)}
+.assistant-header strong {display:block;font-size:17px;font-weight:650;color:#242522;letter-spacing:-.3px}
+.assistant-header span {font-size:11px;color:#84877a}
+.stButton>button {border:1px solid #e4e6dc;border-radius:10px;min-height:38px;color:#414439;background:#fff;font-size:13px;justify-content:flex-start;padding:8px 12px;box-shadow:none}
+.stButton>button p {font-size:13px;line-height:1.35}
+.stButton>button:hover {background:#f1f6e7;border-color:#cbd6b9;color:#242522}
+.stButton>button[kind="primary"] {background:#dffc94;border-color:#dffc94;color:#242522;justify-content:center;font-weight:600}
+.stButton>button[kind="primary"]:hover {background:#ceef7c;border-color:#ceef7c}
+.stButton>button:focus-visible {outline:2px solid #687352;outline-offset:2px}
+.st-key-chat_toolbar button {border:0;background:#f6f7f2;border-radius:20px;min-height:32px;padding:6px 10px}
+.st-key-chat_toolbar button p {font-size:11px}
+.st-key-chat_transcript {padding:12px 4px 12px 0;scrollbar-width:thin;scrollbar-color:#dcdfd3 transparent}
+.chat-row {display:flex;gap:8px;align-items:flex-start;margin:5px 0 13px}
+.chat-avatar {width:24px;height:24px;min-width:24px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:650;background:#eaf3d9;color:#53603b}
+.chat-avatar.you {background:#e7e9e3;color:#55594d}
+.chat-bubble {max-width:min(90%,500px);padding:12px 15px;border-radius:3px 15px 15px;background:#f5f6f1;color:#35382e;font-size:15px;line-height:1.55}
+.chat-bubble p {margin:0 0 .55rem;font-size:15px;line-height:1.55;letter-spacing:0;font-weight:400}
+.chat-bubble p:last-child {margin-bottom:0}
+.chat-row.user {flex-direction:row-reverse}
+.chat-row.user .chat-bubble {background:#30362a;color:#fff;border-radius:15px 3px 15px 15px}
+.intro {background:#f5f6f1;border-radius:4px 14px 14px;padding:12px 15px;color:#414439;font-size:15px;line-height:1.55;margin:3px 0 10px;max-width:500px}
+.order-copy {display:flex;flex-direction:column;gap:5px;padding:3px 0}
+.order-copy strong {font-size:13px;font-weight:600;line-height:1.35;color:#33362d}
+.order-copy span {font-size:11px;line-height:1.4;color:#85887c}
+[class*="st-key-order_card_"] {background:#fcfcf9;border-color:#eaede1!important;border-radius:13px!important}
+[class*="st-key-order_card_"] [data-testid="stHorizontalBlock"] {flex-wrap:nowrap!important;gap:12px}
+[class*="st-key-order_card_"] [data-testid="stColumn"] {min-width:0!important}
+[class*="st-key-order_card_"] button {background:#eef2e5;border:0;border-radius:18px;min-height:32px;padding:6px 10px}
+[class*="st-key-order_card_"] button p {font-size:11px}
+[data-testid="stImage"] img {border-radius:8px}
+.st-key-topic_grid {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px!important}
+.st-key-topic_grid button {min-height:38px;padding:8px 9px;border-radius:18px}
+.st-key-topic_grid button p {font-size:11px}
+.st-key-care_workspace [data-testid="stExpander"] {border:1px solid #e8ebdf;border-radius:10px;background:#fafbf6}
+/* One focus border. BaseWeb's nested input must not draw a second ring. */
+.st-key-care_workspace [data-testid="stChatInput"] {border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;border-radius:14px;padding:0}
+.st-key-care_workspace [data-testid="stChatInput"]>div {border:1px solid #dfe3d5!important;border-radius:14px!important;background:#fafbf7!important;box-shadow:none!important;outline:none!important}
+.st-key-care_workspace [data-testid="stChatInput"]:focus-within>div {border-color:#7d8967!important;box-shadow:0 0 0 2px #edf4df!important}
+.st-key-care_workspace [data-testid="stChatInput"] [data-baseweb="textarea"],.st-key-care_workspace [data-testid="stChatInput"] [data-baseweb="base-input"] {border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important}
+.st-key-care_workspace [data-testid="stChatInput"] textarea {font-size:15px!important;line-height:1.5!important;color:#35382e!important;background:transparent!important}
+.st-key-care_workspace [data-testid="stChatInput"] textarea::placeholder {color:#979b8e}
+.st-key-care_workspace [data-testid="stChatInputSubmitButton"] {color:#555e46}
+[data-testid="stBottom"] {background:transparent}
+@media(max-width:640px) {
+.block-container {padding:3.2rem .6rem 1rem}
+.st-key-care_workspace {padding:13px;border-radius:18px}
+.brand-sub {display:none}.account {font-size:10px}.brand-word {font-size:24px}
+.st-key-chat_toolbar [data-testid="stHorizontalBlock"] {flex-wrap:nowrap!important;gap:5px}
+.st-key-chat_toolbar [data-testid="stColumn"] {min-width:0!important;flex:1 1 0!important;width:0!important}
+.st-key-chat_toolbar button {padding:5px 7px;min-height:30px}
+.st-key-chat_toolbar button p {font-size:10px}
+.tia-avatar {width:33px;height:33px;font-size:18px;border-radius:11px}
+.assistant-header {gap:8px}.assistant-header strong {font-size:16px}.assistant-header span {font-size:10px}
+.st-key-chat_transcript {height:calc(100dvh - 285px)!important;min-height:300px;max-height:500px}
+.chat-bubble,.chat-bubble p {font-size:15px;line-height:1.55}
+.chat-bubble {padding:11px 13px}
+.st-key-topic_grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+[class*="st-key-order_card_"] [data-testid="stColumn"]:first-child {flex:0 0 40px!important;width:40px!important}
+[class*="st-key-order_card_"] [data-testid="stColumn"]:nth-child(2) {flex:1 1 0!important;width:0!important}
+[class*="st-key-order_card_"] [data-testid="stColumn"]:nth-child(3) {flex:0 0 78px!important;width:78px!important}
+[class*="st-key-order_card_"] button {padding:6px 8px}
+.order-copy strong {font-size:12px}.order-copy span {font-size:10px}
+}
+/* Consistent conversation actions on desktop and phone. */
+.st-key-chat_toolbar button[kind="primary"] {background:#dffc94;border:1px solid #d3ee9a;color:#252d18;font-weight:650}
+.st-key-chat_toolbar button[kind="primary"]:hover {background:#d2f17f}
+.st-key-end_chat_actions {margin-top:20px;padding-top:4px}
+.st-key-finish_chat button,.st-key-close_after_checkin button {background:#fbefeb!important;color:#965f55;border:1px solid #efdad3;border-radius:18px;min-height:30px;padding:5px 11px}
+.st-key-finish_chat button:hover,.st-key-close_after_checkin button:hover {background:#f7e2dc!important;border-color:#e7c8be;color:#825146}
+.st-key-finish_chat button p,.st-key-close_after_checkin button p,.st-key-continue_after_checkin button p {font-size:12px}
+.st-key-chat_checkin [data-testid="stHorizontalBlock"] {flex-wrap:nowrap!important;gap:8px}
+.st-key-chat_checkin [data-testid="stColumn"] {min-width:0!important;flex:1 1 0!important}
+.st-key-continue_after_checkin button {border-radius:18px;min-height:30px;padding:5px 10px}
+.chat-row.checkin-question {margin-top:22px}
+.st-key-demo_view_switch {max-width:680px;margin:0 auto 8px}
+.st-key-demo_view_switch [data-testid="stRadio"]>label {font-size:11px;color:#84877a}
+.st-key-demo_phone_frame {max-width:406px;margin:0 auto;background:#282c24;border:8px solid #282c24;border-radius:28px;overflow:hidden;box-shadow:0 14px 45px #30342215}
+.st-key-demo_phone_frame iframe {border-radius:19px;background:#f5f5f0;display:block;max-width:100%}
