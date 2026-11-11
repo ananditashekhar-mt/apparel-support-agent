@@ -6,7 +6,8 @@
 .stApp[data-test-script-state="running"] .threadly-loading-indicator,
 .stApp[data-test-script-state="initial"] .threadly-loading-indicator {display:flex}
 .threadly-loading-ring {display:inline-block;width:17px;height:17px;border:2px solid #e5ecd9;border-top-color:#5e6b46;border-radius:50%;animation:threadly-loading-turn .8s linear infinite}
-.threadly-chat-loading {display:none;align-items:center;gap:8px;padding:6px 12px;color:#5e6b46;font-size:13px}
+.threadly-chat-loading {display:none;align-items:center;gap:12px;min-height:48px;margin:4px 0 8px;padding:11px 15px;background:#f0f6e5;border:1px solid #d9e5c3;border-radius:13px;color:#364426;font-size:14px;font-weight:600;line-height:1.4}
+.threadly-chat-loading .threadly-loading-ring {width:24px;height:24px;flex:0 0 24px;border-width:3px;border-color:#d5dfc4;border-top-color:#435b2b}
 .stApp[data-test-script-state="running"] .threadly-chat-loading {display:flex}
 .stApp:has(.threadly-chat-loading) .threadly-loading-indicator {display:none}
 @keyframes threadly-loading-turn {to {transform:rotate(360deg)}}
