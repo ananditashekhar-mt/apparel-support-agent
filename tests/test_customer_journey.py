@@ -81,6 +81,32 @@ class CustomerJourneyTests(unittest.TestCase):
         self.assertIn('Save photos',[b.label for b in self.app.button])
         self.assertTrue(next(b for b in self.app.button if b.label=='Save photos').disabled)
 
+    def test_undelivered_damage_complaint_never_offers_upload(self):
+        instance=self.app.session_state['agent']
+        for status in ('In Transit','Shipped','Cancelled','Delayed'):
+            order=next(o for o in instance.orders.values() if o['Order_Status']==status)
+            with self.subTest(status=status):
+                picker=next(w for w in self.app.selectbox if w.label=='Preview customer')
+                label=next(label for label in picker.options if label.endswith('Customer '+order['Customer_ID'][-4:]))
+                picker.set_value(label).run()
+                self.click('＋ New chat')
+                self.app.chat_input[0].set_value('My item is damaged '+order['Order_ID']).run()
+                self.assertEqual(self.app.session_state['last']['status'],'blocked')
+                self.assertEqual(len(self.app.get('file_uploader')),0)
+                self.assertNotIn('Save photos',[b.label for b in self.app.button])
+
+    def test_damage_photos_hidden_before_recorded_delivery(self):
+        from datetime import date,timedelta
+        order=next(o for o in self.app.session_state['agent'].orders.values()
+                   if o['Order_Status']=='Delivered' and o['Shipped_Date'] and o['Delivered_Date'][:10]>o['Shipped_Date'][:10])
+        day=date.fromisoformat(order['Delivered_Date'][:10])-timedelta(days=1)
+        next(w for w in self.app.date_input if w.label=='Simulation date').set_value(day).run()
+        picker=next(w for w in self.app.selectbox if w.label=='Preview customer')
+        picker.set_value(next(label for label in picker.options if label.endswith('Customer '+order['Customer_ID'][-4:]))).run()
+        self.app.chat_input[0].set_value('My item is damaged '+order['Order_ID']).run()
+        self.assertEqual(self.app.session_state['last']['status'],'blocked')
+        self.assertEqual(len(self.app.get('file_uploader')),0)
+
     def test_closed_chat_reopens_only_after_reason_and_description(self):
         self.click('Select order');self.click('Delivery status')
         conversation=self.app.session_state['conversation_id']

@@ -26,6 +26,7 @@ AGENT_NAME=os.getenv('AGENT_NAME','Tia')
 st.set_page_config(page_title=BRAND_NAME, page_icon='🧵', layout='wide',
                    initial_sidebar_state='collapsed' if st.query_params.get('phone_preview')=='1' else 'expanded')
 st.markdown('<style>'+(Path(__file__).parent/'ui'/'threadly.css').read_text()+'</style>',unsafe_allow_html=True)
+st.markdown('<div class="threadly-loading-indicator" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Loading…</span></div>',unsafe_allow_html=True)
 PHONE_PREVIEW=st.query_params.get('phone_preview')=='1'
 if PHONE_PREVIEW:
     st.markdown('<style>[data-testid=stSidebar],[data-testid=stSidebarCollapsedControl],[data-testid=stHeader]{display:none}.block-container{padding:16px 10px 10px!important}</style>',unsafe_allow_html=True)
@@ -441,10 +442,16 @@ def offer_chat_choices(cid):
 
 
 def render_evidence(cid,last):
-    oid=(last or {}).get('order_id') or st.session_state.memory.get('order_id')
-    intent=(last or {}).get('intent') or st.session_state.memory.get('intent')
+    # An intent alone does not authorize evidence collection. In-transit and
+    # other blocked decisions must not show a damage upload form.
+    if not last or last.get('status')!='escalation_proposed' or (last.get('pending') or {}).get('kind')!='escalation':return
+    if last.get('as_of')!=demo_date.isoformat():return
+    oid=last.get('order_id')
+    intent=last.get('intent')
     if intent not in ('damaged_item','wrong_item','quality_issue') or not oid:return
-    if oid not in {o['Order_ID'] for o in profiles[cid]['orders']}:return
+    source=next((o for o in profiles[cid]['orders'] if o['Order_ID']==oid),None)
+    order=order_as_of(source,demo_date)
+    if not order or order['Order_Status']!='Delivered' or not order.get('Delivered_Date'):return
     session=st.session_state.conversation_id
     with st.container(border=True):
         st.markdown('**Add photos for your Support Expert**')
