@@ -1,0 +1,727 @@
+{
+  "manifest": {
+    "model": "gpt-4.1-mini",
+    "started_utc": "2026-11-11T13:25:42.454001+00:00",
+    "sha256": {
+      "agent.py": "42b7e6ff07d3ad9d5a23640337753c57ae39bb8a5e1a92b5217e39f79d9ebc44",
+      "data/intent_taxonomy.json": "5e31f0b08acf67bdccf117bdd73c85ab345b358cc6adcf5329ab13b34328745e",
+      "data/orders.json": "bcc7fb4036183ab7a879beed5d97aef25d13df4da90485b3439ee9c33284e5a3",
+      "data/policies.json": "11c1eb59dad36466a0284ea5191e08d2478ffcf810f9ad110d5aee8536ef38db",
+      "scripts/evaluate_damage_fix.py": "45e1154924e62100012d4b796b2a2d581c7f884fbf9aec3511b2225e3377b672",
+      "reports/damage_recognition/quality_cases.json": "ae524cd5ae5f22fe4565cf5a266bb6d592897a10abb3e234b12e38da44478465"
+    }
+  },
+  "overall": {
+    "count": 16,
+    "completed_without_api_error": 16,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100.0
+    },
+    "outcome_accuracy": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100.0
+    },
+    "strict_success": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100.0
+    },
+    "escalation_agreement": {
+      "passed": 16,
+      "total": 16,
+      "percent": 100.0
+    },
+    "tokens": {
+      "input_tokens": 31884,
+      "output_tokens": 1594,
+      "requests": 32
+    },
+    "mock_confirmations": {
+      "attempted": 16,
+      "passed": 16
+    }
+  },
+  "historical_damage": {
+    "count": 0,
+    "completed_without_api_error": 0,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "outcome_accuracy": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "strict_success": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "escalation_agreement": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "tokens": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "requests": 0
+    },
+    "mock_confirmations": {
+      "attempted": 0,
+      "passed": 0
+    }
+  },
+  "fresh": {
+    "count": 0,
+    "completed_without_api_error": 0,
+    "api_failures": 0,
+    "intent_accuracy": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "outcome_accuracy": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "strict_success": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "escalation_agreement": {
+      "passed": 0,
+      "total": 0,
+      "percent": null
+    },
+    "tokens": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "requests": 0
+    },
+    "mock_confirmations": {
+      "attempted": 0,
+      "passed": 0
+    }
+  },
+  "failures": [],
+  "results": [
+    {
+      "id": "CONV-CHALLENGE-0077",
+      "split": "challenge",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Quality achhi nahi hai; stitching is coming apart. I am contacting you about my recent purchase. ORD-20492",
+      "order_id": "ORD-20492",
+      "customer_id": "CUST-2026-0169",
+      "as_of": "2026-12-16",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 2004,
+        "output_tokens": 90,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Quality achhi nahi hai; stitching is coming apart. I am contacting you about my recent purchase. ORD-20492",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your stitching is coming apart. Please add a clear photo showing the damage and one of the full item using the upload below.\n\nIf you’re unable to upload a photo now, you can still request help. Choose “Request a Support Expert” below so a Support Expert can review your case.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 1.78
+    },
+    {
+      "id": "CONV-CHALLENGE-0106",
+      "split": "challenge",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Hinglish / policy boundary",
+      "message": "Quality achhi nahi hai; stitching is coming apart. I am contacting you about my recent purchase. ORD-20521",
+      "order_id": "ORD-20521",
+      "customer_id": "CUST-2026-0178",
+      "as_of": "2026-11-02",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 2004,
+        "output_tokens": 103,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "Quality achhi nahi hai; stitching is coming apart. I am contacting you about my recent purchase. ORD-20521",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item’s stitching is coming apart. To help, please upload a clear photo showing the damage along with a full view of the item using the photo upload below.\n\nIf you can’t upload a photo now, you can still request help. Please select “Request a Support Expert” below so a Support Expert can review your concern and take a closer look.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.62
+    },
+    {
+      "id": "CONV-RESERVE-0012",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The material has a quality flaw that appeared on inspection. ORD-20557",
+      "order_id": "ORD-20557",
+      "customer_id": "CUST-2026-0191",
+      "as_of": "2026-12-16",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1986,
+        "output_tokens": 97,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The material has a quality flaw that appeared on inspection. ORD-20557",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item has a quality flaw. Please add a clear photo of the damage and one of the full item using the photo upload below to help with the review.\n\nIf you can’t upload now, you can still request help. Select “Request a Support Expert” below, and I’ll save your concern for a closer look.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.23
+    },
+    {
+      "id": "CONV-RESERVE-0041",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The material has a quality flaw that appeared on inspection. ORD-20586",
+      "order_id": "ORD-20586",
+      "customer_id": "CUST-2026-0198",
+      "as_of": "2026-11-21",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1986,
+        "output_tokens": 108,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The material has a quality flaw that appeared on inspection. ORD-20586",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with a quality flaw. Since this issue matches one already noted on your order, I cannot approve a replacement here. \n\nPlease upload a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload now, you can still request help by selecting “Request a Support Expert” so your concern can be reviewed more closely.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.21
+    },
+    {
+      "id": "CONV-RESERVE-0067",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The material has a quality flaw that appeared on inspection. I am contacting you about my recent purchase. ORD-20557",
+      "order_id": "ORD-20557",
+      "customer_id": "CUST-2026-0191",
+      "as_of": "2026-12-16",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 2004,
+        "output_tokens": 105,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The material has a quality flaw that appeared on inspection. I am contacting you about my recent purchase. ORD-20557",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with a quality flaw. Please upload a clear photo of the damage and a photo of the full item using the photo upload below. This matches the quality issue already noted on your order.\n\nIf you can’t upload a photo now, you can still request help. Please select “Request a Support Expert” below so a Support Expert can review your concern.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.34
+    },
+    {
+      "id": "CONV-RESERVE-0096",
+      "split": "reserve",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The material has a quality flaw that appeared on inspection. I am contacting you about my recent purchase. ORD-20586",
+      "order_id": "ORD-20586",
+      "customer_id": "CUST-2026-0198",
+      "as_of": "2026-11-21",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 2004,
+        "output_tokens": 114,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The material has a quality flaw that appeared on inspection. I am contacting you about my recent purchase. ORD-20586",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with a quality flaw. Since this matches the quality issue noted on your order, I can’t approve a replacement here without further review.\n\nPlease add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help by selecting “Request a Support Expert” below to have a Support Expert review your concern.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.45
+    },
+    {
+      "id": "CONV-TEST-0012",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. ORD-20372",
+      "order_id": "ORD-20372",
+      "customer_id": "CUST-2026-0129",
+      "as_of": "2026-12-21",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1980,
+        "output_tokens": 92,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. ORD-20372",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item has this issue. Since it matches a quality problem already noted for your order, I can’t approve a replacement directly.\n\nPlease add a clear photo of the damage and one showing the full item using the upload below. Then select “Request a Support Expert” so someone can review this further.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.44
+    },
+    {
+      "id": "CONV-TEST-0041",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. ORD-20401",
+      "order_id": "ORD-20401",
+      "customer_id": "CUST-2026-0138",
+      "as_of": "2026-11-03",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1980,
+        "output_tokens": 99,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. ORD-20401",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with a quality issue that matches what we already noted on your order. Since I can’t approve a replacement here, the best next step is to request a Support Expert review.\n\nPlease upload clear photos showing the damage and the full item, then select “Request a Support Expert” below to save your concern for their review.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.97
+    },
+    {
+      "id": "CONV-TEST-0070",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. ORD-20430",
+      "order_id": "ORD-20430",
+      "customer_id": "CUST-2026-0148",
+      "as_of": "2026-10-12",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1980,
+        "output_tokens": 94,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. ORD-20430",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nThe quality issue you’ve described matches the problem already noted on your order, so I can’t approve a replacement here. Please add clear photos of the damage and the full item using the photo upload below if you haven’t yet.\n\nAfter that, select “Request a Support Expert” so your concern can be reviewed more closely.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.72
+    },
+    {
+      "id": "CONV-TEST-0099",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. ORD-20459",
+      "order_id": "ORD-20459",
+      "customer_id": "CUST-2026-0157",
+      "as_of": "2026-12-01",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1980,
+        "output_tokens": 102,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. ORD-20459",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry the fabric has a quality issue like this. Since this matches the issue already noted on your order, I can’t approve a replacement here.\n\nPlease add a clear photo of the damage and one of the full item using the photo upload below. Then, select “Request a Support Expert” so someone can take a closer look and help you from there.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.44
+    },
+    {
+      "id": "CONV-TEST-0132",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20372",
+      "order_id": "ORD-20372",
+      "customer_id": "CUST-2026-0129",
+      "as_of": "2026-12-21",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1998,
+        "output_tokens": 94,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20372",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI see the fabric has a manufacturing quality issue with order ORD-20372. Please upload clear photos of the damage and the full item using the photo upload below to help with your request. \n\nIf you can’t upload right now, select “Request a Support Expert” below to have a Support Expert review your concern closely.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.93
+    },
+    {
+      "id": "CONV-TEST-0161",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20401",
+      "order_id": "ORD-20401",
+      "customer_id": "CUST-2026-0138",
+      "as_of": "2026-11-03",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1998,
+        "output_tokens": 94,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20401",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI'm sorry your item arrived with a quality issue. Please add a clear photo of the damage and one showing the full item using the photo upload below. \n\nIf you can’t upload a photo right now, you can still ask for help by selecting “Request a Support Expert” below. They can review your concern more closely.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.54
+    },
+    {
+      "id": "CONV-TEST-0190",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20430",
+      "order_id": "ORD-20430",
+      "customer_id": "CUST-2026-0148",
+      "as_of": "2026-10-12",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1998,
+        "output_tokens": 99,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20430",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item has a quality issue. Please add a clear photo of the damage and one of the full item using the photo upload below. \n\nIf you can’t upload a photo now, select “Request a Support Expert” below to have your concern reviewed by a Support Expert. I’ve saved your note with this conversation for their review.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.11
+    },
+    {
+      "id": "CONV-TEST-0219",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20459",
+      "order_id": "ORD-20459",
+      "customer_id": "CUST-2026-0157",
+      "as_of": "2026-12-01",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1998,
+        "output_tokens": 105,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. I am contacting you about my recent purchase. ORD-20459",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nI’m sorry your item arrived with this quality issue. Please upload a clear photo showing the damage and one of the full item using the photo upload below so we can confirm the problem.\n\nIf you can’t upload a photo now, you can still request help. Select “Request a Support Expert” below and I’ll save your concern here for a closer review by a Support Expert.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 3.5
+    },
+    {
+      "id": "CONV-TEST-0252",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. Please explain the next step. ORD-20372",
+      "order_id": "ORD-20372",
+      "customer_id": "CUST-2026-0129",
+      "as_of": "2026-12-21",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1992,
+        "output_tokens": 95,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. Please explain the next step. ORD-20372",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nYour item has a known quality issue, so I can’t approve a replacement directly. Please add a clear photo of the damage and one of the full item using the photo upload below.\n\nIf you can’t upload a photo now, you can still select “Request a Support Expert” below to have a Support Expert review your concern.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.17
+    },
+    {
+      "id": "CONV-TEST-0281",
+      "split": "test",
+      "use_case": "Damaged or defective item",
+      "variant": "Stitching defect",
+      "test_kind": "Standard policy scenario",
+      "message": "The fabric has a manufacturing quality issue. Please explain the next step. ORD-20401",
+      "order_id": "ORD-20401",
+      "customer_id": "CUST-2026-0138",
+      "as_of": "2026-11-03",
+      "expected_intent": "quality_issue",
+      "expected_status": "escalation_proposed",
+      "expected_pending": "escalation",
+      "usage": {
+        "input_tokens": 1992,
+        "output_tokens": 103,
+        "requests": 2
+      },
+      "turns": [
+        {
+          "message": "The fabric has a manufacturing quality issue. Please explain the next step. ORD-20401",
+          "intent": "quality_issue",
+          "status": "escalation_proposed",
+          "pending": "escalation",
+          "response": "Hi,\nI’m Tia from Threadly support.\n\nYour item’s quality issue matches what was already noted on this order, so I can’t approve a replacement here. Please add a clear photo of the damage and one showing the full item using the photo upload below.\n\nIf you can’t upload a photo now, you can still request help. Select “Request a Support Expert” below to have your concern reviewed more closely.",
+          "decision_response": "I’m sorry your item arrived this way. Please add a clear photo of the damage and one of the full item using the photo upload below. If you can’t upload a photo now, you can still request help. This matches the quality issue already noted on this order. I can’t approve a replacement here, but I can help you request a review. A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review."
+        }
+      ],
+      "confirmation_ok": true,
+      "actual_intent": "quality_issue",
+      "actual_status": "escalation_proposed",
+      "actual_pending": "escalation",
+      "intent_correct": true,
+      "outcome_correct": true,
+      "escalation_correct": true,
+      "strict_success": true,
+      "elapsed_seconds": 2.81
+    }
+  ]
+}
