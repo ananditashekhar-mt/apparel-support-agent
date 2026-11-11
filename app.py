@@ -187,11 +187,10 @@ def submit_message(prompt,cid):
     feedback=feedback_state()
     if feedback['phase'] not in ['open','retry']:return
     try:
-        with st.spinner('Checking your request…'):
-            result=agent.chat(prompt,st.session_state.memory,st.session_state.history,demo_date,
-                st.session_state.condition_ok,st.session_state.conversation_id,cid,input_rate,output_rate,usd_inr,
-                [order['Order_ID'] for order in profiles[cid]['orders'] if order_as_of(order,demo_date)],customer_name=profiles[cid]['name'],
-                review_unlisted=st.session_state.get('unlisted_issue',False),offer_order_picker=True)
+        result=agent.chat(prompt,st.session_state.memory,st.session_state.history,demo_date,
+            st.session_state.condition_ok,st.session_state.conversation_id,cid,input_rate,output_rate,usd_inr,
+            [order['Order_ID'] for order in profiles[cid]['orders'] if order_as_of(order,demo_date)],customer_name=profiles[cid]['name'],
+            review_unlisted=st.session_state.get('unlisted_issue',False),offer_order_picker=True)
         if not result.get('needs_order_selection') and (result.get('feedback_required') or feedback['phase']=='retry'):
             if result.get('pending',{} ) and result['pending']['kind']=='escalation':
                 feedback['support_result']=result
@@ -391,6 +390,7 @@ def customer_view():
                     st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
         with st.container(height=450,border=False,key='chat_transcript'):
             render_customer_journey(cid,profile)
+        st.markdown('<div class="threadly-chat-loading" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Loading…</span></div>',unsafe_allow_html=True)
         phase=feedback_state()['phase']
         disabled=phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
         prompt=st.chat_input('Type your message…',key='customer_message',disabled=disabled)
