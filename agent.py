@@ -6,6 +6,8 @@ import logging
 import os
 import re
 import uuid
+import copy
+from functools import lru_cache
 from datetime import date, datetime, timezone
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -21,8 +23,15 @@ if not LOGGER.handlers:
     handler=RotatingFileHandler(LOG_DIR/'app.log',maxBytes=1_000_000,backupCount=3)
     handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
     LOGGER.addHandler(handler);LOGGER.setLevel(logging.INFO);LOGGER.propagate=False
+@lru_cache(maxsize=32)
+def _load_json(path, modified_ns, size):
+    return json.loads(Path(path).read_text())
+
 def load(name):
-    return json.loads((ROOT / 'data' / f'{name}.json').read_text())
+    path=ROOT / 'data' / f'{name}.json'
+    stat=path.stat()
+    # Cache file parsing, but never share mutable fixture records with sessions.
+    return copy.deepcopy(_load_json(str(path),stat.st_mtime_ns,stat.st_size))
 
 COLOURS = sorted({r['Colour'] for r in load('product_catalog')},key=len,reverse=True)
 INTENTS = [r['Intent'] for r in load('intent_taxonomy')] + ['unknown']
@@ -205,12 +214,9 @@ class Agent:
         self.catalog = load('product_catalog')
         self.model = Model(mode,model,client)
         self.jev = JevShadow()
-        from database import open_database, initialize_database
+        from database import open_database, prepare_runtime_database
         self.db = open_database(db_path, db_url)
-        initialize_database(self.db)
-        self.db.executemany('INSERT OR IGNORE INTO stock VALUES(?,?)',
-                            [(self.variant(row),row['Stock_Qty']) for row in self.catalog])
-        self.db.commit()
+        prepare_runtime_database(self.db, [(self.variant(row),row['Stock_Qty']) for row in self.catalog])
         from langgraph.graph import StateGraph, START, END
         graph=StateGraph(State)
         for name, fn in [('understand',self.understand),('retrieve',self.retrieve),('resolve',self.resolve),('respond',self.respond)]:graph.add_node(name,fn)
@@ -516,11 +522,24 @@ class Agent:
         result=json.loads(row[0]) if row else {}
         intent=result.get('intent','Support question').replace('_',' ').capitalize()
         return intent+(' · '+result['order_id'] if result.get('order_id') else '')
-    def customer_conversations(self,customer_id):
-        return [{'id':r[0],'mode':r[1],'started_at':r[2],'updated_at':r[3]} for r in self.db.execute(
-            '''SELECT c.id,c.mode,c.started_at,c.updated_at FROM conversations c
+    def customer_conversations(self,customer_id,limit=None):
+        # Fetch the latest event with each owned conversation in one round trip.
+        # Ownership filtering stays in SQL; never cache one customer's rows globally.
+        sql='''SELECT c.id,c.mode,c.started_at,c.updated_at,
+                    (SELECT e.payload FROM events e WHERE e.session=c.id ORDER BY e.rowid DESC LIMIT 1)
+               FROM conversations c
                WHERE c.customer_id=? AND EXISTS(SELECT 1 FROM messages m WHERE m.conversation_id=c.id)
-               ORDER BY c.updated_at DESC''',(customer_id,))]
+               ORDER BY c.updated_at DESC'''
+        parameters=[customer_id]
+        if limit is not None:
+            sql+=' LIMIT ?';parameters.append(max(0,int(limit)))
+        rows=[]
+        for row in self.db.execute(sql,parameters):
+            result=json.loads(row[4]) if row[4] else {}
+            label=result.get('intent','Support question').replace('_',' ').capitalize()
+            if result.get('order_id'):label+=' · '+result['order_id']
+            rows.append(dict(id=row[0],mode=row[1],started_at=row[2],updated_at=row[3],label=label))
+        return rows
     def messages(self,conversation_id,customer_id=None):
         sql='SELECT role,content,mode,created_at FROM messages WHERE conversation_id=?';params=[conversation_id]
         if customer_id is not None:sql+=' AND customer_id=?';params.append(customer_id)

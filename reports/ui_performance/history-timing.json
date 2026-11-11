@@ -1,0 +1,36 @@
+{
+  "connection_seconds": 0.565,
+  "measurements": [
+    {
+      "iteration": 0,
+      "version": "before",
+      "queries": 25,
+      "rows": 12,
+      "seconds": 1.57
+    },
+    {
+      "iteration": 0,
+      "version": "after",
+      "queries": 1,
+      "rows": 12,
+      "seconds": 0.1
+    },
+    {
+      "iteration": 1,
+      "version": "before",
+      "queries": 25,
+      "rows": 12,
+      "seconds": 1.752
+    },
+    {
+      "iteration": 1,
+      "version": "after",
+      "queries": 1,
+      "rows": 12,
+      "seconds": 0.051
+    }
+  ],
+  "labels_identical": true,
+  "read_only": true,
+  "location": "local machine to configured Neon; not browser end-to-end"
+}
