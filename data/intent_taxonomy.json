@@ -19,7 +19,7 @@
   },
   {
     "Intent": "damaged_item",
-    "Description": "Item damaged",
+    "Description": "Actual physical fault in the received garment: tear, rip, hole, split seam, or broken zip/button. Recognize damage even before try-on and when a return, exchange or refund is requested. Stitching faults framed explicitly as poor quality belong to quality_issue. Exclude negations, hypotheticals, other items, prints and packaging-only damage.",
     "Default_Action": "Collect photo and arrange return/replacement",
     "Escalation_Default": "Conditional"
   },
@@ -61,7 +61,7 @@
   },
   {
     "Intent": "quality_issue",
-    "Description": "Quality concern",
+    "Description": "General quality concern about fabric, feel, finish or durability. Explicit poor-quality complaints about stitching belong here, including Hinglish complaints, even if stitching is coming apart. Standalone fault reports without quality framing belong to damaged_item.",
     "Default_Action": "Distinguish defect vs preference",
     "Escalation_Default": "Conditional"
   },
