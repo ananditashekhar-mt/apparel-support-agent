@@ -1,0 +1,11 @@
+{
+  "bootstrap_calls_across_two_sessions": 1,
+  "first_session_seconds": 2.42,
+  "second_session_seconds": 0.433,
+  "stock_preserved": true,
+  "feedback_preserved": true,
+  "customer_isolation": true,
+  "indexes_created": true,
+  "public_schema_untouched": true,
+  "temporary_schema_removed": true
+}

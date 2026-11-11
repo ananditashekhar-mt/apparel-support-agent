@@ -101,7 +101,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -125,15 +125,21 @@ def reset_customer_state(cid,new=False):
         st.session_state.memory={};st.session_state.last=None;st.session_state.condition_ok=False
 
 
+_feedback_reads={}
+
 def feedback_state():
     # Persist the two-round limit across page reloads and reopening saved chats.
-    row=agent.db.execute('SELECT payload FROM chat_feedback WHERE conversation_id=?',(st.session_state.conversation_id,)).fetchone()
-    return json.loads(row[0]) if row else {'rounds':0,'phase':'open','support_result':None}
+    session=st.session_state.conversation_id
+    if session not in _feedback_reads:
+        row=agent.db.execute('SELECT payload FROM chat_feedback WHERE conversation_id=?',(session,)).fetchone()
+        _feedback_reads[session]=json.loads(row[0]) if row else {'rounds':0,'phase':'open','support_result':None}
+    return copy.deepcopy(_feedback_reads[session])
 
 
 def save_feedback(state):
     agent.db.execute('INSERT OR REPLACE INTO chat_feedback VALUES(?,?)',
         (st.session_state.conversation_id,json.dumps(state)));agent.db.commit()
+    _feedback_reads[st.session_state.conversation_id]=copy.deepcopy(state)
 
 
 
@@ -350,8 +356,8 @@ def customer_view():
     with st.sidebar:
         st.divider()
         st.caption('YOUR CONVERSATIONS')
-        for conversation in agent.customer_conversations(cid)[:12]:
-            label=agent.conversation_label(conversation['id'],cid)+' · '+conversation['updated_at'][:10]
+        for conversation in agent.customer_conversations(cid,limit=12):
+            label=conversation['label']+' · '+conversation['updated_at'][:10]
             if st.button(label,key='history_'+conversation['id'],width='stretch'):
                 open_saved_conversation(cid,conversation['id']);st.rerun()
         st.divider()
@@ -472,7 +478,7 @@ def render_customer_journey(cid,profile):
         conversations=agent.customer_conversations(cid)
         if not conversations:st.info('No previous chats yet. Start a new chat whenever you need help.')
         for conversation in conversations:
-            label=agent.conversation_label(conversation['id'],cid)+' · '+conversation['updated_at'][:10]
+            label=conversation['label']+' · '+conversation['updated_at'][:10]
             if st.button(label,key='recent_'+conversation['id'],width='stretch'):
                 open_saved_conversation(cid,conversation['id']);st.rerun()
         return
