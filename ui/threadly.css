@@ -6,6 +6,9 @@
 .stApp[data-test-script-state="running"] .threadly-loading-indicator,
 .stApp[data-test-script-state="initial"] .threadly-loading-indicator {display:flex}
 .threadly-loading-ring {display:inline-block;width:17px;height:17px;border:2px solid #e5ecd9;border-top-color:#5e6b46;border-radius:50%;animation:threadly-loading-turn .8s linear infinite}
+.threadly-chat-loading {display:none;align-items:center;gap:8px;padding:6px 12px;color:#5e6b46;font-size:13px}
+.stApp[data-test-script-state="running"] .threadly-chat-loading {display:flex}
+.stApp:has(.threadly-chat-loading) .threadly-loading-indicator {display:none}
 @keyframes threadly-loading-turn {to {transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce) {.threadly-loading-ring {animation:none;border-style:dotted}}
 .stApp,.stApp p,.stApp button,.stApp input,.stApp textarea {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}

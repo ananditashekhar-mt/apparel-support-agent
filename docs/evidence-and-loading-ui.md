@@ -13,9 +13,11 @@ the simulation date before a recorded delivery and verifies uploads stay
 hidden. These tests run the actual customer interface and deterministic policy
 path; no new LLM classification change is involved.
 
-A circular, non-blocking Loading indicator appears during Streamlit's initial
-and running script states, covering reruns caused by navigation, reads, saves
-and replies. It disappears when the run completes, supports reduced-motion
-preferences, and leaves the toolbar, sidebar and composer accessible. The
-existing contextual request spinner remains. Before the app's first HTML/CSS
+A circular, non-blocking Loading indicator appears inside the chat window,
+just above the composer, during reruns caused by navigation, reads, saves and
+replies. The separate page-level indicator is suppressed whenever the chat
+indicator is present, avoiding duplicate spinners. Outside the chat workspace,
+the page indicator covers initial/running script states. Indicators disappear
+when the run completes, support reduced-motion preferences, and leave the
+toolbar, sidebar and composer accessible. Before the app's first HTML/CSS
 arrives, and during file-transfer progress, Streamlit's native indicators apply.
