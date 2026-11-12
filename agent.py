@@ -34,7 +34,7 @@ def load(name):
     return copy.deepcopy(_load_json(str(path),stat.st_mtime_ns,stat.st_size))
 
 COLOURS = sorted({r['Colour'] for r in load('product_catalog')},key=len,reverse=True)
-INTENTS = [r['Intent'] for r in load('intent_taxonomy')] + ['unknown']
+INTENTS = [r['Intent'] for r in load('intent_taxonomy')] + ['unknown', 'greeting', 'general_question']
 POLICY_IDS = {
     'return_request': ['POL-01', 'POL-08'], 'exchange_size': ['POL-02','POL-01','POL-08'],
     'exchange_color': ['POL-02','POL-01','POL-08'], 'fit_issue': ['POL-02','POL-01','POL-08'],
@@ -63,12 +63,41 @@ def retrieve_policy(message, intent):
     ranked = sorted(policies, key=lambda p: len(tokens & set(re.findall(r'\w+', json.dumps(p).lower()))), reverse=True)
     return [p for p in policies if p['Policy_ID'] in required] or ranked[:2]
 
+def conversational_route(message):
+    """Recognize non-transactional turns before any order lookup or model call."""
+    text = message.lower().strip()
+    normal = re.sub(r'[^a-z ]', '', text).strip()
+    if normal in ('hi', 'hello', 'hey', 'help', 'i need help', 'can you help', 'i need assistance', 'help me', 'thanks', 'thank you'):
+        return 'greeting'
+    policy_question = ('policy' in text or 'policies' in text) and (any(w in text for w in ('threadly','return','exchange','delivery','shipping','refund','cancel','your')) or normal in ('policy','policies'))
+    general = policy_question or (any(w in text for w in ('in general', 'how do returns work',
+                'how do exchanges work', 'delivery options', 'shipping options', 'how long does delivery take',
+                'can i return an item', 'can i exchange an item', 'do you accept returns', 'return window', 'exchange window'))
+               or bool(re.search(r'\b(what|how)\b.*\b(return|exchange|delivery|shipping)\b', text)))
+    general = general or (bool(re.search(r'^(can|are|is|do|does|tell me|explain)\b', text))
+                          and any(w in text for w in ('return','exchange','delivery','shipping')))
+    personal = bool(re.search(r'\b(my|mine|this|that)\b|ord-\d+', text))
+    return 'general_question' if general and not personal else None
+
+
+def general_answer(message):
+    text = message.lower()
+    if any(w in text for w in ('fee','cost','free')):
+        return 'The available policies don’t specify return, exchange or shipping fees. A Support Expert would need to confirm those details. I can explain the recorded eligibility rules.'
+    if 'return' in text:
+        return 'Returns are available within 30 days of delivery. Items must be unworn, unwashed and have original tags attached; used, altered, stained or tagless items may fail inspection.'
+    if 'exchange' in text:
+        return 'Size and colour exchanges are available within 30 days of delivery, subject to stock. Item condition and availability must be checked before a request can be made.'
+    if 'delivery' in text or 'shipping' in text:
+        return 'Delivery dates depend on the order’s promised delivery date. I don’t have a general delivery-time or shipping-options policy. For a specific delivery, I can check the recorded carrier updates and promised date once you choose an order.'
+    return '\n'.join(f"{p['Policy_Type']}: {p['Rule_Window']}. {p['Policy_Text']}" for p in load('policies'))
+
 def offline_parse(text, previous=None):
     t = text.lower()
     rules = [
         ('price_adjustment', ['price dropped','price adjustment','cheaper']),
         ('refund_status', ['refund','payment dispute','chargeback']),
-        ('delivered_not_received', ['not received','never received','marked delivered']),
+        ('delivered_not_received', ['not received','never received','marked delivered','never arrived']),
         ('missing_item', ['missing','partial','one item','part of the quantity','fewer items']),
         ('wrong_item', ['wrong','incorrect']),
         ('damaged_item', ['damaged','torn','broken','defect']),
@@ -81,7 +110,7 @@ def offline_parse(text, previous=None):
         ('quality_issue', ['quality','fabric']),
         ('return_request', ['return']),
         ('delivery_delay', ['late','delay','promised date']),
-        ('order_tracking', ['where','track','status','delivery'])]
+        ('order_tracking', ['where is my order','where is ord-','where’s my order','track','status','delivery'])]
     intent = next((i for i, words in rules if any(w in t for w in words)), 'unknown')
     if 'return' in t and not any(w in t for w in ['exchange','washed','tagless','used item','worn it','removed tags','after 30','35 days','40 days','outside window']):
         intent='return_request'
@@ -122,6 +151,12 @@ class Model:
         else:
             self.client = OpenAI(timeout=30, max_retries=1)
     def understand(self, message, history, previous):
+        route = conversational_route(message)
+        if route:
+            return {'intent':route,'order_id':None,'size':None,'colour':None}, {}
+        previous = dict(previous or {})
+        if previous.get('intent') in ('greeting','general_question','unknown'):
+            previous['intent'] = previous.get('order_intent','unknown')
         if self.mode == 'Demo':
             return offline_parse(message, previous), {}
         if not self.model:
@@ -240,13 +275,16 @@ class Agent:
         parsed['condition_issues']=issues
         if review and parsed['intent'] in ('return_request','return_outside_window','used_item_return'):
             parsed['intent']='used_item_return'
-        if parsed['intent'] != memory.get('intent'):
+        prior_intent=memory.get('order_intent',memory.get('intent'))
+        if parsed['intent'] not in ('greeting','general_question','unknown'):
+            memory['order_intent'] = parsed['intent']
+        if parsed['intent'] != prior_intent and parsed['intent'] not in ('greeting','general_question','unknown'):
             memory.pop('size',None);memory.pop('colour',None)
         for k,v in parsed.items():
             if v is not None:memory[k]=v
         return {'parsed':memory,'usage':usage,'trace':['Understand customer request']}
     def retrieve(self,s):
-        p=s['parsed'];order=order_as_of(self.orders.get(p.get('order_id')),self.today)
+        p=s['parsed'];order=None if p['intent'] in ('greeting','general_question','unknown') else order_as_of(self.orders.get(p.get('order_id')),self.today)
         return {'order':order,'policies':retrieve_policy(s['message'],p['intent']),
                 'trace':s['trace']+['Retrieve policy sections','Exact order lookup']}
     def resolve(self,s):
@@ -258,9 +296,12 @@ class Agent:
             return {'result':out}
         def escalation(reason):
             return done(reason+' A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review.','escalation_proposed',{'kind':'escalation','reason':reason})
-        if intent=='unknown' and self.review_unlisted:
+        if intent in ('greeting','general_question'):
+            out['tools']=['retrieve_policy'] if intent=='general_question' else []
+            return done(general_answer(s['message']) if intent=='general_question' else 'How can I help you today? I can answer Threadly policy questions or help with an order.', 'answered')
+        if intent=='unknown' and 'invoice' in s['message'].lower():
             return escalation('Thank you for explaining what’s happened. I’m sorry I can’t resolve this through the support options available to me, and I don’t want to give you the wrong advice.')
-        if intent=='unknown':return done('I can help with order tracking, a delivery problem, or a return/exchange. What happened?')
+        if intent=='unknown':return done('I can help with Threadly policies, order tracking, delivery problems, returns and exchanges. I don’t have information to answer that question. What would you like help with?')
         if intent in ['refund_status','price_adjustment']:
             return escalation('I know payment concerns can be worrying. Refunds, payment disputes and price adjustments need a Support Expert, as I can’t safely check or change payments here.')
         if not p.get('order_id'):
@@ -389,7 +430,7 @@ class Agent:
     def respond(self,s):
         result=s['result']
         result['decision_response']=result['response']
-        if self.model.mode!='Demo':
+        if self.model.mode!='Demo' and result['intent'] not in ('greeting','general_question','unknown'):
             result['response'],usage=self.model.compose(s['message'],result)
             result['usage']={k:result['usage'].get(k,0)+v for k,v in usage.items()}
         # Keep the expired-window explanation exact: no condition request or unsolicited handoff.
@@ -549,7 +590,7 @@ class Agent:
         return [{'conversation_id':r[0],'customer_id':r[1],'mode':r[2],'started_at':r[3],'updated_at':r[4],
                  'messages':r[5]} for r in self.db.execute('''SELECT c.id,c.customer_id,c.mode,c.started_at,c.updated_at,COUNT(m.id)
                  FROM conversations c JOIN messages m ON m.conversation_id=c.id
-                 GROUP BY c.id HAVING COUNT(m.id)>0 ORDER BY c.updated_at DESC''')]
+                 GROUP BY c.id,c.customer_id,c.mode,c.started_at,c.updated_at HAVING COUNT(m.id)>0 ORDER BY c.updated_at DESC''')]
     def support_actions(self):
         return [{'id':r[0],'conversation_id':r[1],'order_id':r[2],'kind':r[3],
                  'details':json.loads(r[4]),'status':r[5] or 'pending','assignee':r[6] or '',
@@ -560,6 +601,15 @@ class Agent:
         # Anonymous sessions must never see each other's requests.
         sessions={r[0] for r in self.db.execute('SELECT id FROM conversations WHERE customer_id=?',(customer_id,))} if customer_id!='anonymous' else {session}
         return [r for r in self.support_actions() if r['order_id']==order_id and r['conversation_id'] in sessions]
+    def service_order(self, order_id):
+        order=self.orders.get(order_id)
+        if not order:return None
+        order=dict(order)
+        if any(r['order_id']==order_id and r['kind']=='cancellation' and r['status']=='completed'
+               for r in self.support_actions()):
+            order['Order_Status']='Cancelled'
+        return order
+
     def update_request(self,action_id,status,assignee='',note=''):
         if status not in ('pending','in_progress','completed','rejected'):
             raise ValueError('Invalid request status.')

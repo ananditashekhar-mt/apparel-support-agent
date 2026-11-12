@@ -102,7 +102,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','free-form-service-views-v1',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -178,7 +178,7 @@ def handle_customer_message(prompt,cid):
             answer_checkin(cid,'Yes, I need more help',prompt)
     state['wrapup_pending']=False
     save_feedback(state)
-    st.session_state.unlisted_issue=True
+    st.session_state.unlisted_issue=False
     submit_message(prompt,cid)
 
 
@@ -202,7 +202,7 @@ def submit_message(prompt,cid):
         feedback=feedback_state()
         feedback['wrapup_pending']=False
         save_feedback(feedback)
-        if result.get('status')=='answered' and not result.get('pending') and feedback['phase'] in ('open','retry'):
+        if result.get('status')=='answered' and result.get('intent') not in ('greeting','general_question') and not result.get('pending') and feedback['phase'] in ('open','retry'):
             ask_to_close(cid,feedback)
         st.session_state.pending_order_request=prompt if result.get('needs_order_selection') else None
         st.session_state.unlisted_issue=False
@@ -375,6 +375,7 @@ def customer_view():
                     open_recent_chats();st.rerun()
         selected=st.session_state.selected_order
         order=next((o for o in profile['orders'] if o['Order_ID']==selected),None)
+        if order:order=agent.service_order(selected)
         if order and st.session_state.chat_stage not in ('order','pick_order','recent'):
             with st.expander(order['Product_Name']+' · '+selected):
                 photo,details=st.columns([1,7])
@@ -642,6 +643,17 @@ def support_view():
             chosen=st.selectbox('Open transcript',choices,format_func=lambda x:labels.get(x,x),key='support_transcript')
             for message in agent.messages(chosen):
                 render_message(message,show_meta=True)
+            linked=[r for r in agent.support_actions() if r['conversation_id']==chosen]
+            st.subheader('Requests and resolution status')
+            if linked:st.dataframe(linked,hide_index=True,width='stretch')
+            else:st.info('No service requests for this conversation.')
+            order_ids={r['order_id'] for r in linked if r['order_id']}
+            for event in agent.db.execute('SELECT payload FROM events WHERE session=?',(chosen,)):
+                oid=json.loads(event[0]).get('order_id')
+                if oid:order_ids.add(oid)
+            for oid in sorted(order_ids):
+                if oid in agent.orders:
+                    with st.expander('Order details · '+oid):st.json(agent.service_order(oid))
             for response in agent.csat_responses(chosen):
                 st.write(f"Customer satisfaction: {response['rating']}/5")
                 if response['comment']:st.write(response['comment'])
@@ -653,6 +665,10 @@ def support_view():
             st.dataframe(rows,hide_index=True,width='stretch')
             request_id=st.selectbox('Update request',[r['id'] for r in rows])
             request=next(r for r in rows if r['id']==request_id)
+            if request['order_id'] in agent.orders:
+                with st.expander('Order details'):st.json(agent.service_order(request['order_id']))
+            with st.expander('Customer conversation'):
+                for message in agent.messages(request['conversation_id']):render_message(message,show_meta=True)
             with st.form('support_update_'+request_id):
                 statuses=['pending','in_progress','completed','rejected']
                 status=st.selectbox('Status',statuses,index=statuses.index(request['status']))
@@ -708,7 +724,13 @@ def admin_view():
         st.info('Token tracking is active. Configure the selected model’s token prices to calculate monetary cost.')
     else:
         st.caption(f'Cost basis: {model or "model not named"} · ${input_rate:g}/1M input · ${output_rate:g}/1M output · USD/INR {usd_inr:g}. Estimates are not invoices.')
-    usage,failures,diagnostics,configuration,reference=st.tabs(['API usage','Errors & failures','Diagnostic log','Configuration','Reference'])
+    operations,usage,failures,diagnostics,configuration,reference=st.tabs(['Service overview','API usage','Errors & failures','Diagnostic log','Configuration','Reference'])
+    with operations:
+        st.subheader('Conversations')
+        st.dataframe(agent.support_conversations(),hide_index=True,width='stretch')
+        st.subheader('Requests, escalations and resolution statuses')
+        st.dataframe(agent.support_actions(),hide_index=True,width='stretch')
+        st.caption('Use Support to review transcripts, order details and update requests.')
     with usage:
         rows=agent.usage_rows()
         if rows:st.dataframe(rows,hide_index=True,width='stretch')

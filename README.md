@@ -208,3 +208,11 @@ Evaluate intent against independently labeled examples, including multi-turn exc
 The Assistant selector also supports Gemini and Groq. Double-click `Configure Models.command` to enter or replace provider keys privately. Press Enter to skip any key you do not want to change. Gemini uses `GEMINI_API_KEY` and `GEMINI_MODEL`; Groq uses `GROQ_API_KEY` and `GROQ_MODEL`. Suggested starting models are `gemini-2.5-flash` and `openai/gpt-oss-20b`. Availability and free quotas depend on your account. These providers use their OpenAI-compatible Chat Completions endpoints, including JSON schema extraction. Business rules remain in Python. Hosted adapters are tested with simulated responses; live use requires valid keys.
 
 Double-click `Start App.command` to launch the app, then choose a provider under **Demo settings → Assistant**. Restart after saving new keys. Keep Demo selected until credentials are configured.
+
+### Free-form conversations and service views
+
+Customers can type without selecting an order. Tia answers general return, exchange and delivery-policy questions from the supplied policies, asks a natural follow-up for greetings or vague requests, and asks for an order only when a specific issue needs one. Unknown information is stated explicitly. Unrelated questions receive a scope explanation; invoice requests can still be offered to Support. General questions retain the selected order and previous order intent so the customer can resume it. General answers do not start the closure/rating prompt.
+
+Run `python evaluate.py --split free_form` for the additional response, routing and context regression dataset in `data/free_form_conversations.json`. It is separate from the frozen order benchmark and does not change its historical scores. No new live-provider accuracy claim is made.
+
+Support links transcripts to requests, resolution statuses and order details, including conversations without a service request. Request updates persist the status, assignee and customer-visible reply, append that reply to the customer transcript and update the conversation timestamp. Completed mock cancellations appear in subsequent tracking and order detail views. Admin includes a service overview alongside usage, errors, configuration and diagnostics. Updates remain mock actions; no real payment, shipment or external notification is performed.

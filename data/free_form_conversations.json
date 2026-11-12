@@ -1,0 +1,196 @@
+[
+  {
+    "id": "greeting",
+    "messages": [
+      "Hi"
+    ],
+    "intent": "greeting",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "How can I help"
+    ],
+    "response_excludes": [
+      "order ID"
+    ]
+  },
+  {
+    "id": "vague",
+    "messages": [
+      "I need help"
+    ],
+    "intent": "greeting",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "How can I help"
+    ],
+    "response_excludes": [
+      "order ID"
+    ]
+  },
+  {
+    "id": "returns",
+    "messages": [
+      "What is your return policy?"
+    ],
+    "intent": "general_question",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "30 days",
+      "unworn",
+      "tags"
+    ],
+    "response_excludes": [
+      "share your order"
+    ]
+  },
+  {
+    "id": "exchange",
+    "messages": [
+      "How do exchanges work?"
+    ],
+    "intent": "general_question",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "30 days",
+      "stock"
+    ],
+    "response_excludes": [
+      "share your order"
+    ]
+  },
+  {
+    "id": "delivery",
+    "messages": [
+      "How long does delivery take?"
+    ],
+    "intent": "general_question",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "don\u2019t have",
+      "promised"
+    ],
+    "response_excludes": [
+      "3 days"
+    ]
+  },
+  {
+    "id": "unsupported",
+    "messages": [
+      "Who won the football match?"
+    ],
+    "intent": "unknown",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "Threadly",
+      "don\u2019t have information"
+    ],
+    "response_excludes": []
+  },
+  {
+    "id": "unrelated_where",
+    "messages": [
+      "Where is Paris?"
+    ],
+    "intent": "unknown",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "Threadly"
+    ],
+    "response_excludes": [
+      "order ID"
+    ]
+  },
+  {
+    "id": "needs_order",
+    "messages": [
+      "I want to return my item"
+    ],
+    "intent": "return_request",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "order ID"
+    ],
+    "response_excludes": []
+  },
+  {
+    "id": "switch_to_order",
+    "messages": [
+      "What is your return policy?",
+      "Where is my order?"
+    ],
+    "intent": "order_tracking",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "order ID"
+    ],
+    "response_excludes": []
+  },
+  {
+    "id": "retain_order",
+    "messages": [
+      "Where is ORD-20001?",
+      "What is your return policy?",
+      "Where is my order?"
+    ],
+    "intent": "order_tracking",
+    "status": "answered",
+    "order_id": "ORD-20001",
+    "response_contains": [
+      "ORD-20001"
+    ],
+    "response_excludes": []
+  },
+  {
+    "id": "resume_return",
+    "messages": [
+      "Return ORD-20001",
+      "What is your exchange policy?",
+      "Yes, condition confirmed"
+    ],
+    "intent": "return_request",
+    "status": null,
+    "order_id": "ORD-20001",
+    "response_contains": [],
+    "response_excludes": []
+  },
+  {
+    "id": "fees_unknown",
+    "messages": [
+      "Are returns free?"
+    ],
+    "intent": "general_question",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "don\u2019t specify",
+      "fees"
+    ],
+    "response_excludes": [
+      "order ID"
+    ]
+  },
+  {
+    "id": "vague_assistance",
+    "messages": [
+      "I need assistance"
+    ],
+    "intent": "greeting",
+    "status": "answered",
+    "order_id": null,
+    "response_contains": [
+      "How can I help"
+    ],
+    "response_excludes": [
+      "order ID"
+    ]
+  }
+]

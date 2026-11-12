@@ -8,12 +8,39 @@ from dotenv import load_dotenv
 from agent import Agent, load
 from evaluation_checks import audit_references, score_reference
 
+def evaluate_free_form(mode='Demo', as_of=None):
+    results=[]
+    with tempfile.TemporaryDirectory() as temp:
+        agent=Agent(Path(temp)/'free-form.sqlite',mode=mode)
+        for row in load('free_form_conversations'):
+            memory={};turns=[]
+            for message in row['messages']:
+                result=agent.chat(message,memory,history=agent.messages(row['id']),
+                    session=row['id'],today=date.fromisoformat(as_of) if as_of else None)
+                memory=result['memory'];turns.append(result)
+            checks={
+                'intent':result['intent']==row['intent'],
+                'status':not row['status'] or result['status']==row['status'],
+                'order_context':result['order_id']==row['order_id'],
+                'response':all(t in result['response'] for t in row['response_contains']) and
+                    all(t not in result['response'] for t in row['response_excludes'])}
+            results.append({'id':row['id'],'checks':checks,'passed':all(checks.values()),'turns':turns})
+        agent.db.close()
+    summary={'mode':mode,'count':len(results),'passed':sum(r['passed'] for r in results),
+             'note':'Synthetic regression checks for responses, routing and context; not a live quality benchmark.'}
+    output=Path(f'evaluation_{mode.lower()}_free_form.json')
+    output.write_text(json.dumps({'summary':summary,'results':results},indent=2))
+    print(json.dumps(summary,indent=2));print('Results:',output)
+
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--split',choices=['train','showcase','test','challenge','reserve','all'],default='test')
+    parser.add_argument('--split',choices=['train','showcase','test','challenge','reserve','all','free_form'],default='test')
     parser.add_argument('--mode',choices=['Demo','OpenAI','Ollama'],default='Demo')
     parser.add_argument('--date',default=None,help='Override scenario dates; normally omit.')
     args=parser.parse_args();load_dotenv()
+    if args.split=='free_form':
+        evaluate_free_form(args.mode,args.date)
+        return
     rows=[r for r in load('support_conversations') if args.split=='all' or r['Split']==args.split]
     results=[]
     with tempfile.TemporaryDirectory() as temp:
