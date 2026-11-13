@@ -109,10 +109,25 @@ p {font-size:14px;line-height:1.5}
 /* Desktop fills the available content area; the phone preview remains 390px. */
 @media(min-width:641px) {
  [data-testid="stLayoutWrapper"]:has(> .st-key-chat_transcript),
- .st-key-chat_transcript {height:calc(100vh - 400px)!important;min-height:220px!important;max-height:1200px!important;flex:none!important}
+ .st-key-chat_transcript {height:calc(100vh - 320px)!important;min-height:220px!important;max-height:1200px!important;flex:none!important}
 }
 
 .threadly-client-pending {display:none}
 html[data-tia-reply-pending="true"] .threadly-client-pending {display:block}
 html[data-tia-reply-pending="true"] .threadly-loading-indicator {display:none!important}
 .stApp:has(.threadly-thinking) .threadly-client-pending {display:none}
+
+/* Clear stale Streamlit blocks during a reply instead of leaving faded controls. */
+.st-key-chat_transcript [data-stale="true"] {display:none!important}
+html[data-tia-reply-pending="true"] .st-key-order_start,
+html[data-tia-reply-pending="true"] .st-key-order_choices {display:none!important}
+.st-key-toolbar_actions {max-width:280px;margin-left:auto}
+@media(min-width:641px) {
+ [class*="st-key-order_card_"] {max-width:900px}
+ [class*="st-key-order_card_"] [data-testid="stColumn"]:first-child {flex:0 0 56px!important;width:56px!important}
+ [class*="st-key-order_card_"] [data-testid="stColumn"]:nth-child(2) {flex:1 1 0!important;width:0!important}
+ [class*="st-key-order_card_"] [data-testid="stColumn"]:nth-child(3) {flex:0 0 132px!important;width:132px!important}
+}
+@media(max-width:640px) {
+ .st-key-toolbar_actions {max-width:190px}
+}

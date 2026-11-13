@@ -227,3 +227,5 @@ The expanded Assistant settings panel always exposes Demo, OpenAI, Gemini, Groq 
 Desktop chat fills the available width and its transcript adapts to viewport height. Mobile remains a separate 390 px preview. Submitting a message immediately shows it and Thinking…; Loading… is reserved for UI work. A quiet, short reply tone can be muted with Reply sound. Browser audio requires an initial interaction, and old replies are not replayed when navigating.
 
 Support and Admin retain separate access codes. The owner can find SUPPORT_ACCESS_CODE and ADMIN_ACCESS_CODE under Streamlit → Manage app → Settings → Secrets. An unlocked role stays available for the browser session, with a Lock button; changing the configured code invalidates that unlock. No code or API key is included in the repository.
+
+Chat transitions replace the previous transcript contents as a single block and hide stale Streamlit elements during processing. Preview tools live in the sidebar; desktop toolbar actions and order selection buttons keep compact widths.

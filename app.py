@@ -105,7 +105,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','conversation-ui-v3',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','conversation-ui-v4',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -272,27 +272,28 @@ def back_in_journey(stage):
 
 
 def render_order_choices(cid,profile,resume=False):
-    orders=sorted(profile['orders'],key=lambda o:(o['Order_Date'],o['Order_ID']),reverse=True)
-    show_all=st.session_state.get('show_all_orders',False)
-    st.caption('Your past orders · AI sample photos' if not show_all else 'All your orders · AI sample photos')
-    for order in (orders if show_all else orders[:3]):
-        with st.container(border=True,key='order_card_'+order['Order_ID']):
-            photo,details,action=st.columns([1,6,3],vertical_alignment='center')
-            image_path=product_image_path(order)
-            if image_path:photo.image(str(image_path),width=48)
-            with details:
-                st.markdown(f'<div class="order-copy"><strong>{html.escape(order["Product_Name"])}</strong><span>{html.escape(order["Colour"])} · Size {html.escape(order["Size"])} · Qty {order["Qty"]}</span><span>{html.escape(order["Order_ID"])} · {html.escape(order["Order_Status"])}</span></div>',unsafe_allow_html=True)
-            if action.button('Select order',key='choose_'+order['Order_ID'],width='stretch'):
-                st.session_state.selected_order=order['Order_ID']
-                if resume:
-                    st.session_state.memory=dict(st.session_state.memory,order_id=order['Order_ID'])
-                    submit_message('Please use '+order['Order_ID']+' for my question.',cid)
-                else:
-                    st.session_state.memory={'order_id':order['Order_ID']};st.session_state.last=None
-                    st.session_state.condition_ok=False;st.session_state.chat_stage='issue';st.rerun()
-    if len(orders)>3:
-        if st.button('Show recent orders' if show_all else f'View all {len(orders)} orders',key='toggle_order_list'):
-            st.session_state.show_all_orders=not show_all;st.rerun()
+    with st.container(key='order_choices'):
+        orders=sorted(profile['orders'],key=lambda o:(o['Order_Date'],o['Order_ID']),reverse=True)
+        show_all=st.session_state.get('show_all_orders',False)
+        st.caption('Your past orders · AI sample photos' if not show_all else 'All your orders · AI sample photos')
+        for order in (orders if show_all else orders[:3]):
+            with st.container(border=True,key='order_card_'+order['Order_ID']):
+                photo,details,action=st.columns([1,6,3],vertical_alignment='center')
+                image_path=product_image_path(order)
+                if image_path:photo.image(str(image_path),width=48)
+                with details:
+                    st.markdown(f'<div class="order-copy"><strong>{html.escape(order["Product_Name"])}</strong><span>{html.escape(order["Colour"])} · Size {html.escape(order["Size"])} · Qty {order["Qty"]}</span><span>{html.escape(order["Order_ID"])} · {html.escape(order["Order_Status"])}</span></div>',unsafe_allow_html=True)
+                if action.button('Select order',key='choose_'+order['Order_ID'],width='stretch'):
+                    st.session_state.selected_order=order['Order_ID']
+                    if resume:
+                        st.session_state.memory=dict(st.session_state.memory,order_id=order['Order_ID'])
+                        submit_message('Please use '+order['Order_ID']+' for my question.',cid)
+                    else:
+                        st.session_state.memory={'order_id':order['Order_ID']};st.session_state.last=None
+                        st.session_state.condition_ok=False;st.session_state.chat_stage='issue';st.rerun()
+        if len(orders)>3:
+            if st.button('Show recent orders' if show_all else f'View all {len(orders)} orders',key='toggle_order_list'):
+                st.session_state.show_all_orders=not show_all;st.rerun()
 
 def open_saved_conversation(cid,conversation_id):
     agent.require_conversation_owner(conversation_id,cid)
@@ -315,7 +316,8 @@ def queue_showcase(scenario):
 def customer_view():
     render_reply_sound()
     showcase=load('showcase_scenarios')
-    with st.sidebar:
+    preview_tools=st.sidebar.expander('Preview tools',expanded=False)
+    with preview_tools:
         st.markdown('**Showcase scenarios**')
         use_case=st.selectbox('Support use case',['Browse customers']+sorted({r['Use_Case'] for r in showcase}),key='showcase_use_case')
         scenario=None
@@ -342,7 +344,7 @@ def customer_view():
         st.session_state.customer_profile_picker=next(label for label,c in profile_labels.items() if c==pending['Customer_ID'])
     if st.session_state.get('customer_profile_picker') not in profile_labels:
         st.session_state.customer_profile_picker=next(iter(profile_labels))
-    with st.sidebar:
+    with preview_tools:
         selected_profile=st.selectbox('Preview customer',list(profile_labels),key='customer_profile_picker',help='Choose a synthetic Indian customer to preview their support experience.')
     cid=profile_labels[selected_profile]
     date_changed=st.session_state.get('active_simulation_date')!=demo_date.isoformat()
@@ -368,9 +370,8 @@ def customer_view():
         st.markdown(f'<div class="brand-lockup"><div class="brand-mark">T</div><div class="brand-word">{html.escape(BRAND_NAME)}</div><div class="brand-sub">Customer care</div></div>',unsafe_allow_html=True)
     with account:
         st.markdown(f'<div class="account"><b>{html.escape(profile["name"])}</b> · {html.escape(profile["city"])}</div>',unsafe_allow_html=True)
-    st.write('')
     if not PHONE_PREVIEW:
-        with st.container(key='demo_view_switch'):
+        with preview_tools:
             view=st.radio('Layout preview',['Desktop','Mobile'],horizontal=True,key='demo_view')
         if view=='Mobile':
             st.caption('Phone preview · 390 px · A separate chat for the selected customer')
@@ -392,7 +393,7 @@ def customer_view():
             header,controls=st.columns([3,2],vertical_alignment='center')
             with header:
                 st.markdown('<div class="assistant-header"><div class="tia-avatar">T</div><div><strong>Tia</strong><span>Your shopping sidekick · AI</span></div></div>',unsafe_allow_html=True)
-            with controls:
+            with controls,st.container(key='toolbar_actions'):
                 new,past=st.columns(2)
                 if new.button('＋ New chat',key='new_chat_rail',width='stretch',type='primary'):
                     reset_customer_state(cid,True);st.rerun()
@@ -418,12 +419,14 @@ def customer_view():
         if queued and queued['conversation_id']!=st.session_state.conversation_id:
             st.session_state.pop('queued_customer_message',None);queued=None
         with st.container(height=450 if PHONE_PREVIEW else 600,border=False,key='chat_transcript'):
-            if queued:
-                for message in agent.messages(st.session_state.conversation_id,cid):render_message(message)
-                render_message({'role':'user','content':queued['prompt']})
-                st.markdown('<div class="threadly-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div>',unsafe_allow_html=True)
-            else:render_customer_journey(cid,profile)
-            st.markdown('<div class="threadly-client-pending"><div class="chat-row user"><div class="chat-avatar you">You</div><div class="chat-bubble" data-tia-pending-text></div></div><div class="threadly-client-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div></div>',unsafe_allow_html=True)
+            transcript_body=st.empty()
+            with transcript_body.container():
+                if queued:
+                    for message in agent.messages(st.session_state.conversation_id,cid):render_message(message)
+                    render_message({'role':'user','content':queued['prompt']})
+                    st.markdown('<div class="threadly-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div>',unsafe_allow_html=True)
+                else:render_customer_journey(cid,profile)
+                st.markdown('<div class="threadly-client-pending"><div class="chat-row user"><div class="chat-avatar you">You</div><div class="chat-bubble" data-tia-pending-text></div></div><div class="threadly-client-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div></div>',unsafe_allow_html=True)
         phase=feedback_state()['phase']
         disabled=bool(queued) or phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
         st.chat_input('Type your message…',key='customer_message',disabled=disabled,on_submit=queue_customer_message)
@@ -549,8 +552,9 @@ def render_customer_journey(cid,profile):
                 reset_customer_state(cid,True);st.rerun()
         return
     if stage=='order':
-        render_message({'role':'assistant','content':f"Hi {profile['name']}, I’m Tia.\nHow can I help you today?\n\nChoose a recent order, or type your question below."})
-        render_order_choices(cid,profile)
+        with st.container(key='order_start'):
+            render_message({'role':'assistant','content':f"Hi {profile['name']}, I’m Tia.\nHow can I help you today?\n\nChoose a recent order, or type your question below."})
+            render_order_choices(cid,profile)
         return
     if stage=='issue':
         render_message({'role':'assistant','content':'How can I help with this order?\nChoose a topic or tell me what happened below.'})
