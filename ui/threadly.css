@@ -118,7 +118,8 @@ html[data-tia-reply-pending="true"] .threadly-loading-indicator {display:none!im
 .stApp:has(.threadly-thinking) .threadly-client-pending {display:none}
 
 /* Clear stale Streamlit blocks during a reply instead of leaving faded controls. */
-.st-key-chat_transcript [data-stale="true"] {display:none!important}
+ .stApp:has(.threadly-thinking) .st-key-order_start,
+.stApp:has(.threadly-thinking) .st-key-order_choices,
 html[data-tia-reply-pending="true"] .st-key-order_start,
 html[data-tia-reply-pending="true"] .st-key-order_choices {display:none!important}
 .st-key-toolbar_actions {max-width:280px;margin-left:auto}
