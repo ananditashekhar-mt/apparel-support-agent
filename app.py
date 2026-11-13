@@ -5,6 +5,7 @@ import html
 import io
 import json
 import os
+import random
 import uuid
 import traceback
 from pathlib import Path
@@ -105,7 +106,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','conversation-ui-v4',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','conversation-llm-v5',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -313,22 +314,46 @@ def queue_showcase(scenario):
     st.session_state.simulation_date=date.fromisoformat(scenario['As_Of'])
 
 
+def random_showcase(limit_variant=False):
+    use_case=st.session_state.get('showcase_use_case','Browse customers')
+    if use_case=='Browse customers':
+        st.session_state.pop('loaded_showcase',None)
+        st.session_state.pop('pending_showcase',None)
+        return
+    matches=[row for row in load('showcase_scenarios') if row['Use_Case']==use_case]
+    if limit_variant:
+        matches=[row for row in matches if row['Scenario_Variant']==st.session_state.showcase_variant]
+    customers=sorted({row['Customer_ID'] for row in matches})
+    current=st.session_state.get('loaded_showcase',{}).get('Customer_ID')
+    if len(customers)>1 and current in customers:customers.remove(current)
+    customer=random.choice(customers)
+    scenario=random.choice([row for row in matches if row['Customer_ID']==customer])
+    st.session_state.showcase_variant=scenario['Scenario_Variant']
+    st.session_state.showcase_match=scenario
+    queue_showcase(scenario)
+
+
+def select_showcase_match():
+    queue_showcase(st.session_state.showcase_match)
+
+
 def customer_view():
     render_reply_sound()
     showcase=load('showcase_scenarios')
     preview_tools=st.sidebar.expander('Preview tools',expanded=False)
     with preview_tools:
         st.markdown('**Showcase scenarios**')
-        use_case=st.selectbox('Support use case',['Browse customers']+sorted({r['Use_Case'] for r in showcase}),key='showcase_use_case')
+        use_case=st.selectbox('Support use case',['Browse customers']+sorted({r['Use_Case'] for r in showcase}),key='showcase_use_case',on_change=random_showcase)
         scenario=None
         if use_case!='Browse customers':
             variants=sorted({r['Scenario_Variant'] for r in showcase if r['Use_Case']==use_case})
-            variant=st.selectbox('Scenario variant',variants,key='showcase_variant')
+            variant=st.selectbox('Scenario variant',variants,key='showcase_variant',on_change=random_showcase,args=(True,))
             matches=[r for r in showcase if r['Use_Case']==use_case and r['Scenario_Variant']==variant]
             scenario=st.selectbox('Matching customer and order',matches,
-                format_func=lambda r: f"{profiles[r['Customer_ID']]['name']} · {r['Order_ID']} · {r['As_Of']}",key='showcase_match')
+                format_func=lambda r: f"{profiles[r['Customer_ID']]['name']} · {r['Order_ID']} · {r['As_Of']}",key='showcase_match',on_change=select_showcase_match)
             st.caption('Scenario date: '+scenario['As_Of'])
-            st.button('Load scenario',key='load_showcase',on_click=queue_showcase,args=(scenario,))
+            st.caption('A matching customer loads automatically when you change the use case or variant.')
+            st.button('Try another customer',key='random_showcase',on_click=random_showcase)
     pending=st.session_state.pop('pending_showcase',None)
     visible={cid:dict(p,orders=[view for o in p['orders'] if (view:=order_as_of(o,demo_date))]) for cid,p in profiles.items()}
     visible={cid:p for cid,p in visible.items() if p['orders']}

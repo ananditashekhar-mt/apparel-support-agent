@@ -47,9 +47,10 @@ class FreeFormTests(unittest.TestCase):
         for intent,message in [('order_help','Something is up with my purchase'),
                                ('clarification','the other one')]:
             with self.subTest(intent=intent), tempfile.TemporaryDirectory() as tmp:
-                create=Mock(return_value=SimpleNamespace(
+                create=Mock(side_effect=[SimpleNamespace(
                     output_text=json.dumps(dict(intent=intent,order_id=None,size=None,colour=None,condition_issues=[])),
-                    usage=SimpleNamespace(input_tokens=10,output_tokens=5)))
+                    usage=SimpleNamespace(input_tokens=10,output_tokens=5)),
+                    SimpleNamespace(output_text='Could you tell me what happened?',usage=SimpleNamespace(input_tokens=10,output_tokens=5))])
                 client=SimpleNamespace(responses=SimpleNamespace(create=create))
                 agent=Agent(Path(tmp)/'hosted.sqlite',mode='OpenAI',model='test-model',client=client)
                 history=[{'role':'assistant','content':'How can I help you today?'}]
@@ -57,8 +58,9 @@ class FreeFormTests(unittest.TestCase):
                 self.assertEqual(result['intent'],intent)
                 self.assertEqual(result['status'],'needs_information')
                 self.assertIsNone(result['pending'])
-                self.assertEqual(create.call_count,1)
-                call=create.call_args.kwargs
+                self.assertEqual(create.call_count,2)
+                call=create.call_args_list[0].kwargs
+                self.assertEqual(json.loads(create.call_args_list[1].kwargs['input'])['history'],history)
                 self.assertEqual(json.loads(call['input'])['history'],history)
                 self.assertIn('Read the recent conversation',call['instructions'])
                 self.assertNotIn('get_order',result['tools'])
@@ -85,3 +87,28 @@ class FreeFormTests(unittest.TestCase):
                 self.assertFalse(app.session_state['memory'].get('order_id'))
                 self.assertIsNone(result['pending'])
                 app.session_state['agent'].db.close()
+
+    def test_social_turns_use_model_wording_and_recent_history(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        usage=SimpleNamespace(input_tokens=10,output_tokens=5)
+        parsed=json.dumps(dict(intent='greeting',order_id=None,size=None,colour=None,condition_issues=[]))
+        create=Mock(side_effect=[SimpleNamespace(output_text=parsed,usage=usage),
+            SimpleNamespace(output_text='Hello! How can I help you today?',usage=usage),
+            SimpleNamespace(output_text=parsed,usage=usage),
+            SimpleNamespace(output_text='I’m here and ready to help, thanks for asking!',usage=usage)])
+        with tempfile.TemporaryDirectory() as tmp:
+            agent=Agent(Path(tmp)/'social.sqlite',mode='OpenAI',model='test-model',
+                client=SimpleNamespace(responses=SimpleNamespace(create=create)))
+            first=agent.chat('Hi',session='social')
+            self.assertTrue(first['response'].endswith('\n\nHow can I help you today?'))
+            history=agent.messages('social')
+            result=agent.chat('How are you?',memory=first['memory'],history=history,session='social')
+            self.assertEqual(create.call_count,4)
+            for index in (2,3):
+                self.assertEqual(json.loads(create.call_args_list[index].kwargs['input'])['history'],history)
+            self.assertEqual(result['response'],'I’m here and ready to help, thanks for asking!')
+            self.assertIsNone(result['pending'])
+            self.assertEqual(result['usage']['requests'],2)
+            self.assertEqual(agent.usage_summary()['requests'],4)
+            agent.db.close()

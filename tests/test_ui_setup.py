@@ -65,3 +65,30 @@ class UISetupTests(unittest.TestCase):
         self.assertFalse(any('<div class="threadly-thinking"' in value.value for value in self.app.markdown))
         self.assertFalse(self.app.chat_input[0].disabled)
         self.assertNotIn('reply_sound_event',self.app.session_state)
+
+    def test_use_case_automatically_loads_random_matching_customer(self):
+        use_case='Delayed delivery'
+        rows=[row for row in agent.load('showcase_scenarios') if row['Use_Case']==use_case]
+        next(w for w in self.app.selectbox if w.label=='Support use case').set_value(use_case).run()
+        self.assertEqual(len(self.app.exception),0)
+        chosen=self.app.session_state['loaded_showcase']
+        self.assertIn(chosen,rows)
+        self.assertEqual(self.app.session_state['customer_key'][0],chosen['Customer_ID'])
+        self.assertEqual(self.app.session_state['selected_order'],chosen['Order_ID'])
+        self.assertEqual(self.app.session_state['simulation_date'].isoformat(),chosen['As_Of'])
+        conversation=self.app.session_state['conversation_id']
+        self.app.run()
+        self.assertEqual(self.app.session_state['conversation_id'],conversation)
+        next(b for b in self.app.button if b.label=='Try another customer').click().run()
+        self.assertEqual(len(self.app.exception),0)
+        other=self.app.session_state['loaded_showcase']
+        self.assertIn(other,rows)
+        self.assertNotEqual(self.app.session_state['conversation_id'],conversation)
+        if len({r['Customer_ID'] for r in rows})>1:
+            self.assertNotEqual(chosen['Customer_ID'],other['Customer_ID'])
+        variants=next(w for w in self.app.selectbox if w.label=='Scenario variant')
+        alternative=next((v for v in variants.options if v!=other['Scenario_Variant']),None)
+        if alternative:
+            variants.set_value(alternative).run()
+            self.assertEqual(len(self.app.exception),0)
+            self.assertEqual(self.app.session_state['loaded_showcase']['Scenario_Variant'],alternative)

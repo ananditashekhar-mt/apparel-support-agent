@@ -84,6 +84,8 @@ class DatasetContractTests(unittest.TestCase):
 
 class ShowcaseInterfaceTests(unittest.TestCase):
     def test_every_use_case_loads_matching_order_and_date(self):
+        from star_widget_testing import enable_star_testing
+        enable_star_testing(self)
         from streamlit.testing.v1 import AppTest
         original=Agent
         with tempfile.TemporaryDirectory() as t:
@@ -94,7 +96,6 @@ class ShowcaseInterfaceTests(unittest.TestCase):
                 use_cases=next(w for w in app.selectbox if w.label=='Support use case').options[1:]
                 for group in use_cases:
                     next(w for w in app.selectbox if w.label=='Support use case').set_value(group).run()
-                    app.button(key='load_showcase').click().run()
                     self.assertEqual(len(app.exception),0,group)
                     row=app.session_state['loaded_showcase']
                     self.assertEqual(row['Use_Case'],group)

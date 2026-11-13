@@ -229,3 +229,10 @@ Desktop chat fills the available width and its transcript adapts to viewport hei
 Support and Admin retain separate access codes. The owner can find SUPPORT_ACCESS_CODE and ADMIN_ACCESS_CODE under Streamlit → Manage app → Settings → Secrets. An unlocked role stays available for the browser session, with a Lock button; changing the configured code invalidates that unlock. No code or API key is included in the repository.
 
 Chat transitions replace the previous transcript contents as a single block and hide stale Streamlit elements during processing. Preview tools live in the sidebar; desktop toolbar actions and order selection buttons keep compact widths.
+
+
+### Context-aware model replies and random showcase customers
+
+OpenAI, Groq, Gemini and Ollama now use model understanding and response generation for conversational turns as well as order requests. Both stages receive recent conversation history. Greetings and small talk no longer bypass the response model. Demo remains deterministic. Code continues to enforce eligibility, ownership, confirmation and mock actions; order-picker instructions and expired-window responses retain the authoritative wording. Model usage is recorded for these calls.
+
+Selecting a showcase support use case immediately loads a random matching customer, scenario order and simulation date into a fresh chat. Changing the scenario variant does the same within that variant. Try another customer selects a different matching customer where possible. Normal reruns keep the selected scenario stable. Manual matching-customer selection also loads automatically. Selecting a scenario alone does not send a customer message or make a model request.
