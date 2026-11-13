@@ -426,7 +426,7 @@ def customer_view():
                     render_message({'role':'user','content':queued['prompt']})
                     st.markdown('<div class="threadly-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div>',unsafe_allow_html=True)
                 else:render_customer_journey(cid,profile)
-                st.markdown('<div class="threadly-client-pending"><div class="chat-row user"><div class="chat-avatar you">You</div><div class="chat-bubble" data-tia-pending-text></div></div><div class="threadly-client-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div></div>',unsafe_allow_html=True)
+            st.markdown('<div class="threadly-client-pending"><div class="chat-row user"><div class="chat-avatar you">You</div><div class="chat-bubble" data-tia-pending-text></div></div><div class="threadly-client-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div></div>',unsafe_allow_html=True)
         phase=feedback_state()['phase']
         disabled=bool(queued) or phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
         st.chat_input('Type your message…',key='customer_message',disabled=disabled,on_submit=queue_customer_message)
