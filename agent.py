@@ -314,7 +314,7 @@ class Agent:
             return done(reason+' A Support Expert can take a closer look. Select “Request a Support Expert” below and I’ll save your concern with this conversation for review.','escalation_proposed',{'kind':'escalation','reason':reason})
         if intent in ('greeting','general_question'):
             out['tools']=['retrieve_policy'] if intent=='general_question' else []
-            return done(general_answer(s['message']) if intent=='general_question' else 'How can I help you today? I can answer Threadly policy questions or help with an order.', 'answered')
+            return done(general_answer(s['message']) if intent=='general_question' else 'How can I help you today?', 'answered')
         if intent in ('order_help','clarification'):
             out['tools']=[]
             return done('Of course. What’s happening with your order, and what would you like help with?'
