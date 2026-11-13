@@ -70,19 +70,22 @@ for key,value in [('admin_openai_model',os.getenv('OPENAI_MODEL','gpt-4.1-mini' 
                   ('admin_output_rate',float(os.getenv('OPENAI_OUTPUT_USD_PER_M','0') or 0)),
                   ('admin_usd_inr',float(os.getenv('USD_INR_RATE','0') or 0))]:
     if key not in st.session_state:st.session_state[key]=value
-mode=configured_mode
+mode=st.session_state.get('selected_assistant',configured_mode)
 model=st.session_state.get('admin_'+mode.lower()+'_model','')
 input_rate=st.session_state.admin_input_rate;output_rate=st.session_state.admin_output_rate
 usd_inr=st.session_state.admin_usd_inr
 if interface=='Customer':
-    with st.sidebar.expander('Demo settings',expanded=False):
-        if os.getenv('ALLOW_MODE_SWITCH','false' if APP_ENV=='hosted' else 'true').lower()=='true':
-            choices=['Demo','OpenAI','Gemini','Groq','Ollama']
-            preview_mode=st.query_params.get('mode') if PHONE_PREVIEW else None
-            mode=st.radio('Assistant',choices,index=choices.index(preview_mode if preview_mode in choices else configured_mode),horizontal=True)
-            st.caption('Demo is deterministic. OpenAI, Gemini, Groq and Ollama add model-based understanding and writing; business rules remain in code.')
-        else:st.caption(f'Assistant: {mode}')
+    with st.sidebar.expander('Assistant settings',expanded=True):
+        choices=['Demo','OpenAI','Gemini','Groq','Ollama']
+        preview_mode=st.query_params.get('mode') if PHONE_PREVIEW else None
+        initial=preview_mode if preview_mode in choices else st.session_state.get('selected_assistant',configured_mode)
+        mode=st.radio('Assistant',choices,index=choices.index(initial),horizontal=True,key='assistant_provider')
+        st.session_state.selected_assistant=mode
         model=st.session_state.get('admin_'+mode.lower()+'_model','')
+        st.caption(f'Active assistant: {mode}'+(f' · {model}' if model else ''))
+        if mode not in ('Demo','Ollama') and not os.getenv(mode.upper()+'_API_KEY'):
+            st.warning(f'{mode} needs its API key in Streamlit Secrets before it can reply.')
+        st.toggle('Reply sound',value=st.session_state.get('reply_sound_preference',True),key='reply_sound_enabled',on_change=lambda:st.session_state.update(reply_sound_preference=st.session_state.reply_sound_enabled),help='A short, quiet tone when a new reply arrives. Your browser may require a click or keypress first.')
         demo_date=st.date_input('Simulation date',value=DEFAULT_DATE, key='simulation_date', help='October–December 2026. Earlier dates hide future orders and shipment events.')
         st.caption('All customers, orders and actions are synthetic.')
 else:
@@ -102,7 +105,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','free-form-service-views-v2',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','conversation-ui-v3',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)
@@ -123,6 +126,7 @@ def reset_customer_state(cid,new=False):
         st.session_state.pop('issue_description',None)
         st.session_state.history=[]
         st.session_state.pop('request_error',None)
+        st.session_state.pop('queued_customer_message',None)
         st.session_state.memory={};st.session_state.last=None;st.session_state.condition_ok=False
 
 
@@ -164,6 +168,7 @@ def answer_checkin(cid,answer,customer_text=None):
     agent.log_message(st.session_state.conversation_id,cid,'assistant',reply)
     agent.db.commit()
     save_feedback(state)
+    st.session_state.reply_sound_event=str(uuid.uuid4())
     st.session_state.history=agent.messages(st.session_state.conversation_id,cid)
     st.rerun()
 
@@ -179,10 +184,28 @@ def handle_customer_message(prompt,cid):
     state['wrapup_pending']=False
     save_feedback(state)
     st.session_state.unlisted_issue=False
-    submit_message(prompt,cid)
+    process_message(prompt,cid)
+
+
+def queue_customer_message():
+    prompt=st.session_state.get('customer_message','')
+    if prompt:
+        st.session_state.queued_customer_message={'prompt':prompt,'conversation_id':st.session_state.conversation_id}
 
 
 def submit_message(prompt,cid):
+    st.session_state.queued_customer_message={'prompt':prompt,'conversation_id':st.session_state.conversation_id}
+    st.rerun()
+
+
+def render_reply_sound():
+    script=(Path(__file__).parent/'ui'/'reply_sound.js').read_text()
+    event=st.session_state.pop('reply_sound_event',None)
+    settings=json.dumps({'enabled':st.session_state.get('reply_sound_enabled',True),'event':event,'processing':bool(st.session_state.get('queued_customer_message'))})
+    components.html('<script>'+script+'\nconfigureTiaReplySound('+settings+');</script>',height=0,width=0)
+
+
+def process_message(prompt,cid):
     st.session_state.pop('request_error',None)
     feedback=feedback_state()
     if feedback['phase'] not in ['open','retry']:return
@@ -208,6 +231,7 @@ def submit_message(prompt,cid):
         st.session_state.unlisted_issue=False
         st.session_state.chat_stage='pick_order' if result.get('needs_order_selection') else 'chat'
         st.session_state.memory=result['memory'];st.session_state.last=result
+        st.session_state.reply_sound_event=str(uuid.uuid4())
         st.session_state.history=agent.messages(st.session_state.conversation_id,cid);st.rerun()
     except Exception as error:
         frames='; '.join(f'{Path(frame.filename).name}:{frame.lineno} in {frame.name}' for frame in traceback.extract_tb(error.__traceback__))
@@ -217,7 +241,7 @@ def submit_message(prompt,cid):
         status=getattr(error,'status_code',None)
         print(f'Threadly request failed: {type(error).__name__}; http_status={status if isinstance(status,int) else None}',flush=True)
         st.session_state.request_error='I’m sorry, I couldn’t check that just now. Please try again in a moment. Your order hasn’t been changed.'
-        st.error(st.session_state.request_error)
+        st.rerun()
 
 
 def open_recent_chats():
@@ -289,6 +313,7 @@ def queue_showcase(scenario):
 
 
 def customer_view():
+    render_reply_sound()
     showcase=load('showcase_scenarios')
     with st.sidebar:
         st.markdown('**Showcase scenarios**')
@@ -346,7 +371,7 @@ def customer_view():
     st.write('')
     if not PHONE_PREVIEW:
         with st.container(key='demo_view_switch'):
-            view=st.radio('Demo view',['Desktop','Mobile'],horizontal=True,key='demo_view')
+            view=st.radio('Layout preview',['Desktop','Mobile'],horizontal=True,key='demo_view')
         if view=='Mobile':
             st.caption('Phone preview · 390 px · A separate chat for the selected customer')
             params=urlencode({'phone_preview':'1','embed':'true','customer':cid,'as_of':demo_date.isoformat(),'mode':mode})
@@ -361,7 +386,7 @@ def customer_view():
             if st.button(label,key='history_'+conversation['id'],width='stretch'):
                 open_saved_conversation(cid,conversation['id']);st.rerun()
         st.divider()
-        st.caption('Demo experience · Orders and requests are examples. No live fulfilment or external support connection.')
+        st.caption('Prototype · Orders and requests are synthetic examples. No live fulfilment or external support connection.')
     with st.container(key='care_workspace'):
         with st.container(key='chat_toolbar'):
             header,controls=st.columns([3,2],vertical_alignment='center')
@@ -389,13 +414,23 @@ def customer_view():
                 for event in order.get('Shipment_Events',[]):st.caption(f"{event['Status']} · {str(event['Date'])[:10]}")
                 for request in agent.order_requests(selected,cid,st.session_state.conversation_id):
                     st.info(f"{request['kind'].title()}: {request['status'].replace('_',' ')}. {request['note']}")
-        with st.container(height=450,border=False,key='chat_transcript'):
-            render_customer_journey(cid,profile)
-        st.markdown('<div class="threadly-chat-loading" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Loading…</span></div>',unsafe_allow_html=True)
+        queued=st.session_state.get('queued_customer_message')
+        if queued and queued['conversation_id']!=st.session_state.conversation_id:
+            st.session_state.pop('queued_customer_message',None);queued=None
+        with st.container(height=450 if PHONE_PREVIEW else 600,border=False,key='chat_transcript'):
+            if queued:
+                for message in agent.messages(st.session_state.conversation_id,cid):render_message(message)
+                render_message({'role':'user','content':queued['prompt']})
+                st.markdown('<div class="threadly-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div>',unsafe_allow_html=True)
+            else:render_customer_journey(cid,profile)
+            st.markdown('<div class="threadly-client-pending"><div class="chat-row user"><div class="chat-avatar you">You</div><div class="chat-bubble" data-tia-pending-text></div></div><div class="threadly-client-thinking" role="status" aria-live="polite"><span class="threadly-loading-ring" aria-hidden="true"></span><span>Thinking…</span></div></div>',unsafe_allow_html=True)
         phase=feedback_state()['phase']
-        disabled=phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
-        prompt=st.chat_input('Type your message…',key='customer_message',disabled=disabled)
-        if prompt:handle_customer_message(prompt,cid)
+        disabled=bool(queued) or phase not in ('open','retry') or st.session_state.chat_stage in ('recent','review','reopen')
+        st.chat_input('Type your message…',key='customer_message',disabled=disabled,on_submit=queue_customer_message)
+        if queued:
+            st.session_state.pop('queued_customer_message',None)
+            handle_customer_message(queued['prompt'],cid)
+
 
 
 def render_csat(cid,state,allow_retry=False):
@@ -616,13 +651,25 @@ def render_message(message,show_meta=False):
 
 def access_allowed(env_name,label):
     access_code=os.getenv(env_name)
-    if access_code and st.text_input(f'{label} access code',type='password')!=access_code:
-        st.info(f'Enter the {label.lower()} access code to continue.');return False
+    auth_key='unlocked_'+env_name
+    fingerprint=hashlib.sha256(access_code.encode()).hexdigest() if access_code else None
+    if access_code and st.session_state.get(auth_key)!=fingerprint:
+        entered=st.text_input(f'{label} access code',type='password',key='access_'+env_name)
+        if entered!=access_code:
+            st.info(f'Enter the {label.lower()} access code to continue.')
+            st.caption(f'App owner: find {env_name} in Streamlit → Manage app → Settings → Secrets. This is a custom app code, not your Streamlit password.')
+            return False
+        st.session_state[auth_key]=fingerprint
+        st.rerun()
     if not access_code and APP_ENV=='hosted':
         st.warning(f'{label} is unavailable until its access code is configured in Streamlit secrets.')
         return False
     if not access_code:
         st.caption(f'Local demo: {label.lower()} access is open on this computer. Configure {env_name} before hosting.')
+    elif st.button(f'Lock {label}',key='lock_'+env_name):
+        st.session_state.pop(auth_key,None)
+        st.session_state.pop('access_'+env_name,None)
+        st.rerun()
     return True
 
 

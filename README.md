@@ -218,3 +218,12 @@ Run `python evaluate.py --split free_form` for the additional response, routing 
 Support links transcripts to requests, resolution statuses and order details, including conversations without a service request. Request updates persist the status, assignee and customer-visible reply, append that reply to the customer transcript and update the conversation timestamp. Completed mock cancellations appear in subsequent tracking and order detail views. Admin includes a service overview alongside usage, errors, configuration and diagnostics. Updates remain mock actions; no real payment, shipment or external notification is performed.
 
 Generic order-help requests, including short replies such as “with an order,” ask what happened before requesting order context. Hosted intent extraction uses recent dialogue to distinguish incomplete support requests from unrelated topics. The free-form regression set checks intermediate routing as well as final responses.
+
+
+### Assistant controls and reply feedback
+
+The expanded Assistant settings panel always exposes Demo, OpenAI, Gemini, Groq and Ollama and identifies the active selection. Provider keys and models still come from private environment variables or Streamlit Secrets; selecting a provider does not configure its credentials. The older ALLOW_MODE_SWITCH flag no longer hides the selector. Synthetic-order notices describe the data, independently of the selected assistant.
+
+Desktop chat fills the available width and its transcript adapts to viewport height. Mobile remains a separate 390 px preview. Submitting a message immediately shows it and Thinking…; Loading… is reserved for UI work. A quiet, short reply tone can be muted with Reply sound. Browser audio requires an initial interaction, and old replies are not replayed when navigating.
+
+Support and Admin retain separate access codes. The owner can find SUPPORT_ACCESS_CODE and ADMIN_ACCESS_CODE under Streamlit → Manage app → Settings → Secrets. An unlocked role stays available for the browser session, with a Lock button; changing the configured code invalidates that unlock. No code or API key is included in the repository.

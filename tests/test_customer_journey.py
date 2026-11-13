@@ -257,14 +257,14 @@ class CustomerJourneyTests(unittest.TestCase):
         self.click('Select order')
         conversation=self.app.session_state['conversation_id']
         selected=self.app.session_state['selected_order']
-        next(r for r in self.app.radio if r.label=='Demo view').set_value('Mobile').run()
+        next(r for r in self.app.radio if r.label=='Layout preview').set_value('Mobile').run()
         self.assertEqual(len(self.app.exception),0)
-        frame=self.app.get('iframe')[0]
+        frame=next(frame for frame in self.app.get('iframe') if frame.proto.src)
         params=parse_qs(urlsplit(frame.proto.src).query)
         self.assertEqual(params['phone_preview'],['1'])
         self.assertEqual(params['customer'],[self.app.session_state['customer_key'][0]])
         self.assertEqual(len(self.app.chat_input),0)
-        next(r for r in self.app.radio if r.label=='Demo view').set_value('Desktop').run()
+        next(r for r in self.app.radio if r.label=='Layout preview').set_value('Desktop').run()
         self.assertEqual(self.app.session_state['conversation_id'],conversation)
         self.assertEqual(self.app.session_state['selected_order'],selected)
         self.assertEqual(len(self.app.chat_input),1)
@@ -275,6 +275,6 @@ class CustomerJourneyTests(unittest.TestCase):
         self.app.query_params['customer']='CUST-2026-0003'
         self.app.run()
         self.assertEqual(len(self.app.exception),0)
-        self.assertNotIn('Demo view',[r.label for r in self.app.radio])
-        self.assertEqual(len(self.app.get('iframe')),0)
+        self.assertNotIn('Layout preview',[r.label for r in self.app.radio])
+        self.assertEqual(sum(bool(frame.proto.src) for frame in self.app.get('iframe')),0)
         self.assertEqual(self.app.session_state['customer_key'][0],'CUST-2026-0003')

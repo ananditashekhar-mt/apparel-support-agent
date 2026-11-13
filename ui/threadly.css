@@ -6,14 +6,12 @@
 .stApp[data-test-script-state="running"] .threadly-loading-indicator,
 .stApp[data-test-script-state="initial"] .threadly-loading-indicator {display:flex}
 .threadly-loading-ring {display:inline-block;width:17px;height:17px;border:2px solid #e5ecd9;border-top-color:#5e6b46;border-radius:50%;animation:threadly-loading-turn .8s linear infinite}
-.threadly-chat-loading {display:none;align-items:center;gap:12px;min-height:48px;margin:4px 0 8px;padding:11px 15px;background:#f0f6e5;border:1px solid #d9e5c3;border-radius:13px;color:#364426;font-size:14px;font-weight:600;line-height:1.4}
-.threadly-chat-loading .threadly-loading-ring {width:24px;height:24px;flex:0 0 24px;border-width:3px;border-color:#d5dfc4;border-top-color:#435b2b}
-.stApp[data-test-script-state="running"] .threadly-chat-loading {display:flex}
-.stApp:has(.threadly-chat-loading) .threadly-loading-indicator {display:none}
+.threadly-thinking,.threadly-client-thinking {display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 15px;color:#53603b;font-size:14px}
+.stApp:has(.threadly-thinking) .threadly-loading-indicator {display:none}
 @keyframes threadly-loading-turn {to {transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce) {.threadly-loading-ring {animation:none;border-style:dotted}}
 .stApp,.stApp p,.stApp button,.stApp input,.stApp textarea {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.block-container {max-width:1120px;padding:3.4rem 1.5rem 2rem}
+.block-container {max-width:none;padding:3.4rem 1.5rem 2rem}
 [data-testid="stHeader"] {background:#f5f5f0}
 [data-testid="stSidebar"] {background:#fff;border-right:1px solid #e7e8e1}
 [data-testid="stVerticalBlock"] {gap:.7rem}
@@ -26,7 +24,7 @@ p {font-size:14px;line-height:1.5}
 .brand-sub {font-size:12px;color:#808178;margin-left:8px;border-left:1px solid #dcded3;padding-left:14px}
 .account {text-align:right;font-size:12px;color:#898a81;padding-top:8px}
 .account b {color:#41433b;font-weight:550}
-.st-key-care_workspace {max-width:680px;margin:0 auto;background:white;border:1px solid #e2e4d9;border-radius:22px;padding:20px;box-shadow:0 12px 48px #30342207}
+.st-key-care_workspace {max-width:none;margin:0 auto;background:white;border:1px solid #e2e4d9;border-radius:22px;padding:20px;box-shadow:0 12px 48px #30342207}
 .st-key-chat_toolbar {border-bottom:1px solid #eceee5;padding-bottom:14px}
 .assistant-header {display:flex;align-items:center;gap:10px}
 .tia-avatar {width:40px;height:40px;flex-shrink:0;border-radius:13px;background:#dffc94;color:#282d1c;display:grid;place-items:center;font-size:21px;font-weight:700;transform:rotate(-4deg)}
@@ -103,7 +101,18 @@ p {font-size:14px;line-height:1.5}
 .st-key-chat_checkin [data-testid="stColumn"] {min-width:0!important;flex:1 1 0!important}
 .st-key-continue_after_checkin button {border-radius:18px;min-height:30px;padding:5px 10px}
 .chat-row.checkin-question {margin-top:22px}
-.st-key-demo_view_switch {max-width:680px;margin:0 auto 8px}
+.st-key-demo_view_switch {max-width:none;margin:0 auto 8px}
 .st-key-demo_view_switch [data-testid="stRadio"]>label {font-size:11px;color:#84877a}
 .st-key-demo_phone_frame {max-width:406px;margin:0 auto;background:#282c24;border:8px solid #282c24;border-radius:28px;overflow:hidden;box-shadow:0 14px 45px #30342215}
 .st-key-demo_phone_frame iframe {border-radius:19px;background:#f5f5f0;display:block;max-width:100%}
+
+/* Desktop fills the available content area; the phone preview remains 390px. */
+@media(min-width:641px) {
+ [data-testid="stLayoutWrapper"]:has(> .st-key-chat_transcript),
+ .st-key-chat_transcript {height:calc(100vh - 400px)!important;min-height:220px!important;max-height:1200px!important;flex:none!important}
+}
+
+.threadly-client-pending {display:none}
+html[data-tia-reply-pending="true"] .threadly-client-pending {display:block}
+html[data-tia-reply-pending="true"] .threadly-loading-indicator {display:none!important}
+.stApp:has(.threadly-thinking) .threadly-client-pending {display:none}

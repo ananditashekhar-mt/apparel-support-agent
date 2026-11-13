@@ -8,7 +8,7 @@ import agent
 
 
 class HostedReleaseTests(unittest.TestCase):
-    def test_hosted_defaults_use_openai_and_hide_model_switch(self):
+    def test_hosted_defaults_use_openai_and_show_model_switch(self):
         from streamlit.testing.v1 import AppTest
         original=agent.Agent
         with tempfile.TemporaryDirectory() as t:
@@ -19,7 +19,7 @@ class HostedReleaseTests(unittest.TestCase):
                 self.assertEqual(len(app.exception),0)
                 self.assertEqual(app.session_state['agent'].model.mode,'OpenAI')
                 self.assertEqual(app.session_state['agent'].model.model,'gpt-4.1-mini')
-                self.assertNotIn('Assistant',[r.label for r in app.radio])
+                self.assertIn('Assistant',[r.label for r in app.radio])
                 app.session_state['agent'].db.close()
 
     def test_hosted_operational_pages_stay_closed_without_codes(self):
