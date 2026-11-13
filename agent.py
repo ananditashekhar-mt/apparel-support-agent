@@ -34,7 +34,7 @@ def load(name):
     return copy.deepcopy(_load_json(str(path),stat.st_mtime_ns,stat.st_size))
 
 COLOURS = sorted({r['Colour'] for r in load('product_catalog')},key=len,reverse=True)
-INTENTS = [r['Intent'] for r in load('intent_taxonomy')] + ['unknown', 'greeting', 'general_question']
+INTENTS = [r['Intent'] for r in load('intent_taxonomy')] + ['unknown', 'greeting', 'general_question', 'order_help', 'clarification']
 POLICY_IDS = {
     'return_request': ['POL-01', 'POL-08'], 'exchange_size': ['POL-02','POL-01','POL-08'],
     'exchange_color': ['POL-02','POL-01','POL-08'], 'fit_issue': ['POL-02','POL-01','POL-08'],
@@ -77,7 +77,15 @@ def conversational_route(message):
     general = general or (bool(re.search(r'^(can|are|is|do|does|tell me|explain)\b', text))
                           and any(w in text for w in ('return','exchange','delivery','shipping')))
     personal = bool(re.search(r'\b(my|mine|this|that)\b|ord-\d+', text))
-    return 'general_question' if general and not personal else None
+    if general and not personal:return 'general_question'
+    # Generic order help is in scope, but does not specify an order operation.
+    # Keep concrete complaints in the existing tracking/return/etc. workflow.
+    order_help = re.fullmatch(
+        r'(?:(?:hi|hello|hey)\s+)?(?:(?:i\s+)?(?:need|want|would like)\s+)?'
+        r'(?:(?:can|could)\s+you\s+)?(?:please\s+)?(?:help(?:\s+me)?\s+)?'
+        r'(?:(?:with|about|regarding)\s+)?(?:an?|my|the)\s+(?:order|purchase)(?:\s+please)?', normal)
+    if order_help:return 'order_help'
+    return None
 
 
 def general_answer(message):
@@ -155,7 +163,7 @@ class Model:
         if route:
             return {'intent':route,'order_id':None,'size':None,'colour':None}, {}
         previous = dict(previous or {})
-        if previous.get('intent') in ('greeting','general_question','unknown'):
+        if previous.get('intent') in ('greeting','general_question','order_help','clarification','unknown'):
             previous['intent'] = previous.get('order_intent','unknown')
         if self.mode == 'Demo':
             return offline_parse(message, previous), {}
@@ -173,6 +181,14 @@ class Model:
             'required':['intent','order_id','size','colour','condition_issues'],'additionalProperties':False}
         instruction=('Classify an apparel post-purchase message. Extract explicit order ID, size, colour and actual item-condition disclosures. '
             'Use the intent descriptions below. Classify the actual problem, not merely the requested remedy. '
+            'Read the recent conversation to interpret short answers to the assistant, not just the latest message. '
+            'order_help: the customer wants help with a purchase but has not explained the issue. '
+            'Examples: with an order; need help with an order; something is up with my purchase. '
+            'This is in scope. Do not guess tracking, returns or another operation. '
+            'clarification: an incomplete or ambiguous message that needs a natural follow-up, such as '
+            'a short answer whose meaning cannot be established from history. Use unknown only for clearly unrelated '
+            'or unsupported topics, never simply because a request lacks an order ID or a specific issue. '
+            'greeting: greetings and general requests for help. general_question: general Threadly policy questions. '
             'An actual physical fault in the received garment is damaged_item: a tear, rip, hole, split/open seam, '
             'stitching that has come apart, or a broken zip/button. This applies even without the word damaged, '
             'when the fault was visible before trying on, and when the customer asks to return, exchange or get a refund because of it. '
@@ -276,15 +292,15 @@ class Agent:
         if review and parsed['intent'] in ('return_request','return_outside_window','used_item_return'):
             parsed['intent']='used_item_return'
         prior_intent=memory.get('order_intent',memory.get('intent'))
-        if parsed['intent'] not in ('greeting','general_question','unknown'):
+        if parsed['intent'] not in ('greeting','general_question','order_help','clarification','unknown'):
             memory['order_intent'] = parsed['intent']
-        if parsed['intent'] != prior_intent and parsed['intent'] not in ('greeting','general_question','unknown'):
+        if parsed['intent'] != prior_intent and parsed['intent'] not in ('greeting','general_question','order_help','clarification','unknown'):
             memory.pop('size',None);memory.pop('colour',None)
         for k,v in parsed.items():
             if v is not None:memory[k]=v
         return {'parsed':memory,'usage':usage,'trace':['Understand customer request']}
     def retrieve(self,s):
-        p=s['parsed'];order=None if p['intent'] in ('greeting','general_question','unknown') else order_as_of(self.orders.get(p.get('order_id')),self.today)
+        p=s['parsed'];order=None if p['intent'] in ('greeting','general_question','order_help','clarification','unknown') else order_as_of(self.orders.get(p.get('order_id')),self.today)
         return {'order':order,'policies':retrieve_policy(s['message'],p['intent']),
                 'trace':s['trace']+['Retrieve policy sections','Exact order lookup']}
     def resolve(self,s):
@@ -299,6 +315,10 @@ class Agent:
         if intent in ('greeting','general_question'):
             out['tools']=['retrieve_policy'] if intent=='general_question' else []
             return done(general_answer(s['message']) if intent=='general_question' else 'How can I help you today? I can answer Threadly policy questions or help with an order.', 'answered')
+        if intent in ('order_help','clarification'):
+            out['tools']=[]
+            return done('Of course. What’s happening with your order, and what would you like help with?'
+                        if intent=='order_help' else 'Could you tell me a little more about what you need help with?')
         if intent=='unknown' and 'invoice' in s['message'].lower():
             return escalation('Thank you for explaining what’s happened. I’m sorry I can’t resolve this through the support options available to me, and I don’t want to give you the wrong advice.')
         if intent=='unknown':return done('I can help with Threadly policies, order tracking, delivery problems, returns and exchanges. I don’t have information to answer that question. What would you like help with?')
@@ -430,7 +450,7 @@ class Agent:
     def respond(self,s):
         result=s['result']
         result['decision_response']=result['response']
-        if self.model.mode!='Demo' and result['intent'] not in ('greeting','general_question','unknown'):
+        if self.model.mode!='Demo' and result['intent'] not in ('greeting','general_question','order_help','clarification','unknown'):
             result['response'],usage=self.model.compose(s['message'],result)
             result['usage']={k:result['usage'].get(k,0)+v for k,v in usage.items()}
         # Keep the expired-window explanation exact: no condition request or unsolicited handoff.

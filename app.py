@@ -102,7 +102,7 @@ if APP_ENV=='hosted' and os.getenv('DATABASE_URL'):
         st.error('The database cutover needs review. Existing data has not been overwritten. Please contact the app owner.')
         st.stop()
 
-agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','free-form-service-views-v1',database_fingerprint())
+agent_key=(mode,model,load('dataset_manifest')['Version'],'item-condition-v1','runtime-performance-v1','free-form-service-views-v2',database_fingerprint())
 if st.session_state.get('agent_key')!=agent_key:
     if st.session_state.get('agent'):st.session_state.agent.db.close()
     st.session_state.agent=Agent(mode=mode,model=model)

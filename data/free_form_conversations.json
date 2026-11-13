@@ -192,5 +192,102 @@
     "response_excludes": [
       "order ID"
     ]
+  },
+  {
+    "id": "screenshot_order_help",
+    "messages": [
+      "Hi",
+      "with an order",
+      "need help with an order"
+    ],
+    "intent": "order_help",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "What\u2019s happening with your order"
+    ],
+    "response_excludes": [
+      "order ID",
+      "don\u2019t have information"
+    ],
+    "turn_intents": [
+      "greeting",
+      "order_help",
+      "order_help"
+    ]
+  },
+  {
+    "id": "polite_order_help",
+    "messages": [
+      "Could you help me with my purchase?"
+    ],
+    "intent": "order_help",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "What\u2019s happening with your order"
+    ],
+    "response_excludes": [
+      "order ID",
+      "don\u2019t have information"
+    ],
+    "turn_intents": [
+      "order_help"
+    ]
+  },
+  {
+    "id": "reworded_order_help",
+    "messages": [
+      "I would like help with my order"
+    ],
+    "intent": "order_help",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "What\u2019s happening with your order"
+    ],
+    "response_excludes": [
+      "order ID",
+      "don\u2019t have information"
+    ],
+    "turn_intents": [
+      "order_help"
+    ]
+  },
+  {
+    "id": "order_help_then_tracking",
+    "messages": [
+      "need help with an order",
+      "Where is my order?"
+    ],
+    "intent": "order_tracking",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "order ID"
+    ],
+    "response_excludes": [],
+    "turn_intents": [
+      "order_help",
+      "order_tracking"
+    ]
+  },
+  {
+    "id": "unrelated_order_word",
+    "messages": [
+      "What is the order of the planets?"
+    ],
+    "intent": "unknown",
+    "status": "needs_information",
+    "order_id": null,
+    "response_contains": [
+      "Threadly"
+    ],
+    "response_excludes": [
+      "What\u2019s happening with your order"
+    ],
+    "turn_intents": [
+      "unknown"
+    ]
   }
 ]

@@ -20,6 +20,8 @@ def evaluate_free_form(mode='Demo', as_of=None):
                 memory=result['memory'];turns.append(result)
             checks={
                 'intent':result['intent']==row['intent'],
+                'turn_routing':not row.get('turn_intents') or [turn['intent'] for turn in turns]==row['turn_intents'],
+                'clarification_safety':all(turn.get('pending') is None and turn['status']=='needs_information' and 'get_order' not in turn['tools'] for turn in turns if turn['intent'] in ('order_help','clarification')),
                 'status':not row['status'] or result['status']==row['status'],
                 'order_context':result['order_id']==row['order_id'],
                 'response':all(t in result['response'] for t in row['response_contains']) and
